@@ -145,10 +145,7 @@ public class EnemyAI : MonoBehaviour
                 animator.SetBool("isAttacking", false);
             }
         }
-        else
-        {
-            PatrolWaypoints();
-        }
+      
     }
 
     void AttackPlayer()
@@ -184,10 +181,17 @@ public class EnemyAI : MonoBehaviour
             if (waitTimer >= waitTimeAtWaypoint)
             {
                 waitTimer = 0f;
-                currentWaypointIndex++;
-                if (currentWaypointIndex >= waypoints.Length)
+
+                // Move to the next waypoint if not the last one
+                if (currentWaypointIndex < waypoints.Length - 1)
                 {
-                    currentWaypointIndex = 0;
+                    currentWaypointIndex++;
+                }
+                else
+                {
+                    // Stay at the last waypoint instead of looping back to 0
+                    agent.isStopped = true;
+                    return;
                 }
             }
         }
