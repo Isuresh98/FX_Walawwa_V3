@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 91e2f518567549447bc67f9728d4ddf8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Scripts/Helpers/DisableOnGame.cs
+  uploadId: 399370

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 5318fb0304cad91488a5c985e6822bdb
+timeCreated: 1571886255
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Animation/Interact/Doors/Cupboard/CupboardDrawnerOpen.anim
+  uploadId: 399370

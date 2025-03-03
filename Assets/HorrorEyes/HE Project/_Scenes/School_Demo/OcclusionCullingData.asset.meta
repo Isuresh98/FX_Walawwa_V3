@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5a0908c1eb1f9a34595a7a31874b0861
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Scenes/School_Demo/OcclusionCullingData.asset
+  uploadId: 399370

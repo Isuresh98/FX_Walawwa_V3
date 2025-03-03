@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2cd97b97ad40b25419ba1acaca69c492
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Scripts/Enemy/EnemyInteractPoint.cs
+  uploadId: 399370

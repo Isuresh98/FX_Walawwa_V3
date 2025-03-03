@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: cc065f214e8764c41a2504b02fd94ec6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Scripts/Helpers/MainMenuCutscene.cs
+  uploadId: 399370

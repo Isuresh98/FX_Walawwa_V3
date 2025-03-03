@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3b7309fae7c7ff940a6ff6bef1325cac
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Scripts/Interact/Videcam/Videcam.cs
+  uploadId: 399370

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: cbd5b955da5866848967b3d9434894ea
+timeCreated: 1572202438
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Scripts/Mobile/ButtonControll.cs
+  uploadId: 399370

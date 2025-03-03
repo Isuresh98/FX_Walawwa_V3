@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 93fe376ea29be924889ba7dd93a32e29
+timeCreated: 1572714671
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Animation/Interact/Light/LightFlickering.anim
+  uploadId: 399370

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1d2f7c20872839648a1edec4e20bbbf5
+timeCreated: 1572787843
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Prefabs/Furniture/Furniture_Chair.prefab
+  uploadId: 399370

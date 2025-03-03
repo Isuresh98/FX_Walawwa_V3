@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 75d7fafc0dc10534b99f92e92ea778c4
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Shaders/ScanlinesEffect/ScanlinesEffect.shader
+  uploadId: 399370

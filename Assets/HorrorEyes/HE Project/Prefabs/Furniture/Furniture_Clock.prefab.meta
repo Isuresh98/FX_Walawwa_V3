@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8ac3fdd9007ea364789078756e1f989e
+timeCreated: 1572788130
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Prefabs/Furniture/Furniture_Clock.prefab
+  uploadId: 399370

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 5545ede95d60e794eab755c3c20b1d29
+timeCreated: 1572788095
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Prefabs/Furniture/Furniture_Table.prefab
+  uploadId: 399370

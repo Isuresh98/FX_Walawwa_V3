@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: d5099f8421fe229479ddb46a7ff2124d
+timeCreated: 1572619550
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Scripts/General/MainMenu.cs
+  uploadId: 399370

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0f57aeb1b8dce3342bea5c28ac17db24
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/Standard Assets/CrossPlatformInput/Scripts/VirtualInput.cs
+  uploadId: 399370

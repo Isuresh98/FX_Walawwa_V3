@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 92043fb8e6c12da4cabacef415e7f5aa
+timeCreated: 1572340283
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Scripts/Interact/TriggerEvents.cs
+  uploadId: 399370

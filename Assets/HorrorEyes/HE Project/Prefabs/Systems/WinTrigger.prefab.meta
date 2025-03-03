@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bd17787817afba64aaf6206f5dba47a4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Prefabs/Systems/WinTrigger.prefab
+  uploadId: 399370

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c2f73fb2cb13f2d4cb1feda0082fc086
+timeCreated: 1572787945
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Prefabs/Furniture/Furniture_Rug.prefab
+  uploadId: 399370

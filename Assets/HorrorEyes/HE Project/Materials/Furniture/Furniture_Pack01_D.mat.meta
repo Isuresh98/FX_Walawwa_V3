@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 395d6b1696f54c64085ba8516f1c489f
+timeCreated: 1572790760
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 180950
+  packageName: Eyes of Horror - Mobile Game Template
+  packageVersion: 1.1
+  assetPath: Assets/HorrorEyes/HE Project/Materials/Furniture/Furniture_Pack01_D.mat
+  uploadId: 399370
