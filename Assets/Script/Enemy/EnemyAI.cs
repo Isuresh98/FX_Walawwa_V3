@@ -45,8 +45,6 @@ public class EnemyAI : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerController = player.GetComponent<PlayerController>();
-        // Set the nearest waypoint before patrolling
-        currentWaypointIndex = GetNearestWaypointIndex();
         if (animator)
         {
             animator.SetBool("isStanding", true);
@@ -93,21 +91,18 @@ public class EnemyAI : MonoBehaviour
                     }
                 }
 
-              
+
 
                 // Check if the timer exceeds the delay time
                 if (playerOffNavMeshTimer >= offNavMeshDelay)
                 {
                     isWaitingForPlayer = true;
-                  
                     PatrolWaypoints();  // Start patrolling after the delay
                 }
             }
         }
         else if (playerController.iSIntractableHideObject)
         {
-            // Set the nearest waypoint before patrolling
-            currentWaypointIndex = GetNearestWaypointIndex();
             PatrolWaypoints();
         }
     }
@@ -179,8 +174,7 @@ public class EnemyAI : MonoBehaviour
     void PatrolWaypoints()
     {
         if (waypoints.Length == 0) return;
-        // Set the nearest waypoint before patrolling
-        currentWaypointIndex = GetNearestWaypointIndex();
+
         // Check if the enemy reached the waypoint
         if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].position) <= waypointReachThreshold)
         {
@@ -209,25 +203,6 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isWalking", !agent.isStopped);
             animator.SetBool("isAttacking", false);
         }
-    }
-
-
-    int GetNearestWaypointIndex()
-    {
-        int nearestIndex = 0;
-        float shortestDistance = Mathf.Infinity;
-
-        for (int i = 0; i < waypoints.Length; i++)
-        {
-            float distance = Vector3.Distance(transform.position, waypoints[i].position);
-            if (distance < shortestDistance)
-            {
-                shortestDistance = distance;
-                nearestIndex = i;
-            }
-        }
-
-        return nearestIndex;
     }
 
     bool IsPlayerOnNavMesh()
