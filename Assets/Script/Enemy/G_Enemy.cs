@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,16 +9,19 @@ public class G_Enemy : MonoBehaviour
     private Animator animator;
 
     public float detectionRange = 15f;  // Enemy detects player within this range
-    public float stoppingDistance = 1.5f; // Distance at which enemy stops moving
+   // public float stoppingDistance = 1.5f; // Distance at which enemy stops moving
     public float attackRange = 1.2f; // Distance at which enemy starts attacking
     public float attackCooldown = 2f; // Time between attacks
 
     private bool isAttacking = false;
     private float lastAttackTime = 0f;
 
-
     [Header("Waypoint Patrol Settings")]
     public Transform[] waypoints;
+    public float patrolWaitTime = 2f; // Time to wait at each waypoint
+    private int currentWaypointIndex = 0;
+    private bool isPatrolling = false;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -37,15 +41,24 @@ public class G_Enemy : MonoBehaviour
     {
         if (player == null) return;
 
+        // Check if the player's position is on the NavMesh
+        if (!IsPlayerOnNavMesh(player.position))
+        {
+            Debug.Log("Player is in a non-walkable area. Stopping pursuit.");
+            SetPlayerOutOfRange();
+            return;
+        }
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         Debug.Log($"Distance to Player: {distanceToPlayer}");
 
         if (distanceToPlayer <= detectionRange)
         {
+            LookAtPlayer(); // ---------------------------------------------------🔹 Rotate to face player
             agent.SetDestination(player.position);
             Debug.Log("Chasing player...");
 
-            if (distanceToPlayer > stoppingDistance)
+            if (distanceToPlayer > attackRange)
             {
                 agent.isStopped = false;
                 isAttacking = false;
@@ -88,11 +101,7 @@ public class G_Enemy : MonoBehaviour
         }
         else
         {
-            UpdateMovement();
-            Debug.Log("Player out of range. Stopping.");
-            agent.isStopped = true;
-            isAttacking = false;
-            animator.SetBool("isAttacking", false);
+            SetPlayerOutOfRange();
         }
     }
 
@@ -114,4 +123,83 @@ public class G_Enemy : MonoBehaviour
             Debug.Log($"Setting MoveSpeed: {speed}");
         }
     }
+
+    private bool IsPlayerOnNavMesh(Vector3 position)
+    {
+        NavMeshHit hit;
+        bool isOnNavMesh = NavMesh.SamplePosition(position, out hit, 2.0f, NavMesh.AllAreas);
+
+       // Debug.DrawRay(hit.position, Vector3.up * 2, Color.green, 2.0f); // Show NavMesh hit position
+        //Debug.DrawRay(position, Vector3.up * 2, Color.red, 2.0f); // Show Player position
+
+        if (!isOnNavMesh)
+        {
+           // Debug.LogError("Player is NOT on NavMesh! Stopping pursuit.");
+            return false;
+        }
+
+        float distanceThreshold = 1.0f; // Allow some tolerance
+        if (Vector3.Distance(position, hit.position) > distanceThreshold)
+        {
+          //  Debug.LogWarning($"Player is slightly off NavMesh by {Vector3.Distance(position, hit.position)} units. Adjusting...");
+            return true; // Allow movement but recognize slight offset
+        }
+
+        return true;
+    }
+
+    private void SetPlayerOutOfRange()
+    {
+        agent.isStopped = true;
+        isAttacking = false;
+        animator.SetBool("isAttacking", false);
+        animator.SetFloat("MoveSpeed", 0);
+        Debug.Log("Player out of range. Stopping.");
+        StartPatrol();
+    }
+    /// 🔹 **NEW METHOD: Makes the enemy face the player**
+    private void LookAtPlayer()
+    {
+        if (player == null) return;
+
+        Vector3 direction = player.position - transform.position;
+        direction.y = 0; // Prevents the enemy from tilting up/down
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        }
+    }
+
+
+    void StartPatrol()
+    {
+        if (waypoints.Length == 0) return;
+        isPatrolling = true;
+        StartCoroutine(PatrolRoutine());
+    }
+
+    IEnumerator PatrolRoutine()
+    {
+        while (isPatrolling)
+        {
+            if (waypoints.Length == 0) yield break;
+
+            agent.SetDestination(waypoints[currentWaypointIndex].position);
+            animator.SetFloat("MoveSpeed", 1);
+            agent.isStopped = false;
+
+            while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+            {
+                yield return null;
+            }
+
+            agent.isStopped = true;
+            animator.SetFloat("MoveSpeed", 0);
+            yield return new WaitForSeconds(patrolWaitTime);
+
+            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+        }
+    }
+
 }

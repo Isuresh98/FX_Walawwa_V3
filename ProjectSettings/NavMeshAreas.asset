@@ -13,7 +13,7 @@ NavMeshProjectSettings:
     cost: 3
   - name: 
     cost: 2
-  - name: PriorityWay
+  - name: 
     cost: 1
   - name: 
     cost: 1
