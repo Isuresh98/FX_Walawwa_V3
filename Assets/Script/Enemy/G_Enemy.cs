@@ -7,18 +7,27 @@ public class G_Enemy : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
 
-    [Header("Attack Settings")]
-    public float attackCooldown = 2f;
-    public float followDistance = 10f;
-    public float attackDistance = 2f;
-    private float attackTimer;
+    public float detectionRange = 15f;  // Enemy detects player within this range
+    public float stoppingDistance = 1.5f; // Distance at which enemy stops moving
+    public float attackRange = 1.2f; // Distance at which enemy starts attacking
+    public float attackCooldown = 2f; // Time between attacks
+
+    private bool isAttacking = false;
+    private float lastAttackTime = 0f;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        agent.enabled = true; // Enable the agent
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+        if (player == null)
+        {
+            Debug.LogError("Player not found! Make sure your player GameObject has the 'Player' tag.");
+            return;
+        }
+
+        agent.enabled = true;
     }
 
     void Update()
@@ -27,43 +36,42 @@ public class G_Enemy : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // Check if the player is within follow range
-        if (distanceToPlayer <= followDistance)
+        if (distanceToPlayer <= detectionRange)
         {
             agent.SetDestination(player.position);
-            animator.SetFloat("Speed", agent.velocity.magnitude);
-            if (distanceToPlayer <= attackDistance)
+
+            if (distanceToPlayer > stoppingDistance)
             {
-                AttackPlayer();
+                agent.isStopped = false;
+                isAttacking = false;
+                animator.SetBool("isAttacking", false);
             }
             else
             {
-                print("Attac Not");
-                animator.SetBool("isAttacking", false);
-                animator.SetBool("isWalking", true);
+                agent.isStopped = true;
+
+                // Attack logic
+                if (distanceToPlayer <= attackRange && Time.time > lastAttackTime + attackCooldown)
+                {
+                    lastAttackTime = Time.time;
+                    isAttacking = true;
+                    animator.SetBool("isAttacking", true);
+                }
+                else
+                {
+                    isAttacking = false;
+                    animator.SetBool("isAttacking", false);
+                }
             }
         }
         else
         {
-            print("Attac Not USe");
-            animator.SetBool("isWalking", false);
+            agent.isStopped = true;
+            isAttacking = false;
+            animator.SetBool("isAttacking", false);
         }
-    }
 
-    void AttackPlayer()
-    {
-        print("Attac Start");
-        agent.ResetPath(); // Stop moving
-        animator.SetBool("isWalking", false);
-
-        if (attackTimer <= 0f)
-        {
-            animator.SetBool("isAttacking", true);
-            attackTimer = attackCooldown; // Reset cooldown
-        }
-        else
-        {
-            attackTimer -= Time.deltaTime;
-        }
+        // Set animation blend tree parameter based on movement speed
+        animator.SetFloat("Speed", agent.velocity.magnitude);
     }
 }
