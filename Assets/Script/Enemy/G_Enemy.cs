@@ -21,26 +21,34 @@ public class G_Enemy : MonoBehaviour
     public float patrolWaitTime = 2f; // Time to wait at each waypoint
     private int currentWaypointIndex = 0;
     private bool isPatrolling = false;
-    public bool FristTrigger = false;
+
+
+    [Header("Frist Step")]
+    FristTrigger FristTrigger;
+
+
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-
+        FristTrigger = GameObject.FindGameObjectWithTag("Frist_Trigger").GetComponent<FristTrigger>();
         if (player == null)
         {
             Debug.LogError("Player not found! Make sure your player GameObject has the 'Player' tag.");
             return;
         }
 
-        agent.enabled = true;
+        agent.enabled = false;
     }
 
     void Update()
     {
         if (player == null) return;
-        if (FristTrigger) return;
+        if (!FristTrigger.isFrist_Trigger) return;
+
+        agent.enabled = true;
         // Check if the player's position is on the NavMesh
         if (!IsPlayerOnNavMesh(player.position))
         {
