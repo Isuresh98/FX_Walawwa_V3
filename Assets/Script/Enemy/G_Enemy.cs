@@ -88,6 +88,7 @@ public class G_Enemy : MonoBehaviour
         }
         else
         {
+            UpdateMovement();
             Debug.Log("Player out of range. Stopping.");
             agent.isStopped = true;
             isAttacking = false;
