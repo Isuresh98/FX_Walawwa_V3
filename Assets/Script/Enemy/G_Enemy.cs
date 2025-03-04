@@ -21,7 +21,7 @@ public class G_Enemy : MonoBehaviour
     public float patrolWaitTime = 2f; // Time to wait at each waypoint
     private int currentWaypointIndex = 0;
     private bool isPatrolling = false;
-
+    public bool FristTrigger = false;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -40,7 +40,7 @@ public class G_Enemy : MonoBehaviour
     void Update()
     {
         if (player == null) return;
-
+        if (FristTrigger) return;
         // Check if the player's position is on the NavMesh
         if (!IsPlayerOnNavMesh(player.position))
         {
@@ -150,12 +150,15 @@ public class G_Enemy : MonoBehaviour
 
     private void SetPlayerOutOfRange()
     {
+        Vector3 lastPlayerPosition = agent.destination; // Store last reached player position
+
         agent.isStopped = true;
         isAttacking = false;
         animator.SetBool("isAttacking", false);
         animator.SetFloat("MoveSpeed", 0);
-        Debug.Log("Player out of range. Stopping.");
-        StartPatrol();
+        Debug.Log("Player out of range. Moving to last known position before patrolling.");
+
+        StartCoroutine(MoveToLastPlayerPosition(lastPlayerPosition));
     }
     /// 🔹 **NEW METHOD: Makes the enemy face the player**
     private void LookAtPlayer()
@@ -169,6 +172,25 @@ public class G_Enemy : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
         }
+    }
+
+
+    private IEnumerator MoveToLastPlayerPosition(Vector3 lastPosition)
+    {
+        agent.isStopped = false;
+        agent.SetDestination(lastPosition);
+
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance + 0.1f)
+        {
+            animator.SetFloat("MoveSpeed", Mathf.Clamp(agent.velocity.magnitude, 0, 1));
+            yield return null;
+        }
+
+        agent.isStopped = true;
+        animator.SetFloat("MoveSpeed", 0);
+        yield return new WaitForSeconds(1f); // Brief wait before starting patrol
+
+        StartPatrol();
     }
 
 
@@ -186,11 +208,11 @@ public class G_Enemy : MonoBehaviour
             if (waypoints.Length == 0) yield break;
 
             agent.SetDestination(waypoints[currentWaypointIndex].position);
-            animator.SetFloat("MoveSpeed", 1);
             agent.isStopped = false;
 
-            while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+            while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance + 0.1f)
             {
+                animator.SetFloat("MoveSpeed", Mathf.Clamp(agent.velocity.magnitude, 0, 1));
                 yield return null;
             }
 
