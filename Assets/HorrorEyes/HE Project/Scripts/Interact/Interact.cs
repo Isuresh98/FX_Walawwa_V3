@@ -18,6 +18,7 @@ public class Interact : MonoBehaviour {
 
     [Tooltip("Tags for interact")]
     public string interactTag;
+    public string interactCoinTag;
     [Header("UI Settings")]
     private PlayerController player;
 
@@ -41,6 +42,12 @@ public class Interact : MonoBehaviour {
     private float displayDuration = 0.5f;
     private float timer;
 
+
+    [Header("UI Item Settings")]
+    public Button ItemInteractdBT;
+    public int ItemID;
+    private ItemsDatabase m_itemsDatabase;
+    private Inventory GetInventory;
     [SerializeField]
   //  private float rayDistance = 3f;
 
@@ -55,8 +62,17 @@ public class Interact : MonoBehaviour {
     private void Start()
     {
         m_gameController = FindObjectOfType<GameControll>();
+        m_itemsDatabase = FindObjectOfType<ItemsDatabase>();
+        GetInventory= FindObjectOfType<Inventory>();
+        InteractItemBehavior(0);
+
         player = m_gameController.player;
+
         HabdBT.onClick.AddListener(OnHandButtonClicked); // Add this line
+        ItemInteractdBT.onClick.AddListener(InteractBTUse); // Add this line
+
+        
+
     }
     private void OnHandButtonClicked()
     {
@@ -71,8 +87,21 @@ public class Interact : MonoBehaviour {
             if (hot.transform.gameObject.tag == interactTag)
             {
                 print("Interactive Object Name: " + hot.transform.name);
+               Rigidbody rb= hot.transform.gameObject.GetComponent<Rigidbody>(); // Freezes all movement and rotation
+                rb.constraints = RigidbodyConstraints.FreezeAll;
                 CheckRaycastedObject(hot.transform.gameObject, -1);
             }
+            else if (hot.transform.gameObject.tag == interactCoinTag)
+            {
+                print("Interactive Object Name: " + hot.transform.name);
+                SphereCollider sphereCollider = hot.transform.gameObject.GetComponent<SphereCollider>();
+                if (sphereCollider != null)
+                {
+                    sphereCollider.radius = 0.5f; // Set your desired radius
+                }
+
+            }
+
         }
     }
     private void Update()
@@ -122,7 +151,15 @@ public class Interact : MonoBehaviour {
                 itemNameText.gameObject.SetActive(true);
                 HabdBT.gameObject.SetActive(true);
                 timer = displayDuration;
-            }
+            }else if (hitObject.CompareTag(interactCoinTag))
+                    {
+                        CoinCollider sphereCollider = hitObject.transform.gameObject.GetComponent<CoinCollider>();
+                        if (sphereCollider != null)
+                        {
+                            sphereCollider.isRayHit = true;
+                        }
+                    }
+                    
             else
             {
                 // If the object has a different tag, hide the text
@@ -150,64 +187,117 @@ public class Interact : MonoBehaviour {
 
         }
         }
+    }
 
-        //new codes
 
-/*
-if (!player.locked)
-{
-if (m_gameController.m_mobileTouchInput)
-{
-
-    for (var i = 0; i < Input.touchCount; ++i)
+    private void InteractBTUse()
     {
-        if (Input.GetTouch(i).phase == TouchPhase.Began)
-        {
-            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
-            {
-                RaycastHit hot;
-                Ray ray2 = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
-                if (Physics.Raycast(ray2, out hot, rayDistance, interactLayers))
-                {
-                    if (hot.transform.gameObject.tag == interactTag)
-                    {
-                        print("Interactive Object NAme" + hot.transform.name);
-                        CheckRaycastedObject(hot.transform.gameObject, -1);
-                    }
-                }
-            }
+        Image buttonImage = ItemInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
 
+        if (ItemID == 0)
+        {
+            buttonImage.gameObject.SetActive(false); // Hide the button when ID is 0
+        }
+        else if (ItemID == 3)
+        {
+            GetInventory.DropItem(ItemID);
+
+        }
+        else
+        {
+            itemNameText.gameObject.SetActive(true);
+            itemNameText.text = "Use Item Animation";
+            print("Use Animation");
         }
     }
 
-}
 
-if (!m_gameController.m_mobileTouchInput)
-{
-    if (CrossPlatformInputManager.GetButtonDown("Interact"))
+    public void InteractItemBehavior(int ID)
     {
-        if (EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
+        Image buttonImage = ItemInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
+
+        if (buttonImage == null)
         {
+            Debug.LogError("Button does not have an Image component!");
             return;
         }
-        RaycastHit hot;
-        Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray2, out hot, rayDistance, interactLayers))
+
+        if (ID == 0)
         {
-            if (hot.transform.gameObject.tag == interactTag)
+            buttonImage.gameObject.SetActive(false); // Hide the button when ID is 0
+            ItemID = ID;
+        }
+        else if (ID > 0 && ID < m_itemsDatabase.Items.Count)
+        {
+            buttonImage.gameObject.SetActive(true); // Ensure the button is visible
+            buttonImage.sprite = m_itemsDatabase.Items[ID].m_itemIcon; // Set the sprite
+            ItemID = ID;
+        }
+        else
+        {
+            Debug.LogWarning("Invalid Item ID!");
+        }
+    }
+
+
+
+    //new codes
+
+    /*
+    if (!player.locked)
+    {
+    if (m_gameController.m_mobileTouchInput)
+    {
+
+        for (var i = 0; i < Input.touchCount; ++i)
+        {
+            if (Input.GetTouch(i).phase == TouchPhase.Began)
             {
-                CheckRaycastedObject(hot.transform.gameObject, -1);
+                if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+                {
+                    RaycastHit hot;
+                    Ray ray2 = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                    if (Physics.Raycast(ray2, out hot, rayDistance, interactLayers))
+                    {
+                        if (hot.transform.gameObject.tag == interactTag)
+                        {
+                            print("Interactive Object NAme" + hot.transform.name);
+                            CheckRaycastedObject(hot.transform.gameObject, -1);
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }
+
+    if (!m_gameController.m_mobileTouchInput)
+    {
+        if (CrossPlatformInputManager.GetButtonDown("Interact"))
+        {
+            if (EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
+            {
+                return;
+            }
+            RaycastHit hot;
+            Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray2, out hot, rayDistance, interactLayers))
+            {
+                if (hot.transform.gameObject.tag == interactTag)
+                {
+                    CheckRaycastedObject(hot.transform.gameObject, -1);
+                }
             }
         }
     }
-}
-}
+    }
 
-        */
+            */
 
-}
 
-private void ReadPaper()
+
+    private void ReadPaper()
 {
 if(m_readPaper && m_paper != null)
 {

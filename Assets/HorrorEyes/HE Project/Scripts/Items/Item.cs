@@ -10,4 +10,7 @@ public class Item : MonoBehaviour {
     public string itemName;
     [Tooltip("Item pickup sound")]
     public AudioClip pickupSound;
+
+   
+
 }

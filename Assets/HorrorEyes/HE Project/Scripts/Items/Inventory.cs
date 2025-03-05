@@ -17,6 +17,13 @@ public class Inventory : MonoBehaviour {
     [Header("UI Settings")]
     public Sprite m_emptySprite;
 
+    Interact InteractScript;
+    private void Start()
+    {
+        InteractScript = FindObjectOfType<Interact>();
+    }
+
+
 
     private void Awake()
     {
@@ -24,7 +31,41 @@ public class Inventory : MonoBehaviour {
         m_itemsDatabase = GetComponent<ItemsDatabase>();
        
     }
+    public void DropItem(int itemID)
+    {
+        print("Drop Item.." + itemID);
+        int slotIndex = GetSlotWithSameItem(itemID);
 
+        if (slotIndex != -1)
+        {
+            Slot slot = m_slots[slotIndex];
+
+            if (slot.m_itemCount > 0)
+            {
+                int dbID = m_itemsDatabase.GetItemInDatabaseByID(itemID);
+
+                if (dbID != -1)
+                {
+                    Database itemData = m_itemsDatabase.Items[dbID]; // Correctly reference Database class
+
+                    if (itemData.m_itemPrefab != null) // Ensure the item has a prefab to spawn
+                    {
+                        // Get drop position in front of the player
+                        Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.5f;
+
+                        // Instantiate the dropped item at the calculated position
+                        GameObject droppedItem = Instantiate(itemData.m_itemPrefab, dropPosition, Quaternion.identity);
+                        Rigidbody rb = droppedItem.transform.gameObject.GetComponent<Rigidbody>(); // Freezes all movement and rotation
+                        rb.constraints = RigidbodyConstraints.None;
+                        Debug.Log($"Dropped: {itemData.name}");
+                    }
+                }
+
+                // Remove one item from the slot
+                RemoveItem(itemID, 1);
+            }
+        }
+    }
 
     public void AddItem (int id, int cnt)
     {
@@ -77,8 +118,10 @@ public class Inventory : MonoBehaviour {
             if(m_slots[same].m_itemCount <= 0)
             {
                 Destroy(m_slots[same].gameObject);
-                m_slots.RemoveAt(same);        
-            }else
+                m_slots.RemoveAt(same);
+                InteractScript.InteractItemBehavior(0);
+            }
+            else
             {
                 PrepareSlot(m_slots[same]);
             }

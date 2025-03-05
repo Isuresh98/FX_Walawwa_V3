@@ -14,7 +14,8 @@ public class Database {
     public int id;
     [Tooltip("Item icon sprite")]
     public Sprite m_itemIcon;
-
+    [Tooltip("Item prefab for dropping")]
+    public GameObject m_itemPrefab; // Add this line
 
 }
 

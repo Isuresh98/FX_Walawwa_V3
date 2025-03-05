@@ -26,8 +26,14 @@ public class G_Enemy : MonoBehaviour
     [Header("Frist Step")]
     FristTrigger FristTrigger;
 
-
-
+    [Header("Coin Detect Section")]
+    public float CoindetectionRange = 1f;
+    public float waitTime = 10f;
+    public LayerMask coinLayer;
+    private Transform detectedCoin;
+    private bool isWaiting = false;
+    public bool IsCoinDetected = false;
+    private bool isWaitingCoroutineStarted = false;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -48,35 +54,56 @@ public class G_Enemy : MonoBehaviour
         if (player == null) return;
         if (!FristTrigger.isFrist_Trigger) return;
 
+        DetectCoin();
+        
+
+        if (IsCoinDetected&&!isWaiting)
+        {
+            MissingInteractionPlayer();
+        }
+        else if (!IsCoinDetected && !isWaiting)
+        {
+            IntracPlayer();
+        }
+
+
+
+
+         
+    }
+
+
+    private void IntracPlayer()
+    {
         agent.enabled = true;
         // Check if the player's position is on the NavMesh
         if (!IsPlayerOnNavMesh(player.position))
         {
-            Debug.Log("Player is in a non-walkable area. Stopping pursuit.");
+           // Debug.Log("Player is in a non-walkable area. Stopping pursuit.");
             SetPlayerOutOfRange();
             return;
         }
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        Debug.Log($"Distance to Player: {distanceToPlayer}");
+//        Debug.Log($"Distance to Player: {distanceToPlayer}");
 
         if (distanceToPlayer <= detectionRange)
         {
             LookAtPlayer(); // ---------------------------------------------------🔹 Rotate to face player
             agent.SetDestination(player.position);
-            Debug.Log("Chasing player...");
+         //   Debug.Log("Chasing player...");
 
             if (distanceToPlayer > attackRange)
             {
                 agent.isStopped = false;
                 isAttacking = false;
                 animator.SetBool("isAttacking", false);
-                Debug.Log("Moving towards player...");
+             //   Debug.Log("Moving towards player...");
             }
             else
             {
                 agent.isStopped = true;
-                Debug.Log("Reached stopping distance...");
+           //     Debug.Log("Reached stopping distance...");
 
                 if (distanceToPlayer <= attackRange)
                 {
@@ -112,6 +139,67 @@ public class G_Enemy : MonoBehaviour
             SetPlayerOutOfRange();
         }
     }
+    private void MissingInteractionPlayer()
+    {
+        if (detectedCoin != null)
+        {
+            Debug.Log("set enemy coin coin place");
+            agent.SetDestination(detectedCoin.position);
+            if (Vector3.Distance(transform.position, detectedCoin.position) < 1.5f&&!isWaitingCoroutineStarted)
+            {
+               
+                Debug.Log("set enemy waiting coin coin place");
+                StartCoroutine(WaitAtCoin());
+            }
+        }
+    }
+
+
+    void DetectCoin()
+    {
+        if (isWaiting) return;
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, CoindetectionRange, coinLayer);
+        if (hitColliders.Length > 0)
+        {
+            detectedCoin = hitColliders[0].transform;
+            IsCoinDetected = true;
+        }
+        else
+        {
+            detectedCoin = null;
+            IsCoinDetected = false;
+        }
+    }
+
+    IEnumerator WaitAtCoin()
+    {
+        isWaitingCoroutineStarted = true;
+        isWaiting = true;
+        agent.isStopped = true;
+
+        // Change coin's layer to ignore it
+        if (detectedCoin != null)
+        {
+            detectedCoin.gameObject.layer = LayerMask.NameToLayer("IgnoredCoin"); // Ensure this layer exists in Unity
+        }
+        //enemy behavior
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero; // Stop completely
+        animator.SetFloat("MoveSpeed", 0);
+
+
+
+        yield return new WaitForSeconds(waitTime);
+
+        isWaitingCoroutineStarted = false;
+        detectedCoin = null;
+        IsCoinDetected = false;
+        agent.isStopped = false;
+        isWaiting = false;
+    }
+
+
 
     private void UpdateMovement()
     {
@@ -120,7 +208,7 @@ public class G_Enemy : MonoBehaviour
             agent.isStopped = true;
             agent.velocity = Vector3.zero; // Stop completely
             animator.SetFloat("MoveSpeed", 0);
-            Debug.Log("Stopping movement for attack.");
+       //     Debug.Log("Stopping movement for attack.");
         }
         else
         {
@@ -128,7 +216,7 @@ public class G_Enemy : MonoBehaviour
             speed = Mathf.Clamp(speed, 0, 1); // Ensure speed is within range
 
             animator.SetFloat("MoveSpeed", speed, 0.2f, Time.deltaTime);
-            Debug.Log($"Setting MoveSpeed: {speed}");
+//            Debug.Log($"Setting MoveSpeed: {speed}");
         }
     }
 

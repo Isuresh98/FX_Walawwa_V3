@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Frist_Trigger
   - LightTrigger_1
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - Enemy
   - Examine
   - MainCameraException
-  - 
-  - 
+  - detectCoin
+  - IgnoredCoin
   - 
   - 
   - 

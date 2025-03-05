@@ -24,34 +24,35 @@ public class ItemDrag : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerCl
     public void OnDrag(PointerEventData eventData)
     {
 
-        m_gameControll.DragInteract = true;
-        if (m_gameControll.m_mobileTouchInput)
-        {
-            transform.parent = m_newParent;
-            transform.position = Input.GetTouch(0).position;
+        //m_gameControll.DragInteract = true;
+        //if (m_gameControll.m_mobileTouchInput)
+        //{
+        //    transform.parent = m_newParent;
+        //    transform.position = Input.GetTouch(0).position;
             
-        }else
-        {
-            transform.parent = m_newParent;
-            transform.position = Input.mousePosition;
-        }
+        //}else
+        //{
+        //    transform.parent = m_newParent;
+        //    transform.position = Input.mousePosition;
+        //}
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        m_gameControll.DragInteract = false;
-        m_interactScript.DropItemCheck(m_mySlot.m_itemID);
-        transform.parent = m_parent;
-        transform.localPosition = Vector3.zero;
+        //m_gameControll.DragInteract = false;
+        //m_interactScript.DropItemCheck(m_mySlot.m_itemID);
+        //transform.parent = m_parent;
+        //transform.localPosition = Vector3.zero;
     }
     // NEW: OnClick event handler
     public void OnPointerClick(PointerEventData eventData)
     {
-        m_gameControll.DragInteract = true;
+        //m_gameControll.DragInteract = true;
         // Check if the item has a valid ID before printing
         if (m_mySlot != null)
         {
             Debug.Log("Item clicked: " + m_mySlot.m_itemID);
+            m_interactScript.InteractItemBehavior(m_mySlot.m_itemID);
         }
         else
         {
