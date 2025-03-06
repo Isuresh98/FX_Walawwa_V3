@@ -15,6 +15,7 @@ public class CerventAI : MonoBehaviour
 
     private bool isAttacking = false;
     private float lastAttackTime = 0f;
+    private bool isWalking = false;
 
     [Header("Waypoint Patrol Settings")]
     public Transform[] waypoints;
@@ -53,12 +54,6 @@ public class CerventAI : MonoBehaviour
     {
         if (player == null) return;
         if (!FristTrigger.isFrist_Trigger) return;
-
-
-        float speed = agent.velocity.magnitude; // Get AI movement speed
-        float normalizedSpeed = Mathf.Clamp01(speed / agent.speed); // Normalize between 0 and 1
-        animator.SetFloat("Blend", normalizedSpeed); // Update blend parameter
-
 
         DetectCoin();
 
@@ -140,6 +135,7 @@ public class CerventAI : MonoBehaviour
 
             UpdateMovement();
         }
+
         else
         {
             SetPlayerOutOfRange();
@@ -236,6 +232,12 @@ public class CerventAI : MonoBehaviour
             agent.velocity = Vector3.zero; // Stop completely
             animator.SetFloat("MoveSpeed", 0);
             //     Debug.Log("Stopping movement for attack.");
+        }else if (isWalking&& !isAttacking)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero; // Stop completely
+            animator.SetFloat("MoveSpeed", 0);
+            animator.SetBool("isRun", true);
         }
         else
         {
@@ -244,25 +246,6 @@ public class CerventAI : MonoBehaviour
 
             animator.SetFloat("MoveSpeed", speed, 0.2f, Time.deltaTime);
             //            Debug.Log($"Setting MoveSpeed: {speed}");
-
-            // Check if following the player or patrolling
-            if (IsCoinDetected) // Chasing a coin - Walk
-            {
-                animator.SetFloat("MoveSpeed", 0.5f, 0.2f, Time.deltaTime);
-            }
-            else if (Vector3.Distance(transform.position, player.position) < detectionRange) // Chasing player - Run
-            {
-                animator.SetFloat("MoveSpeed", 1.0f, 0.2f, Time.deltaTime);
-            }
-            else // Default to walking (Patrol)
-            {
-                animator.SetFloat("MoveSpeed", 0.3f, 0.2f, Time.deltaTime);
-            }
-
-
-
-
-
         }
     }
 
@@ -343,6 +326,7 @@ public class CerventAI : MonoBehaviour
         StartCoroutine(PatrolRoutine());
     }
 
+
     IEnumerator PatrolRoutine()
     {
         while (isPatrolling)
@@ -351,11 +335,10 @@ public class CerventAI : MonoBehaviour
 
             agent.SetDestination(waypoints[currentWaypointIndex].position);
             agent.isStopped = false;
-            // Set to Walking Animation
-            animator.SetFloat("MoveSpeed", 0.5f);
+
             while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance + 0.1f)
             {
-               // animator.SetFloat("MoveSpeed", Mathf.Clamp(agent.velocity.magnitude, 0, 1));
+                animator.SetFloat("MoveSpeed", Mathf.Clamp(agent.velocity.magnitude, 0, 1));
                 yield return null;
             }
 
