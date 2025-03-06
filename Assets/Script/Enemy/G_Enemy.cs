@@ -147,7 +147,8 @@ public class G_Enemy : MonoBehaviour
             agent.SetDestination(detectedCoin.position);
             if (Vector3.Distance(transform.position, detectedCoin.position) < 1.5f&&!isWaitingCoroutineStarted)
             {
-               
+                
+                    
                 Debug.Log("set enemy waiting coin coin place");
                 StartCoroutine(WaitAtCoin());
             }
@@ -187,10 +188,30 @@ public class G_Enemy : MonoBehaviour
         agent.isStopped = true;
         agent.velocity = Vector3.zero; // Stop completely
         animator.SetFloat("MoveSpeed", 0);
+      // Play "stand down" animation
+        animator.SetBool("standDown", true);
+        yield return new WaitForSeconds(0.1f);
+        // Wait until "stand down" animation finishes
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
 
-
+        // Play "coin collect" animation
+        animator.SetBool("standDown", false);
+        animator.SetBool("collectCoin", true);
 
         yield return new WaitForSeconds(waitTime);
+        
+        animator.SetBool("collectCoin", false);
+        animator.SetBool("standUp", true);
+        // Wait until "coin collect" animation finishes
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
+        animator.SetBool("standUp", false);
+        animator.SetBool("standUp_V2", true);
+        // Wait until "stand up" animation finishes
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
+
+        animator.SetBool("standUp_V2", false);
+        animator.SetBool("standUp_V3", true);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
 
         isWaitingCoroutineStarted = false;
         detectedCoin = null;
