@@ -144,6 +144,7 @@ public class G_Enemy : MonoBehaviour
         if (detectedCoin != null)
         {
             Debug.Log("set enemy coin coin place");
+           
             agent.SetDestination(detectedCoin.position);
             if (Vector3.Distance(transform.position, detectedCoin.position) < 1.5f&&!isWaitingCoroutineStarted)
             {
@@ -178,7 +179,7 @@ public class G_Enemy : MonoBehaviour
         isWaitingCoroutineStarted = true;
         isWaiting = true;
         agent.isStopped = true;
-
+       
         // Change coin's layer to ignore it
         if (detectedCoin != null)
         {
@@ -187,6 +188,7 @@ public class G_Enemy : MonoBehaviour
         //enemy behavior
         agent.isStopped = true;
         agent.velocity = Vector3.zero; // Stop completely
+        animator.SetBool("isAttacking", false);
         animator.SetFloat("MoveSpeed", 0);
       // Play "stand down" animation
         animator.SetBool("standDown", true);

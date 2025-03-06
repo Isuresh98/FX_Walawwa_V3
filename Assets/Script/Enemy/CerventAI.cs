@@ -9,7 +9,7 @@ public class CerventAI : MonoBehaviour
     private Animator animator;
 
     public float detectionRange = 15f;  // Enemy detects player within this range
-                                        // public float stoppingDistance = 1.5f; // Distance at which enemy stops moving
+    public float runRange; // Adjust this value as needed
     public float attackRange = 1.2f; // Distance at which enemy starts attacking
     public float attackCooldown = 2f; // Time between attacks
 
@@ -33,6 +33,7 @@ public class CerventAI : MonoBehaviour
     public LayerMask coinLayer;
     private Transform detectedCoin;
     private bool isWaiting = false;
+    private bool isRun = false;
     public bool IsCoinDetected = false;
     private bool isWaitingCoroutineStarted = false;
     void Start()
@@ -46,7 +47,7 @@ public class CerventAI : MonoBehaviour
             Debug.LogError("Player not found! Make sure your player GameObject has the 'Player' tag.");
             return;
         }
-
+        runRange = detectionRange / 2;
         agent.enabled = false;
     }
 
@@ -99,38 +100,43 @@ public class CerventAI : MonoBehaviour
                 agent.isStopped = false;
                 isAttacking = false;
                 animator.SetBool("isAttacking", false);
-                //   Debug.Log("Moving towards player...");
+                if (distanceToPlayer <= runRange)
+                {
+                    isWalking = false;
+                    isRun = true;
+                    animator.SetBool("isRun", true);
+                }
+                else
+                {
+                    isWalking = true;
+                    isRun = false;
+                    animator.SetBool("isRun", false);
+                }
             }
             else
             {
                 agent.isStopped = true;
-                //     Debug.Log("Reached stopping distance...");
+             
 
-                if (distanceToPlayer <= attackRange)
-                {
+               
                     if (Time.time >= lastAttackTime + attackCooldown)
                     {
-                        lastAttackTime = Time.time;
+                    isWalking = true;
+                    isRun = false;
+                    animator.SetBool("isRun", false);
+                    lastAttackTime = Time.time;
                         isAttacking = true;
                         animator.SetBool("isAttacking", true);
 
                         agent.isStopped = true;
                         agent.velocity = Vector3.zero;
-
-                        // Stop movement by setting MoveSpeed to 0
-                        animator.SetFloat("MoveSpeed", 0);
+                    
+                    // Stop movement by setting MoveSpeed to 0
+                    animator.SetFloat("MoveSpeed", 0);
                         Debug.Log("Enemy is attacking!");
                     }
-                }
-                else
-                {
-                    isAttacking = false;
-                    animator.SetBool("isAttacking", false);
-
-                    // Restore movement speed based on NavMeshAgent velocity
-                    float speed = agent.velocity.magnitude;
-                    animator.SetFloat("MoveSpeed", speed);
-                }
+                
+                
             }
 
             UpdateMovement();
@@ -223,29 +229,31 @@ public class CerventAI : MonoBehaviour
     }
 
 
-
     private void UpdateMovement()
     {
         if (isAttacking)
         {
             agent.isStopped = true;
-            agent.velocity = Vector3.zero; // Stop completely
+            agent.velocity = Vector3.zero;
             animator.SetFloat("MoveSpeed", 0);
-            //     Debug.Log("Stopping movement for attack.");
-        }else if (isWalking&& !isAttacking)
+        }
+        else if (isRun)
         {
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero; // Stop completely
-            animator.SetFloat("MoveSpeed", 0);
-            animator.SetBool("isRun", true);
+            agent.isStopped = false;
+            agent.speed = 2.5f; // Adjust speed for running
+            animator.SetFloat("MoveSpeed", 1);
+        }
+        else if (isWalking)
+        {
+            agent.isStopped = false;
+            agent.speed = 1.5f; // Adjust speed for walking
+            animator.SetFloat("MoveSpeed", 0.5f);
         }
         else
         {
             float speed = agent.velocity.magnitude;
-            speed = Mathf.Clamp(speed, 0, 1); // Ensure speed is within range
-
+            speed = Mathf.Clamp(speed, 0, 1);
             animator.SetFloat("MoveSpeed", speed, 0.2f, Time.deltaTime);
-            //            Debug.Log($"Setting MoveSpeed: {speed}");
         }
     }
 
