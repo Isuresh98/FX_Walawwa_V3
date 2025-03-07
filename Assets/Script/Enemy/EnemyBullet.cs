@@ -18,6 +18,7 @@ public class EnemyBullet : MonoBehaviour
         if (other.CompareTag("Player")) // Check if it hits the player
         {
             Debug.Log("Bullet hit player...");
+            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(110);
         }
 
         Destroy(gameObject); // Destroy bullet after first valid hit
