@@ -37,13 +37,12 @@ public class MasterAI : MonoBehaviour
     private bool isWaitingCoroutineStarted = false;
 
     [Header("Shooting Settings")]
-    public GameObject projectilePrefab;
-    public Transform shootPoint;
-    public float shootForce = 10f;
+  
+    
     public float shootCooldown = 1.5f;
     public float ShootIntervalTime;
     private bool canShoot = true;
-
+    public Transform masterShootAIGFX; // Assign MasterShootAIGFX in the Inspector
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -58,7 +57,17 @@ public class MasterAI : MonoBehaviour
  
         agent.enabled = false;
     }
+    private void SetGFXUnderEnemy()
+    {
+        if (masterShootAIGFX != null)
+        {
+            // Set position to be the same as MasterAI but keep original Y
+            Vector3 enemyCenter = transform.position;
+            enemyCenter.y = masterShootAIGFX.position.y; // Keep the current Y position
 
+            masterShootAIGFX.position = enemyCenter; // Apply new position
+        }
+    }
     void Update()
     {
         if (player == null) return;
@@ -76,7 +85,7 @@ public class MasterAI : MonoBehaviour
             IntracPlayer();
         }
 
-
+        SetGFXUnderEnemy();
 
 
 
@@ -100,6 +109,7 @@ public class MasterAI : MonoBehaviour
         if (distanceToPlayer <= detectionRange)
         {
             LookAtPlayer(); // ---------------------------------------------------🔹 Rotate to face player
+            LookAtPlayerGFX();
             agent.SetDestination(player.position);
             //   Debug.Log("Chasing player...");
 
@@ -115,7 +125,7 @@ public class MasterAI : MonoBehaviour
                 agent.isStopped = true;
                 agent.velocity = Vector3.zero;
                 animator.SetFloat("MoveSpeed", 0);
-          
+               // SetGFXShootingRotation();
 
                 if (canShoot && Time.time >= lastAttackTime + shootCooldown)
                 {
@@ -281,8 +291,30 @@ public class MasterAI : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
         }
     }
+    /// 🔹 **Makes MasterShootAIGFX face the player**
+    private void LookAtPlayerGFX()
+    {
+        if (player == null || masterShootAIGFX == null) return;
 
+        Vector3 gfxDirection = player.position - masterShootAIGFX.position;
+        gfxDirection.y = 0; // Keeps rotation flat
 
+        if (gfxDirection != Vector3.zero)
+        {
+            Quaternion gfxRotation = Quaternion.LookRotation(gfxDirection);
+            masterShootAIGFX.rotation = Quaternion.Slerp(masterShootAIGFX.rotation, gfxRotation, Time.deltaTime * 5f);
+        }
+    }
+    /// 🔹 **Set MasterShootAIGFX to y = 60 when shooting**
+    private void SetGFXShootingRotation()
+    {
+        if (masterShootAIGFX != null)
+        {
+            Vector3 newRotation = masterShootAIGFX.eulerAngles;
+            newRotation.y = 60; // Set Y-axis rotation to 60 degrees
+            masterShootAIGFX.rotation = Quaternion.Euler(newRotation);
+        }
+    }
     private IEnumerator MoveToLastPlayerPosition(Vector3 lastPosition)
     {
         agent.isStopped = false;
@@ -338,21 +370,15 @@ public class MasterAI : MonoBehaviour
     {
         canShoot = false; // Prevent multiple shots before cooldown
         agent.isStopped = true; // Stop movement before shooting
-        animator.SetTrigger("shoot");
+        animator.SetFloat("MoveSpeed", 0);
 
         yield return new WaitForSeconds(0.5f); // Small delay before shooting
-
-        GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
-        Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            Vector3 direction = (player.position - shootPoint.position).normalized;
-            rb.AddForce(direction * shootForce, ForceMode.Impulse);
-        }
+        animator.SetTrigger("shoot");
+      
 
         yield return new WaitForSeconds(ShootIntervalTime); // 5-second delay before the next shot
 
-        agent.isStopped = false; // Resume movement after shooting
+       // agent.isStopped = false; // Resume movement after shooting
         canShoot = true; // Allow next shot
     }
 }

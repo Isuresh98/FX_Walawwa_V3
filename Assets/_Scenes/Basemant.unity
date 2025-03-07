@@ -59741,14 +59741,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058753094}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.015331288, y: -0.089677244, z: -0.04296675, w: 0.9949256}
+  m_LocalRotation: {x: -0.09668686, y: -0.16152121, z: -0.057233565, w: 0.9804524}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 543450652964664577}
   m_Father: {fileID: 1852576805910963833}
-  m_LocalEulerAnglesHint: {x: -2.19, y: -10.21, z: -4.75}
+  m_LocalEulerAnglesHint: {x: -12.01, y: -18.21, z: -4.75}
 --- !u!1 &2062506192
 GameObject:
   m_ObjectHideFlags: 0
@@ -63291,13 +63291,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148690710459}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.50139815, y: 0.4485848, z: -0.47002575, w: 0.5713558}
-  m_LocalPosition: {x: -0.011, y: 0.07, z: 0.02}
+  m_LocalRotation: {x: -0.50196654, y: 0.44796717, z: -0.4694289, w: 0.5718317}
+  m_LocalPosition: {x: -0.018, y: 0.063, z: 0.05}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2058753095}
-  m_LocalEulerAnglesHint: {x: -8.7, y: 84.5, z: -86.79}
+  m_LocalEulerAnglesHint: {x: -8.83, y: 84.5, z: -86.79}
 --- !u!222 &555357882505903365
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -63967,8 +63967,9 @@ GameObject:
   m_Component:
   - component: {fileID: 543450651920039514}
   - component: {fileID: 5866666020132365344}
+  - component: {fileID: 5866666020132365345}
   m_Layer: 0
-  m_Name: MaterShootAI
+  m_Name: MaterShootAIGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64870,7 +64871,7 @@ GameObject:
   - component: {fileID: 5685300608665368121}
   - component: {fileID: 4153146126472432350}
   m_Layer: 0
-  m_Name: tripo_node_8d63ab5b
+  m_Name: nod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73321,6 +73322,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5866666020132365345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147713156320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37fb0fae580f44fa1b0727117cffa3e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2553012416257448551, guid: e48137edaf21e4a98ab4315bea7ab4c6,
+    type: 3}
+  shootPoint: {fileID: 152620040}
+  shootForce: 20
 --- !u!95 &5866666020407775169
 Animator:
   serializedVersion: 7
@@ -76708,12 +76725,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16384
   IsCoinDetected: 0
-  projectilePrefab: {fileID: 2553012416257448551, guid: e48137edaf21e4a98ab4315bea7ab4c6,
-    type: 3}
-  shootPoint: {fileID: 152620040}
-  shootForce: 30
   shootCooldown: 1
   ShootIntervalTime: 5
+  masterShootAIGFX: {fileID: 543450651920039514}
 --- !u!114 &7810181530725156891
 MonoBehaviour:
   m_ObjectHideFlags: 0
