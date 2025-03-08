@@ -3,7 +3,12 @@ guid: a2fe6d84ae5d44a3498d5b41c6b6b18b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Diffuse_Bake
+    second: {fileID: 2800000, guid: 67e607002a00f4672bf5ece4cc0696b0, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
