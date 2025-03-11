@@ -4,8 +4,6 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 using TMPro;
-using System.Net.Sockets;
-using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class Interact : MonoBehaviour {
