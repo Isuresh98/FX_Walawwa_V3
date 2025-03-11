@@ -75,8 +75,6 @@ public class Interact : MonoBehaviour {
     private bool isHolding = false;
     public float holdTime = 0f;
     public float requiredHoldTime = 2f; // Time in seconds to trigger hold action
-
-
     public LayerMask interactDoorLayers;
     private void Start()
     {
