@@ -176,18 +176,18 @@ public class Interact : MonoBehaviour {
                 itemNameText.gameObject.SetActive(true);
                 HabdBT.gameObject.SetActive(true);
                 timer = displayDuration;
-            }else if (hitObject.CompareTag(interactCoinTag))
-                    {
-                        CoinCollider sphereCollider = hitObject.transform.gameObject.GetComponent<CoinCollider>();
-                        if (sphereCollider != null)
-                        {
-                            sphereCollider.isRayHit = true;
-                        }
-                    }
+            }
+
+            //else
+            //{
+            //    // If the object has a different tag, hide the text
+            //    itemNameText.gameObject.SetActive(false);
+            //    HabdBT.gameObject.SetActive(false);
+            //}
 
 
 
-            else if (hitObject.CompareTag(interactDorTag))
+            if (hitObject.CompareTag(interactDorTag))
                     {
                         itemNameText.gameObject.SetActive(true);
                         DoorSystem doorSystem = hitObject.gameObject.GetComponent<DoorSystem>();
@@ -207,12 +207,12 @@ public class Interact : MonoBehaviour {
 
 
                     }
-            else
-            {
-                // If the object has a different tag, hide the text
-                itemNameText.gameObject.SetActive(false);
-                HabdBT.gameObject.SetActive(false);
-            }
+            //else
+            //{
+            //    // If the object has a different tag, hide the text
+            //    itemNameText.gameObject.SetActive(false);
+            //    HabdBT.gameObject.SetActive(false);
+            //}
         }
         else
         {
