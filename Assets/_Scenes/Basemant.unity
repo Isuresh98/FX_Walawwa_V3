@@ -10712,7 +10712,7 @@ Transform:
   m_GameObject: {fileID: 438828499}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00073, y: -0, z: 0.000846}
+  m_LocalPosition: {x: 0.000618, y: 0, z: 0.00085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33627,6 +33627,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1331375579}
+  - component: {fileID: 1331375580}
   m_Layer: 0
   m_Name: DorAnim
   m_TagString: Untagged
@@ -33650,6 +33651,28 @@ Transform:
   - {fileID: 49658518}
   m_Father: {fileID: 543450651595873895}
   m_LocalEulerAnglesHint: {x: -0.04, y: 0, z: 180}
+--- !u!95 &1331375580
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331375578}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fba1a9d559bc046ef8323d9324e1f33d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1333791587
 GameObject:
   m_ObjectHideFlags: 0
@@ -42121,7 +42144,7 @@ Transform:
   m_GameObject: {fileID: 1677458238}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -56.328766, y: 0.464, z: -8.675247}
+  m_LocalPosition: {x: -56.328766, y: 1.02, z: -3.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55480,7 +55503,7 @@ PrefabInstance:
     - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
       propertyPath: interactLayers.m_Bits
-      value: 49537
+      value: 49409
       objectReference: {fileID: 0}
     - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
@@ -55525,7 +55548,7 @@ PrefabInstance:
     - target: {fileID: 7590293176331890907, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -56.99
+      value: -59.44
       objectReference: {fileID: 0}
     - target: {fileID: 7590293176331890907, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
@@ -55535,27 +55558,27 @@ PrefabInstance:
     - target: {fileID: 7590293176331890907, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.71
+      value: -4.05
       objectReference: {fileID: 0}
     - target: {fileID: 7590293176331890907, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9993724
+      value: -0.72296727
       objectReference: {fileID: 0}
     - target: {fileID: 7590293176331890907, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590293176331890907, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.035422824
+      value: -0.69088227
       objectReference: {fileID: 0}
     - target: {fileID: 7590293176331890907, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7590293176331890907, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
@@ -55565,7 +55588,7 @@ PrefabInstance:
     - target: {fileID: 7590293176331890907, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 355.94
+      value: 447.4
       objectReference: {fileID: 0}
     - target: {fileID: 7590293176331890907, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
@@ -59219,7 +59242,7 @@ MonoBehaviour:
   doorID: Master_Dor
   requiredKey: MasterKey
   isLocked: 1
-  doorAnimator: {fileID: 0}
+  doorAnimator: {fileID: 1331375580}
   closeDelay: 3
 --- !u!65 &3469287837728018884
 BoxCollider:
@@ -59240,8 +59263,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0023372257, y: 0.005719168, z: 0.009413793}
-  m_Center: {x: 0.000518843, y: -0.0000080296995, z: 0.0000030397239}
+  m_Size: {x: 0.004625252, y: 0.0042184386, z: 0.0094191125}
+  m_Center: {x: 0.00046917656, y: 0.00074232905, z: 0.0000056950894}
 --- !u!33 &3469287837755358050
 MeshFilter:
   m_ObjectHideFlags: 0
