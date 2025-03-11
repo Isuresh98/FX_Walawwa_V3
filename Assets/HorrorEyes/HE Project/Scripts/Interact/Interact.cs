@@ -548,6 +548,7 @@ if(m_readState == 2)
         m_paper = null;                
         m_gameController.AddPaperPicture();
     }
+
 }
 }
 }
