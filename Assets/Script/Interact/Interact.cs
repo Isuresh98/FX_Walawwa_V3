@@ -4,7 +4,9 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 using TMPro;
-using UnityEditorInternal.Profiling.Memory.Experimental;
+#if UNITY_EDITOR
+using UnityEditorInternal.Profiling.Memory.Experimental; // Only in Editor
+#endif
 
 public class Interact : MonoBehaviour {
 

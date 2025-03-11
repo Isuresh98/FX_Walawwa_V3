@@ -1,10 +1,19 @@
 # ninja log v5
-3	616	1741184831120948077	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	3c138237a156ad1e
-2	632	1741184831139213625	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	2b61012a03e75e11
-1	632	1741184831138872573	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	c0678014a36726b8
-2	638	1741184831146030330	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	bb8a74f9a3fa1f70
-3	686	1741184831193362458	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	fd714809c96cda40
+1	898	1741184831406201551	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	8d40bc1e3120e521
 1	704	1741184831211933932	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	838b6044b53c84bd
 2	837	1741184831344759791	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	23c97cb4058a0d4f
-1	898	1741184831406201551	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	8d40bc1e3120e521
+3	686	1741184831193362458	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	fd714809c96cda40
+2	638	1741184831146030330	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	bb8a74f9a3fa1f70
+1	632	1741184831138872573	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	c0678014a36726b8
+2	632	1741184831139213625	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	2b61012a03e75e11
 898	999	1741184831504343495	/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4u5l2m67/obj/armeabi-v7a/libgame.so	4c447199121c23c0
+3	616	1741184831120948077	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	3c138237a156ad1e
+2	556	1741699460682956333	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	2b61012a03e75e11
+2	558	1741699460684922131	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	bb8a74f9a3fa1f70
+1	619	1741699460745858554	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	c0678014a36726b8
+3	619	1741699460745015087	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	3c138237a156ad1e
+3	644	1741699460771787083	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	fd714809c96cda40
+1	694	1741699460822419635	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	838b6044b53c84bd
+2	802	1741699460930186737	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	23c97cb4058a0d4f
+1	864	1741699460992067430	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	8d40bc1e3120e521
+864	965	1741699461090275242	/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4u5l2m67/obj/armeabi-v7a/libgame.so	4c447199121c23c0
