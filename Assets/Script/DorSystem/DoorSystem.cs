@@ -32,12 +32,9 @@ public class DoorSystem : MonoBehaviour
         }
     }
 
-
-
-    private void OnTriggerEnter(Collider other)
+    public void ChaeckDoor()
     {
-        if (other.CompareTag("Player"))
-        {
+        
             if (isOpen)
             {
                 CloseDoor();
@@ -46,7 +43,12 @@ public class DoorSystem : MonoBehaviour
             {
                 TryUnlockDoor();
             }
-        }
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+       
     }
 
     private void TryUnlockDoor()
@@ -77,7 +79,7 @@ public class DoorSystem : MonoBehaviour
         }
         isOpen = true;
         Debug.Log("Door Opened!");
-        Invoke(nameof(CloseDoor), closeDelay); // Auto-close after delay
+       // Invoke(nameof(CloseDoor), closeDelay); // Auto-close after delay
     }
 
     private void CloseDoor()

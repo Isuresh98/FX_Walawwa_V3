@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 using TMPro;
+using System.Net.Sockets;
+using Unity.VisualScripting;
 
 public class Interact : MonoBehaviour {
 
@@ -189,23 +191,18 @@ public class Interact : MonoBehaviour {
 
             if (hitObject.CompareTag(interactDorTag))
                     {
-                        itemNameText.gameObject.SetActive(true);
+                       
                         DoorSystem doorSystem = hitObject.gameObject.GetComponent<DoorSystem>();
 
                         if (doorSystem.isLocked)
                         {
-                           
-                            itemNameText.text = "Loack Status";
+                            itemNameText.gameObject.SetActive(true);
+                            itemNameText.text = "This door is LOCKED.You need * *" + doorSystem.requiredKey + " * *to unlock it.";
                             // Invoke(nameof(HideMessage), 3f); // Hide after 3 seconds
-                            print("Loack Status");
+                            timer = displayDuration;
+                        
                         }
-                       
-
-                        print("Hit Door Name" + hitObject.gameObject.name);
-
-
-
-
+                      
                     }
             //else
             //{
@@ -235,11 +232,7 @@ public class Interact : MonoBehaviour {
         }
         }
     }
-    private void HideMessage()
-    {
-        itemNameText.text = "";
-    }
-
+   
     private void InteractBTUse()
     {
         Image buttonImage = ItemInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
