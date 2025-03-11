@@ -19,6 +19,8 @@ public class Interact : MonoBehaviour {
     [Tooltip("Tags for interact")]
     public string interactTag;
     public string interactCoinTag;
+   
+
     [Header("UI Settings")]
     private PlayerController player;
 
@@ -59,6 +61,11 @@ public class Interact : MonoBehaviour {
     // Update rate for mobile optimization
     private float checkInterval = 0.2f;
     private float checkTimer;
+
+
+    [Header("Door Settings")]
+    public string interactDorTag;
+    public LayerMask interactDoorLayers;
     private void Start()
     {
         m_gameController = FindObjectOfType<GameControll>();
@@ -99,6 +106,24 @@ public class Interact : MonoBehaviour {
                 {
                     sphereCollider.radius = 0.5f; // Set your desired radius
                 }
+
+            }
+            else if (hot.transform.gameObject.tag == interactDorTag)
+            {
+                print("Interactive Dor Object Name: " + hot.transform.name);
+              
+               
+
+            }
+
+        }
+       else if (Physics.Raycast(ray, out hot, rayDistance, interactDoorLayers))
+        {
+            if (hot.transform.gameObject.tag == interactDorTag)
+            {
+                print("Interactive Dor Object Name: " + hot.transform.name);
+
+
 
             }
 
@@ -159,7 +184,29 @@ public class Interact : MonoBehaviour {
                             sphereCollider.isRayHit = true;
                         }
                     }
-                    
+
+
+
+            else if (hitObject.CompareTag(interactDorTag))
+                    {
+                        itemNameText.gameObject.SetActive(true);
+                        DoorSystem doorSystem = hitObject.gameObject.GetComponent<DoorSystem>();
+
+                        if (doorSystem.isLocked)
+                        {
+                           
+                            itemNameText.text = "Loack Status";
+                            // Invoke(nameof(HideMessage), 3f); // Hide after 3 seconds
+                            print("Loack Status");
+                        }
+                       
+
+                        print("Hit Door Name" + hitObject.gameObject.name);
+
+
+
+
+                    }
             else
             {
                 // If the object has a different tag, hide the text
@@ -188,7 +235,10 @@ public class Interact : MonoBehaviour {
         }
         }
     }
-
+    private void HideMessage()
+    {
+        itemNameText.text = "";
+    }
 
     private void InteractBTUse()
     {
