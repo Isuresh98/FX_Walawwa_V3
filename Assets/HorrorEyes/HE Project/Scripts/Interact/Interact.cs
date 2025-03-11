@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System.Net.Sockets;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class Interact : MonoBehaviour {
 
@@ -67,6 +68,11 @@ public class Interact : MonoBehaviour {
 
     [Header("Door Settings")]
     public string interactDorTag;
+    public string interactKeyTag;
+    public string interactKeyholTag;
+    
+
+
     public LayerMask interactDoorLayers;
     private void Start()
     {
@@ -110,13 +116,28 @@ public class Interact : MonoBehaviour {
                 }
 
             }
-            else if (hot.transform.gameObject.tag == interactDorTag)
+            else if (hot.transform.gameObject.tag == interactKeyTag)
             {
                 print("Interactive Dor Object Name: " + hot.transform.name);
-              
-               
+
+                Rigidbody rb = hot.transform.gameObject.GetComponent<Rigidbody>(); // Freezes all movement and rotation
+                rb.constraints = RigidbodyConstraints.FreezeAll;
+                KeyItem keyItem = hot.transform.gameObject.GetComponent<KeyItem>();
+                keyItem.CollectKey();
+                CheckRaycastedObject(hot.transform.gameObject, -1);
 
             }
+            else if (hot.transform.gameObject.tag == interactKeyholTag)
+            {
+                print("Interactive Dor Hol Object Name: " + hot.transform.name);
+                Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
+                keyhol.TryUnlockDoor();
+
+                itemNameText.gameObject.SetActive(true);
+                itemNameText.text = keyhol.TryUnlockDoor();
+                timer = displayDuration;
+            }
+
 
         }
        else if (Physics.Raycast(ray, out hot, rayDistance, interactDoorLayers))
@@ -124,7 +145,7 @@ public class Interact : MonoBehaviour {
             if (hot.transform.gameObject.tag == interactDorTag)
             {
                 print("Interactive Dor Object Name: " + hot.transform.name);
-
+             
 
 
             }
@@ -189,7 +210,7 @@ public class Interact : MonoBehaviour {
 
 
 
-            if (hitObject.CompareTag(interactDorTag))
+                     if (hitObject.CompareTag(interactDorTag))
                     {
                        
                         DoorSystem doorSystem = hitObject.gameObject.GetComponent<DoorSystem>();
@@ -197,20 +218,55 @@ public class Interact : MonoBehaviour {
                         if (doorSystem.isLocked)
                         {
                             itemNameText.gameObject.SetActive(true);
-                            itemNameText.text = "This door is LOCKED.You need * *" + doorSystem.requiredKey + " * *to unlock it.";
-                            // Invoke(nameof(HideMessage), 3f); // Hide after 3 seconds
+                            itemNameText.text = "This door is LOCKED.Use the " + doorSystem.requiredKey + " to unlock";
+                
                             timer = displayDuration;
                         
                         }
                       
                     }
-            //else
-            //{
-            //    // If the object has a different tag, hide the text
-            //    itemNameText.gameObject.SetActive(false);
-            //    HabdBT.gameObject.SetActive(false);
-            //}
-        }
+
+                    if (hitObject.CompareTag(interactKeyTag))
+                    {
+
+
+                        KeyItem keyItem = hitObject.GetComponent<KeyItem>();
+
+                        itemNameText.gameObject.SetActive(true);
+                            itemNameText.text = "Pickup"+ keyItem.keyID;
+                        HabdBT.gameObject.SetActive(true);
+                  
+                        timer = displayDuration;
+
+                        
+
+                    }
+                
+                    if (hitObject.CompareTag(interactKeyholTag))
+                    {
+
+
+                        Keyhole keyhol = hitObject.GetComponent<Keyhole>();
+                        if (keyhol.locket)
+                        {
+                            itemNameText.gameObject.SetActive(true);
+                            itemNameText.text = "Unlock Use " + keyhol.requiredKey;
+                            HabdBT.gameObject.SetActive(true);
+                  
+                            timer = displayDuration;
+                        }
+                      
+
+
+
+                    }
+                    //else
+                    //{
+                    //    // If the object has a different tag, hide the text
+                    //    itemNameText.gameObject.SetActive(false);
+                    //    HabdBT.gameObject.SetActive(false);
+                    //}
+                }
         else
         {
             // If nothing was hit, hide the text

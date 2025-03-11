@@ -12,10 +12,11 @@ public class DoorSystem : MonoBehaviour
 
     private void Start()
     {
-        // Load saved door state
+        PlayerPrefs.SetInt(doorID, 0); // Savedoor
+        //// Load saved door state
         if (PlayerPrefs.GetInt(doorID, 0) == 1)
         {
-            isLocked = false;
+          isLocked = false;
         }
     }
 
@@ -51,7 +52,7 @@ public class DoorSystem : MonoBehaviour
        
     }
 
-    private void TryUnlockDoor()
+    public void TryUnlockDoor()
     {
         if (!isLocked)
         {
