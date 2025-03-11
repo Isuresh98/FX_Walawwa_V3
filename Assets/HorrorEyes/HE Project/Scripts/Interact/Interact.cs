@@ -70,7 +70,11 @@ public class Interact : MonoBehaviour {
     public string interactDorTag;
     public string interactKeyTag;
     public string interactKeyholTag;
-    
+    [Header("Timer Use Button Settings")]
+    public Button DoorInteractdBT;
+    private bool isHolding = false;
+    public float holdTime = 0f;
+    public float requiredHoldTime = 2f; // Time in seconds to trigger hold action
 
 
     public LayerMask interactDoorLayers;
@@ -130,12 +134,20 @@ public class Interact : MonoBehaviour {
             else if (hot.transform.gameObject.tag == interactKeyholTag)
             {
                 print("Interactive Dor Hol Object Name: " + hot.transform.name);
-                Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
-                keyhol.TryUnlockDoor();
 
-                itemNameText.gameObject.SetActive(true);
-                itemNameText.text = keyhol.TryUnlockDoor();
-                timer = displayDuration;
+                Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
+
+                if (keyhol.locket)
+                {
+                   
+
+                    keyhol.TryUnlockDoor();
+
+                    itemNameText.gameObject.SetActive(true);
+                    itemNameText.text = keyhol.TryUnlockDoor();
+                    timer = displayDuration;
+                }
+
             }
 
 
@@ -152,8 +164,88 @@ public class Interact : MonoBehaviour {
 
         }
     }
+
+
+
+    public void OnHandButtonDoorClicked()
+    {
+        Debug.Log(" Button Clicked!");
+        isHolding = true;
+        holdTime = 0f;
+    }
+
+    public void OnHandButtonDoorReleased()
+    {
+        if (isHolding)
+        {
+            if (holdTime < requiredHoldTime)
+            {
+                Debug.Log("Hold Canceled. Button Released Too Early!");
+            }
+
+            isHolding = false; // Stop the hold process
+            holdTime = 0f; // Reset the timer
+        }
+    }
+
+    private void HoldAction()
+    {
+        Debug.Log(" Hold Successful! Action triggered.");
+
+        // Add action when hold is completed
+        isHolding = false; // Stop the hold process
+        holdTime = 0f; // Reset the timer
+
+
+        RaycastHit hot;
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+
+        if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
+        {
+
+            if (hot.transform.gameObject.tag == interactKeyholTag)
+            {
+                print("Interactive Dor Hol Object Name: " + hot.transform.name);
+
+                Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
+
+                if (keyhol.locket)
+                {
+
+
+                    keyhol.TryUnlockDoor();
+
+                    itemNameText.gameObject.SetActive(true);
+                    itemNameText.text = keyhol.TryUnlockDoor();
+                    timer = displayDuration;
+                }
+
+            }
+
+
+        }
+
+
+     }
+
+    // button reaction in dor
     private void Update()
     {
+
+        if (isHolding)
+        {
+            holdTime += Time.deltaTime;
+
+            if (holdTime >= requiredHoldTime)
+            {
+                HoldAction();
+                isHolding = false; // Stop further execution
+                holdTime = 0f; // Reset hold time
+            }
+        }
+
+
+
         if (m_readPaper)
         {
             ReadPaper();
@@ -221,7 +313,12 @@ public class Interact : MonoBehaviour {
                             itemNameText.text = "This door is LOCKED.Use the " + doorSystem.requiredKey + " to unlock";
                 
                             timer = displayDuration;
-                        
+
+                        }
+                        else
+                        {
+                            itemNameText.gameObject.SetActive(false);
+                            HabdBT.gameObject.SetActive(true);
                         }
                       
                     }
@@ -247,16 +344,23 @@ public class Interact : MonoBehaviour {
 
 
                         Keyhole keyhol = hitObject.GetComponent<Keyhole>();
-                        if (keyhol.locket)
+                        int keyvaluwe = PlayerPrefs.GetInt(keyhol.requiredKey);
+
+                        if (keyvaluwe == 1&& keyhol.locket)// Player has the key
                         {
                             itemNameText.gameObject.SetActive(true);
                             itemNameText.text = "Unlock Use " + keyhol.requiredKey;
-                            HabdBT.gameObject.SetActive(true);
-                  
+                            DoorInteractdBT.gameObject.SetActive(true);
+
                             timer = displayDuration;
                         }
-                      
+                        else
+                        {
+                            itemNameText.text = "Need " + keyhol.requiredKey;
+                            DoorInteractdBT.gameObject.SetActive(false);
+                            timer = displayDuration;
 
+                        }
 
 
                     }
@@ -272,7 +376,8 @@ public class Interact : MonoBehaviour {
             // If nothing was hit, hide the text
             itemNameText.gameObject.SetActive(false);
             HabdBT.gameObject.SetActive(false);
-        }
+            DoorInteractdBT.gameObject.SetActive(false);
+                }
 
         // Hide the text after the timer runs out
         if (itemNameText.gameObject.activeSelf)
@@ -282,6 +387,7 @@ public class Interact : MonoBehaviour {
             {
                 itemNameText.gameObject.SetActive(false);
                 HabdBT.gameObject.SetActive(false);
+                 DoorInteractdBT.gameObject.SetActive(false);
             }
         }
 

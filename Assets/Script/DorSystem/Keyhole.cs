@@ -16,7 +16,7 @@ public class Keyhole : MonoBehaviour
     {
         if (linkedDoor == null)
         {
-            return "⚠️ No door assigned to this keyhole!";
+            return " No door assigned to this keyhole!";
         }
 
         if (linkedDoor.isLocked) // Check if the door is locked
@@ -25,17 +25,17 @@ public class Keyhole : MonoBehaviour
             {
                 linkedDoor.TryUnlockDoor(); // Unlock the door
                 locket = linkedDoor.isLocked;
-                return "🔑 Key used! Door unlocked.";
-
+                return " Key used! Door unlocked.";
+               
             }
             else
             {
-                return "🔒 You need **" + requiredKey + "** to unlock this door!";
+                return " You need **" + requiredKey + "** to unlock this door!";
             }
         }
         else
         {
-            return "🚪 The door is already unlocked!";
+            return "The door is unlocked!";
         }
     }
 }
