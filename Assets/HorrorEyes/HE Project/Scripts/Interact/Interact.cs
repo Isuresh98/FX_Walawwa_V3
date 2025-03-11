@@ -152,12 +152,13 @@ public class Interact : MonoBehaviour {
 
 
         }
-       else if (Physics.Raycast(ray, out hot, rayDistance, interactDoorLayers))
+       if (Physics.Raycast(ray, out hot, rayDistance, interactDoorLayers))
         {
             if (hot.transform.gameObject.tag == interactDorTag)
             {
                 print("Interactive Dor Object Name: " + hot.transform.name);
-             
+                DoorSystem doorSystem = hot.transform.gameObject.GetComponent<DoorSystem>();
+                doorSystem.ToggleDoor();
 
 
             }
@@ -354,13 +355,18 @@ public class Interact : MonoBehaviour {
 
                             timer = displayDuration;
                         }
-                        else
+                       else if(!(keyvaluwe == 1))
                         {
                             itemNameText.text = "Need " + keyhol.requiredKey;
                             DoorInteractdBT.gameObject.SetActive(false);
                             timer = displayDuration;
 
                         }
+                        else
+                        {
+                            DoorInteractdBT.gameObject.SetActive(false);
+                        }
+                       
 
 
                     }

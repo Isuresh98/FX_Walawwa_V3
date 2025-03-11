@@ -56,7 +56,7 @@ public class DoorSystem : MonoBehaviour
     {
         if (!isLocked)
         {
-            OpenDoor();
+           // OpenDoor();
             return;
         }
 
@@ -64,7 +64,7 @@ public class DoorSystem : MonoBehaviour
         {
             isLocked = false;
             PlayerPrefs.SetInt(doorID, 1); // Save door state
-            OpenDoor();
+           // OpenDoor();
         }
         else
         {
@@ -72,7 +72,7 @@ public class DoorSystem : MonoBehaviour
         }
     }
 
-    private void OpenDoor()
+    public void OpenDoor()
     {
         if (doorAnimator)
         {
@@ -83,7 +83,7 @@ public class DoorSystem : MonoBehaviour
        // Invoke(nameof(CloseDoor), closeDelay); // Auto-close after delay
     }
 
-    private void CloseDoor()
+    public void CloseDoor()
     {
         if (doorAnimator)
         {
@@ -91,5 +91,19 @@ public class DoorSystem : MonoBehaviour
         }
         isOpen = false;
         Debug.Log("Door Closed!");
+    }
+
+    public void ToggleDoor()
+    {
+        print("Toggele Work");
+
+        if (isOpen)
+        {
+            CloseDoor();
+        }
+        else
+        {
+            OpenDoor();
+        }
     }
 }
