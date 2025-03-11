@@ -55450,16 +55450,6 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1383023664}
-    - target: {fileID: 619014200435568536, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 619014200435568536, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: cameraMoveSpeed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
       propertyPath: HabdBT
@@ -55472,16 +55462,6 @@ PrefabInstance:
       objectReference: {fileID: 1815526912}
     - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
-      propertyPath: interactDorTag
-      value: Door
-      objectReference: {fileID: 0}
-    - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: interactKeyTag
-      value: Key
-      objectReference: {fileID: 0}
-    - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
       propertyPath: DoorInteractdBT
       value: 
       objectReference: {fileID: 48942377}
@@ -55490,61 +55470,6 @@ PrefabInstance:
       propertyPath: ItemInteractdBT
       value: 
       objectReference: {fileID: 991090162}
-    - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: interactCoinTag
-      value: Coin
-      objectReference: {fileID: 0}
-    - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: requiredHoldTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: interactKeyholTag
-      value: Keyhol
-      objectReference: {fileID: 0}
-    - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: interactLayers.m_Bits
-      value: 49409
-      objectReference: {fileID: 0}
-    - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: detectableLayer.m_Bits
-      value: 49536
-      objectReference: {fileID: 0}
-    - target: {fileID: 3139942092775827227, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: interactDoorLayers.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 4145588738795500708, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.063
-      objectReference: {fileID: 0}
-    - target: {fileID: 4145588738795500708, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.245
-      objectReference: {fileID: 0}
-    - target: {fileID: 4229567671481929505, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: field of view
-      value: 64.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4229567671481929505, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: m_StereoConvergence
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4229567671481929505, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 53175
-      objectReference: {fileID: 0}
     - target: {fileID: 5740860739890559035, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
       propertyPath: m_Name
@@ -55602,11 +55527,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8177863445031550501, guid: 743d7e5e5fba54949a7c8b15f31273e7,
         type: 3}
-      propertyPath: crouchHeight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8177863445031550501, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
       propertyPath: gameControll
       value: 
       objectReference: {fileID: 2001139096952848455}
@@ -55625,16 +55545,6 @@ PrefabInstance:
       propertyPath: m_runArrownImage
       value: 
       objectReference: {fileID: 2001139095582229117}
-    - target: {fileID: 8248047117747900143, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.058
-      objectReference: {fileID: 0}
-    - target: {fileID: 8248047117747900143, guid: 743d7e5e5fba54949a7c8b15f31273e7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.664
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

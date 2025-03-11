@@ -590,7 +590,7 @@ Transform:
   m_GameObject: {fileID: 2063622848578227479}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.063, y: 0, z: 0.245}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -873,13 +873,13 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 50
-  field of view: 60
+  field of view: 64.3
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2871
+    m_Bits: 53175
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -923,8 +923,9 @@ MonoBehaviour:
   rayDistance: 2
   interactLayers:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 49409
   interactTag: Interact
+  interactCoinTag: Coin
   m_examineTransform: {fileID: 3495405126941238219}
   m_paperScreenTransform: {fileID: 6354137429621549478}
   m_itemScreenTransform: {fileID: 3725446957177940877}
@@ -933,9 +934,20 @@ MonoBehaviour:
   m_itemShowTime: 0.2
   itemNameText: {fileID: 0}
   HabdBT: {fileID: 0}
+  ItemInteractdBT: {fileID: 0}
+  ItemID: 0
   detectableLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 49536
+  interactDorTag: Door
+  interactKeyTag: Key
+  interactKeyholTag: Keyhol
+  DoorInteractdBT: {fileID: 0}
+  holdTime: 0
+  requiredHoldTime: 2
+  interactDoorLayers:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &4235083535405163707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,7 +1263,7 @@ MonoBehaviour:
   cameraIdleAnimName: CameraIdle
   cameraMoveAnimName: CameraMove
   normalHeight: 2
-  crouchHeight: 1.2
+  crouchHeight: 0.5
   cameraNormalOffset: 0.9
   cameraCrouchOffset: 0
   obstacleLayers:
@@ -1272,6 +1284,7 @@ MonoBehaviour:
   dyingSound: {fileID: 0}
   AS: {fileID: 0}
   m_TPS_Player: {fileID: 9005095258769897355}
+  iSIntractableHideObject: 0
   joystickArea: {fileID: 0}
 --- !u!82 &3515041510523488851
 AudioSource:
@@ -1432,10 +1445,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d81d5677fec4ccf8633699eac72d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 100
   healthBar: {fileID: 0}
   deathCameraPoint: {fileID: 6420375008028812756}
-  cameraMoveSpeed: 0.1
+  cameraMoveSpeed: 3
 --- !u!1 &5790414223092685767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,7 +2039,7 @@ Transform:
   m_GameObject: {fileID: 7982720609639670168}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.01899992, y: -1.04, z: -0.45399833}
+  m_LocalPosition: {x: 0.058, y: -1.04, z: -0.664}
   m_LocalScale: {x: 2.3, y: 2.3, z: 2.3}
   m_ConstrainProportionsScale: 0
   m_Children:
