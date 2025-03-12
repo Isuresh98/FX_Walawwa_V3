@@ -91,11 +91,11 @@ public class Inventory : MonoBehaviour {
                 // Check if the inventory has reached the maximum slot limit
                 if (m_slots.Count >= maxSlots)
                 {
-                    InteractScript.isInventoryFull = true;
+                
                     Debug.Log("Cannot add item: Inventory is full! No free slots available.");
                     return; // Stop adding
                 }
-                InteractScript.isInventoryFull = false;
+              
                 GameObject slt = Instantiate(m_slotPrefab, m_slotsContent);
                 Slot newSlot = slt.GetComponent<Slot>();
                 newSlot.m_itemID = id;

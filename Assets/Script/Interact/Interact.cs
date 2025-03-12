@@ -79,7 +79,7 @@ public class Interact : MonoBehaviour {
     public LayerMask interactDoorLayers;
     public Slider TimerForCollect;
     public Sprite[] sprites;
-    public bool isInventoryFull=false;
+
 
     private void Start()
     {
@@ -199,8 +199,8 @@ public class Interact : MonoBehaviour {
 
                 isHolding = false; // Stop the hold process
                 holdTime = 0f; // Reset the timer
-            TimerForCollect.value = 0f; // Reset slider when released
-        }
+                TimerForCollect.value = 0f; // Reset slider when released
+             }
         
        
     }
@@ -342,75 +342,131 @@ public class Interact : MonoBehaviour {
 
                     //cheak Inventor Full
                     //cheak inventory fulll
-                    if (!isInventoryFull)
-                    {
+                 
                         // Check if the hit object has the correct tag
-                        if (hitObject.CompareTag(interactTag)) // Change "PickupItem" to your desired tag
+                   if (hitObject.CompareTag(interactTag)) // Change "PickupItem" to your desired tag
+                    {
+
+                        int hitItemID = hitObject.gameObject.GetComponent<Item>().itemID;
+                        foreach (var slot in m_gameController.inventory.m_slots)
                         {
-                            if (!isInventoryFull)
+                            if (slot.m_itemID == hitItemID)
+                            {
+
+
+                                // Display the item name on the UI if it has changed
+                                string itemName = hitObject.gameObject.GetComponent<Item>().itemName; // Or use a custom name if needed
+
+                                if (itemName == "Helth")
+                                {
+                                    Image buttonImage = DoorInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
+                                    int Id = hitObject.gameObject.GetComponent<Item>().itemID;
+                                    if (itemNameText.text != itemName)
+                                    {
+                                        itemNameText.text = "Pickup " + itemName;
+                                    }
+                                    TimerForCollect.gameObject.SetActive(true);
+                                    ItemID = Id;
+                                    buttonImage.gameObject.SetActive(true); // Ensure the button is visible
+                                    buttonImage.sprite = sprites[0]; // Set the sprite
+
+
+                                    itemNameText.gameObject.SetActive(true);
+                                    DoorInteractdBT.gameObject.SetActive(true);
+                                    timer = displayDuration;
+                                }
+                                else if (!(itemName == null))
+                                {
+                                    int Id = hitObject.gameObject.GetComponent<Item>().itemID;
+                                    if (itemNameText.text != itemName)
+                                    {
+                                        itemNameText.text = "Pickup " + itemName;
+                                    }
+                                    ItemID = Id;
+                                    itemNameText.gameObject.SetActive(true);
+                                    HabdBT.gameObject.SetActive(true);
+                                    timer = displayDuration;
+                                }
+                                else
+                                {
+
+                                    itemNameText.gameObject.SetActive(false);
+                                    HabdBT.gameObject.SetActive(false);
+                                }
+                            }
+                            else if (!m_gameController.inventory.IsInventoryFull())
                             {
 
                                 // Display the item name on the UI if it has changed
-                             string itemName = hitObject.gameObject.GetComponent<Item>().itemName; // Or use a custom name if needed
+                                string itemName = hitObject.gameObject.GetComponent<Item>().itemName; // Or use a custom name if needed
 
-                            if (itemName == "Helth")
-                            {
-                                Image buttonImage = DoorInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
-                                int Id = hitObject.gameObject.GetComponent<Item>().itemID;
-                                if (itemNameText.text != itemName)
+                                if (itemName == "Helth")
                                 {
-                                    itemNameText.text = "Pickup " + itemName;
+                                    Image buttonImage = DoorInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
+                                    int Id = hitObject.gameObject.GetComponent<Item>().itemID;
+                                    if (itemNameText.text != itemName)
+                                    {
+                                        itemNameText.text = "Pickup " + itemName;
+                                    }
+                                    TimerForCollect.gameObject.SetActive(true);
+                                    ItemID = Id;
+                                    buttonImage.gameObject.SetActive(true); // Ensure the button is visible
+                                    buttonImage.sprite = sprites[0]; // Set the sprite
+
+
+                                    itemNameText.gameObject.SetActive(true);
+                                    DoorInteractdBT.gameObject.SetActive(true);
+                                    timer = displayDuration;
                                 }
-                                TimerForCollect.gameObject.SetActive(true);
-                                ItemID = Id;
-                                buttonImage.gameObject.SetActive(true); // Ensure the button is visible
-                                buttonImage.sprite = sprites[0]; // Set the sprite
-
-
-                                itemNameText.gameObject.SetActive(true);
-                                DoorInteractdBT.gameObject.SetActive(true);
-                                timer = displayDuration;
-                            }
-                            else if (!(itemName == null))
-                            {
-                                int Id = hitObject.gameObject.GetComponent<Item>().itemID;
-                                if (itemNameText.text != itemName)
+                                else if (!(itemName == null))
                                 {
-                                    itemNameText.text = "Pickup " + itemName;
+                                    int Id = hitObject.gameObject.GetComponent<Item>().itemID;
+                                    if (itemNameText.text != itemName)
+                                    {
+                                        itemNameText.text = "Pickup " + itemName;
+                                    }
+                                    ItemID = Id;
+                                    itemNameText.gameObject.SetActive(true);
+                                    HabdBT.gameObject.SetActive(true);
+                                    timer = displayDuration;
                                 }
-                                ItemID = Id;
-                                itemNameText.gameObject.SetActive(true);
-                                HabdBT.gameObject.SetActive(true);
-                                timer = displayDuration;
+                                else
+                                {
+
+                                    itemNameText.gameObject.SetActive(false);
+                                    HabdBT.gameObject.SetActive(false);
+                                }
                             }
                             else
                             {
+                                
 
-                                itemNameText.gameObject.SetActive(false);
-                                HabdBT.gameObject.SetActive(false);
+                                    itemNameText.gameObject.SetActive(true);
+                                    itemNameText.text = "Hand bags Item Full";
+                                    timer = displayDuration;
+                                
+
                             }
-
-                            }
-                            else
-                            {
-
-                                itemNameText.gameObject.SetActive(true);
-                                itemNameText.text = "Hand bags Item Full";
-                                timer = displayDuration;
-                            }
-
-
                         }
 
+
+
+
+
+
+                    }
+                           
+
+                   
 
 
 
                         if (hitObject.CompareTag(interactKeyTag))
                         {
 
-                            if (!isInventoryFull)
-                            {
-                                KeyItem keyItem = hitObject.GetComponent<KeyItem>();
+                        if (!m_gameController.inventory.IsInventoryFull())
+                        {
+                            KeyItem keyItem = hitObject.GetComponent<KeyItem>();
 
                             itemNameText.gameObject.SetActive(true);
                             itemNameText.text = "Pickup" + keyItem.keyID;
@@ -429,7 +485,7 @@ public class Interact : MonoBehaviour {
 
                         }
 
-                    }
+                    
 
 
                     if (hitObject.CompareTag(interactDorTag))
@@ -678,48 +734,65 @@ if(m_readState == 2)
 }
 }
 
-private void TakingItem()
-{
-print("Take Item....");
-if (m_takeItem && m_item != null)
-{
-if (m_itemTakeState == 0)
-{
-    m_item.transform.position = Vector3.Slerp(m_item.transform.position, m_examineTransform.position, m_moveSpeed * Time.deltaTime);
-    m_item.transform.rotation = Quaternion.Slerp(m_item.transform.rotation, m_examineTransform.rotation, m_moveSpeed * Time.deltaTime);
-    float dist = Vector3.Distance(m_item.transform.position, m_examineTransform.position);
-    float ang = Quaternion.Angle(m_item.transform.rotation, m_examineTransform.rotation);
-
-    if (dist <= 0.5 && ang <= 0.5)
+    private void TakingItem()
     {
-        m_item.transform.position = m_examineTransform.position;
-        m_item.transform.rotation = m_examineTransform.rotation;
-        m_itemTakeState = 1;
-        m_gameController.ShowTip(m_item.itemID,6);
-        StartCoroutine(WaitForItemShow());
+        print("Take Item....");
 
-    }
-}
+        if (!m_gameController.inventory.IsInventoryFull())
+        {
+            if (m_takeItem && m_item != null)
+            {
+                if (m_itemTakeState == 0)
+                {
+                    m_item.transform.position = Vector3.Slerp(m_item.transform.position, m_examineTransform.position, m_moveSpeed * Time.deltaTime);
+                    m_item.transform.rotation = Quaternion.Slerp(m_item.transform.rotation, m_examineTransform.rotation, m_moveSpeed * Time.deltaTime);
+                    float dist = Vector3.Distance(m_item.transform.position, m_examineTransform.position);
+                    float ang = Quaternion.Angle(m_item.transform.rotation, m_examineTransform.rotation);
 
-if (m_itemTakeState == 2)
-{
-    m_item.transform.position = Vector3.Slerp(m_item.transform.position, m_itemScreenTransform.position, m_moveSpeed * Time.deltaTime);
-    m_item.transform.rotation = Quaternion.Slerp(m_item.transform.rotation, m_itemScreenTransform.rotation, m_moveSpeed * Time.deltaTime);
-    float dist = Vector3.Distance(m_item.transform.position, m_itemScreenTransform.position);
-    float ang = Quaternion.Angle(m_item.transform.rotation, m_itemScreenTransform.rotation);
+                    if (dist <= 0.5 && ang <= 0.5)
+                    {
+                        m_item.transform.position = m_examineTransform.position;
+                        m_item.transform.rotation = m_examineTransform.rotation;
+                        m_itemTakeState = 1;
+                        m_gameController.ShowTip(m_item.itemID, 6);
+                        StartCoroutine(WaitForItemShow());
 
-    if (dist <= 1 && ang <= 1)
-    {
+                    }
+                }
 
-        m_itemTakeState = 0;
-        m_gameController.inventory.AddItem(m_item.itemID, m_item.itemCount);
-        m_takeItem = false;
-        Destroy(m_item.gameObject);
-        m_item = null;                 
-    }
-}
-}
-}
+                if (m_itemTakeState == 2)
+                {
+                    m_item.transform.position = Vector3.Slerp(m_item.transform.position, m_itemScreenTransform.position, m_moveSpeed * Time.deltaTime);
+                    m_item.transform.rotation = Quaternion.Slerp(m_item.transform.rotation, m_itemScreenTransform.rotation, m_moveSpeed * Time.deltaTime);
+                    float dist = Vector3.Distance(m_item.transform.position, m_itemScreenTransform.position);
+                    float ang = Quaternion.Angle(m_item.transform.rotation, m_itemScreenTransform.rotation);
+
+                    if (dist <= 1 && ang <= 1)
+                    {
+
+
+                        m_itemTakeState = 0;
+
+
+
+
+                        m_gameController.inventory.AddItem(m_item.itemID, m_item.itemCount);
+                        m_takeItem = false;
+                        Destroy(m_item.gameObject);
+                        m_item = null;
+                    }
+                }
+            }
+            
+
+        }
+        else
+        {
+         
+            Debug.Log("Inventory Full..");
+        }
+
+}//take item
 
 public void DropItemCheck(int id)
 {
