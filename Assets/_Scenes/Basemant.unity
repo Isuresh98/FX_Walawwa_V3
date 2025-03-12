@@ -64038,7 +64038,7 @@ MonoBehaviour:
     m_description: MasterKey For Master Door Open
     id: 4
     m_itemIcon: {fileID: 21300000, guid: 7b3f49862de1e4de080a3929bf9abcaa, type: 3}
-    m_itemPrefab: {fileID: 8255109270847316338, guid: 513c15ae60a6a4e11bca227bb59b15e7,
+    m_itemPrefab: {fileID: 4564514567943140536, guid: a9e2390987e084297ae1b72c703cd8aa,
       type: 3}
   - name: Helth
     m_description: Iramusu For Your Helth Up

@@ -222,11 +222,17 @@ public class Interact : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
             {
-
+               
                 if (hot.transform.gameObject.tag == interactTag)
                 {
-                    print("Interactive Dor Hol Object Name: " + hot.transform.name);
-                    CheckRaycastedObject(hot.transform.gameObject, -1);
+
+                    Item item = hot.transform.gameObject.GetComponent<Item>();
+                  if(item.itemID ==5)
+                    {
+                        print("Interactive Dor Hol Object Name: " + hot.transform.name);
+                        CheckRaycastedObject(hot.transform.gameObject, -1);
+                    }
+                 
                    
                 }
 
