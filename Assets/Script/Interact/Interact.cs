@@ -77,6 +77,7 @@ public class Interact : MonoBehaviour {
     public float holdTime = 0f;
     public float requiredHoldTime = 2f; // Time in seconds to trigger hold action
     public LayerMask interactDoorLayers;
+    public Slider TimerForCollect;
     private void Start()
     {
         m_gameController = FindObjectOfType<GameControll>();
@@ -195,7 +196,8 @@ public class Interact : MonoBehaviour {
 
                 isHolding = false; // Stop the hold process
                 holdTime = 0f; // Reset the timer
-            }
+            TimerForCollect.value = 0f; // Reset slider when released
+        }
         
        
     }
@@ -204,7 +206,8 @@ public class Interact : MonoBehaviour {
     {
         Debug.Log(" Hold Successful! Action triggered.");
 
-
+        TimerForCollect.gameObject.SetActive(false);
+        HabdBT.gameObject.SetActive(false);
         if (ItemID == 5)
         {
             Debug.Log(" Helth Up");
@@ -275,12 +278,13 @@ public class Interact : MonoBehaviour {
         if (isHolding)
         {
             holdTime += Time.deltaTime;
-
+            TimerForCollect.value = holdTime / requiredHoldTime; // Update slider progress
             if (holdTime >= requiredHoldTime)
             {
                 HoldAction();
                 isHolding = false; // Stop further execution
                 holdTime = 0f; // Reset hold time
+                TimerForCollect.value = 0f; // Reset slider
             }
         }
 
@@ -332,7 +336,7 @@ public class Interact : MonoBehaviour {
                             {
                                 itemNameText.text = "Pickup " + itemName;
                             }
-
+                            TimerForCollect.gameObject.SetActive(true);
                             ItemID = Id;
                             buttonImage.gameObject.SetActive(true); // Ensure the button is visible
                             buttonImage.sprite = m_itemsDatabase.Items[Id].m_itemIcon; // Set the sprite
@@ -408,9 +412,10 @@ public class Interact : MonoBehaviour {
 
                         Keyhole keyhol = hitObject.GetComponent<Keyhole>();
                         int keyvaluwe = PlayerPrefs.GetInt(keyhol.requiredKey);
-
+                       
                         if (keyvaluwe == 1&& keyhol.locket)// Player has the key
                         {
+                            TimerForCollect.gameObject.SetActive(true);
                             itemNameText.gameObject.SetActive(true);
                             itemNameText.text = "Unlock Use " + keyhol.requiredKey;
                             DoorInteractdBT.gameObject.SetActive(true);
@@ -445,6 +450,7 @@ public class Interact : MonoBehaviour {
             itemNameText.gameObject.SetActive(false);
             HabdBT.gameObject.SetActive(false);
             DoorInteractdBT.gameObject.SetActive(false);
+                    TimerForCollect.gameObject.SetActive(false);
                 }
 
         // Hide the text after the timer runs out
@@ -456,7 +462,8 @@ public class Interact : MonoBehaviour {
                 itemNameText.gameObject.SetActive(false);
                 HabdBT.gameObject.SetActive(false);
                  DoorInteractdBT.gameObject.SetActive(false);
-            }
+                        TimerForCollect.gameObject.SetActive(false);
+                    }
         }
 
         }
