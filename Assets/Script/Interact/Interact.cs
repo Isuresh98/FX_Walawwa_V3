@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using TMPro;
 using Unity.VisualScripting;
+using System.Linq;
 #if UNITY_EDITOR
 using UnityEditorInternal.Profiling.Memory.Experimental; // Only in Editor
 #endif
@@ -51,6 +52,7 @@ public class Interact : MonoBehaviour {
 
     [Header("UI Item Settings")]
     public Button ItemInteractdBT;
+    public Button ItemDropBT;
     public int ItemID;
     private ItemsDatabase m_itemsDatabase;
     private Inventory GetInventory;
@@ -92,8 +94,9 @@ public class Interact : MonoBehaviour {
 
         HabdBT.onClick.AddListener(OnHandButtonClicked); // Add this line
         ItemInteractdBT.onClick.AddListener(InteractBTUse); // Add this line
+        ItemDropBT.onClick.AddListener(DropItem); // Add this line
 
-        
+
 
     }
     private void OnHandButtonClicked()
@@ -340,90 +343,70 @@ public class Interact : MonoBehaviour {
             GameObject hitObject = hit.collider.gameObject;
 
 
-                    //cheak Inventor Full
-                    //cheak inventory fulll
-                 
-                        // Check if the hit object has the correct tag
-                   if (hitObject.CompareTag(interactTag)) // Change "PickupItem" to your desired tag
+                    // Check if the hit object has an interactable tag
+                    if (hitObject.CompareTag(interactTag) || hitObject.CompareTag(interactKeyTag))
                     {
-
-                        int hitItemID = hitObject.GetComponent<Item>().itemID;
-                        string itemName = hitObject.GetComponent<Item>().itemName;
-                        int Id = hitItemID;
-
-                        bool itemExists = false;
                         bool inventoryFull = m_gameController.inventory.IsInventoryFull();
+                        string itemName = "";
+                        int Id = -1;
 
-
-                        foreach (var slot in m_gameController.inventory.m_slots)
+                        if (hitObject.CompareTag(interactTag)) // Normal Item Pickup
                         {
-                            if (slot.m_itemID == hitItemID)
+                            Item item = hitObject.GetComponent<Item>();
+                            int hitItemID = item.itemID;
+                            itemName = item.itemName;
+                            Id = hitItemID;
+
+                            bool itemExists = m_gameController.inventory.m_slots.Any(slot => slot.m_itemID == hitItemID);
+
+                            if (itemExists || !inventoryFull)
                             {
-                                itemExists = true;
-                                break; // Exit loop early if the item exists
-                            }
-                        }
-
-                        if (itemExists || !inventoryFull)
-                        {
-                            // Update UI for pickup items
-                            if (itemName == "Helth")
-                            {
-                                Image buttonImage = DoorInteractdBT.GetComponent<Image>();
-                                buttonImage.gameObject.SetActive(true);
-                                buttonImage.sprite = sprites[0];
-                                DoorInteractdBT.gameObject.SetActive(true);
-                                TimerForCollect.gameObject.SetActive(true);
-                            }
-                            else if (!string.IsNullOrEmpty(itemName))
-                            {
-                                HabdBT.gameObject.SetActive(true);
-                            }
-
-                            itemNameText.text = "Pickup " + itemName;
-                            itemNameText.gameObject.SetActive(true);
-                            ItemID = Id;
-                            timer = displayDuration;
-                        }
-                        else
-                        {
-                            // Show full inventory message
-                            itemNameText.text = "Hand bags Item Full";
-                            itemNameText.gameObject.SetActive(true);
-                            timer = displayDuration;
-                        }
-
-
-                    }
-                           
-
-                   
-
-
-
-                        if (hitObject.CompareTag(interactKeyTag))
-                        {
-
-                        if (!m_gameController.inventory.IsInventoryFull())
-                        {
-                            KeyItem keyItem = hitObject.GetComponent<KeyItem>();
-
-                            itemNameText.gameObject.SetActive(true);
-                            itemNameText.text = "Pickup" + keyItem.keyID;
-                            HabdBT.gameObject.SetActive(true);
-
-                            timer = displayDuration;
-
+                                // Update UI for pickup items
+                                if (itemName == "Helth")
+                                {
+                                    DoorInteractdBT.gameObject.SetActive(true);
+                                    Image buttonImage = DoorInteractdBT.GetComponent<Image>();
+                                    buttonImage.gameObject.SetActive(true);
+                                    buttonImage.sprite = sprites[0];
+                                   
+                                    TimerForCollect.gameObject.SetActive(true);
+                                    HabdBT.gameObject.SetActive(false);
+                                }
+                               else
+                                {
+                                    HabdBT.gameObject.SetActive(true);
+                                }
                             }
                             else
                             {
-
-                                itemNameText.gameObject.SetActive(true);
-                                itemNameText.text = "Hand bags Item Full";
-                                timer = displayDuration;
+                                itemName = "Hand bags Item Full";
                             }
-
                         }
+                        else if (hitObject.CompareTag(interactKeyTag)) // Key Item Pickup
+                        {
+                            if (!inventoryFull)
+                            {
+                                KeyItem keyItem = hitObject.GetComponent<KeyItem>();
+                                itemName = "Pickup " + keyItem.keyID;
+                                HabdBT.gameObject.SetActive(true);
+                            }
+                            else
+                            {
+                                itemName = "Hand bags Item Full";
+                            }
+                        }
+
+                        // Update UI
+                        itemNameText.text = itemName;
+                        itemNameText.gameObject.SetActive(true);
+                        ItemID = Id;
+                        timer = displayDuration;
+                    }
+
+
+
+
+
 
                     
 
@@ -504,7 +487,7 @@ public class Interact : MonoBehaviour {
                 }
              else
                  {
-            // If nothing was hit, hide the text
+                      // If nothing was hit, hide the text
                    itemNameText.gameObject.SetActive(false);
                    HabdBT.gameObject.SetActive(false);
                      DoorInteractdBT.gameObject.SetActive(false);
@@ -521,19 +504,15 @@ public class Interact : MonoBehaviour {
 
       
     }
-   
+    int InteractID;
     private void InteractBTUse()
     {
         Image buttonImage = ItemInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
 
-        if (ItemID == 0)
+        if (InteractID == 0)
         {
             buttonImage.gameObject.SetActive(false); // Hide the button when ID is 0
-        }
-        else if (ItemID == 3)
-        {
-            GetInventory.DropItem(ItemID);
-
+            ItemDropBT.gameObject.SetActive(false);
         }
         else
         {
@@ -543,6 +522,10 @@ public class Interact : MonoBehaviour {
         }
     }
 
+    private void DropItem()
+    {
+        GetInventory.DropItem(InteractID);
+    }
 
     public void InteractItemBehavior(int ID)
     {
@@ -557,13 +540,17 @@ public class Interact : MonoBehaviour {
         if (ID == 0)
         {
             buttonImage.gameObject.SetActive(false); // Hide the button when ID is 0
-            ItemID = ID;
+            ItemDropBT.gameObject.SetActive(false);
+            InteractID = ID;
         }
         else if (ID > 0 && ID < m_itemsDatabase.Items.Count)
         {
             buttonImage.gameObject.SetActive(true); // Ensure the button is visible
+            ItemDropBT.gameObject.SetActive(true);
             buttonImage.sprite = m_itemsDatabase.Items[ID].m_itemIcon; // Set the sprite
-            ItemID = ID;
+          
+
+            InteractID = ID;
         }
         else
         {
@@ -678,8 +665,7 @@ if(m_readState == 2)
     {
         print("Take Item....");
 
-        if (!m_gameController.inventory.IsInventoryFull())
-        {
+        
             if (m_takeItem && m_item != null)
             {
                 if (m_itemTakeState == 0)
@@ -725,12 +711,8 @@ if(m_readState == 2)
             }
             
 
-        }
-        else
-        {
-         
-            Debug.Log("Inventory Full..");
-        }
+        
+        
 
 }//take item
 
