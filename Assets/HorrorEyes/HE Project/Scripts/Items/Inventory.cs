@@ -18,6 +18,10 @@ public class Inventory : MonoBehaviour {
     public Sprite m_emptySprite;
 
     Interact InteractScript;
+
+    // Define the maximum stack limit per item (adjust as needed)
+    public int maxSlots = 1;
+
     private void Start()
     {
         InteractScript = FindObjectOfType<Interact>();
@@ -76,12 +80,22 @@ public class Inventory : MonoBehaviour {
 
             if (same != -1)
             {
+
                 m_slots[same].m_itemCount += cnt;
                 PrepareSlot(m_slots[same]);
 
             }
             else
             {
+
+                // Check if the inventory has reached the maximum slot limit
+                if (m_slots.Count >= maxSlots)
+                {
+                    InteractScript.isInventoryFull = true;
+                    Debug.Log("Cannot add item: Inventory is full! No free slots available.");
+                    return; // Stop adding
+                }
+                InteractScript.isInventoryFull = false;
                 GameObject slt = Instantiate(m_slotPrefab, m_slotsContent);
                 Slot newSlot = slt.GetComponent<Slot>();
                 newSlot.m_itemID = id;
@@ -103,7 +117,10 @@ public class Inventory : MonoBehaviour {
             }
         }
     }
-
+    public bool IsInventoryFull()
+    {
+        return m_slots.Count >= maxSlots;
+    }
 
 
     public void RemoveItem(int itemID, int removeCount)

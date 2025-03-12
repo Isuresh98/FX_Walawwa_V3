@@ -79,7 +79,7 @@ public class Interact : MonoBehaviour {
     public LayerMask interactDoorLayers;
     public Slider TimerForCollect;
     public Sprite[] sprites;
-
+    public bool isInventoryFull=false;
 
     private void Start()
     {
@@ -339,55 +339,100 @@ public class Interact : MonoBehaviour {
             RaycastHit hit = hits[0];
             GameObject hitObject = hit.collider.gameObject;
 
-            // Check if the hit object has the correct tag
-            if (hitObject.CompareTag(interactTag)) // Change "PickupItem" to your desired tag
-                     {
-                // Display the item name on the UI if it has changed
-                string itemName = hitObject.gameObject.GetComponent<Item>().itemName; // Or use a custom name if needed
 
-                        if (itemName == "Helth")
+                    //cheak Inventor Full
+                    //cheak inventory fulll
+                    if (!isInventoryFull)
+                    {
+                        // Check if the hit object has the correct tag
+                        if (hitObject.CompareTag(interactTag)) // Change "PickupItem" to your desired tag
                         {
-                            Image buttonImage = DoorInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
-                            int Id = hitObject.gameObject.GetComponent<Item>().itemID;
-                            if (itemNameText.text != itemName)
+                            if (!isInventoryFull)
                             {
-                                itemNameText.text = "Pickup " + itemName;
+
+                                // Display the item name on the UI if it has changed
+                             string itemName = hitObject.gameObject.GetComponent<Item>().itemName; // Or use a custom name if needed
+
+                            if (itemName == "Helth")
+                            {
+                                Image buttonImage = DoorInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
+                                int Id = hitObject.gameObject.GetComponent<Item>().itemID;
+                                if (itemNameText.text != itemName)
+                                {
+                                    itemNameText.text = "Pickup " + itemName;
+                                }
+                                TimerForCollect.gameObject.SetActive(true);
+                                ItemID = Id;
+                                buttonImage.gameObject.SetActive(true); // Ensure the button is visible
+                                buttonImage.sprite = sprites[0]; // Set the sprite
+
+
+                                itemNameText.gameObject.SetActive(true);
+                                DoorInteractdBT.gameObject.SetActive(true);
+                                timer = displayDuration;
                             }
-                            TimerForCollect.gameObject.SetActive(true);
-                            ItemID = Id;
-                            buttonImage.gameObject.SetActive(true); // Ensure the button is visible
-                            buttonImage.sprite = sprites[0]; // Set the sprite
+                            else if (!(itemName == null))
+                            {
+                                int Id = hitObject.gameObject.GetComponent<Item>().itemID;
+                                if (itemNameText.text != itemName)
+                                {
+                                    itemNameText.text = "Pickup " + itemName;
+                                }
+                                ItemID = Id;
+                                itemNameText.gameObject.SetActive(true);
+                                HabdBT.gameObject.SetActive(true);
+                                timer = displayDuration;
+                            }
+                            else
+                            {
+
+                                itemNameText.gameObject.SetActive(false);
+                                HabdBT.gameObject.SetActive(false);
+                            }
+
+                            }
+                            else
+                            {
+
+                                itemNameText.gameObject.SetActive(true);
+                                itemNameText.text = "Hand bags Item Full";
+                                timer = displayDuration;
+                            }
 
 
-                            itemNameText.gameObject.SetActive(true);
-                            DoorInteractdBT.gameObject.SetActive(true);
-                            timer = displayDuration;
                         }
-                        else if(!(itemName==null))
+
+
+
+
+                        if (hitObject.CompareTag(interactKeyTag))
                         {
-                            int Id = hitObject.gameObject.GetComponent<Item>().itemID;
-                            if (itemNameText.text != itemName)
+
+                            if (!isInventoryFull)
                             {
-                                itemNameText.text = "Pickup " + itemName;
-                            }
-                            ItemID = Id;
+                                KeyItem keyItem = hitObject.GetComponent<KeyItem>();
+
                             itemNameText.gameObject.SetActive(true);
+                            itemNameText.text = "Pickup" + keyItem.keyID;
                             HabdBT.gameObject.SetActive(true);
+
                             timer = displayDuration;
+
+                            }
+                            else
+                            {
+
+                                itemNameText.gameObject.SetActive(true);
+                                itemNameText.text = "Hand bags Item Full";
+                                timer = displayDuration;
+                            }
+
                         }
-                        else
-                        {
-                            itemNameText.gameObject.SetActive(false);
-                            HabdBT.gameObject.SetActive(false);
-                        }
 
-               
-                     }
+                    }
 
 
-
-
-                     if (hitObject.CompareTag(interactDorTag))
+                    if (hitObject.CompareTag(interactDorTag))
                     {
                        
                         DoorSystem doorSystem = hitObject.gameObject.GetComponent<DoorSystem>();
@@ -412,21 +457,7 @@ public class Interact : MonoBehaviour {
                       
                     }
 
-                    if (hitObject.CompareTag(interactKeyTag))
-                    {
-
-
-                        KeyItem keyItem = hitObject.GetComponent<KeyItem>();
-
-                        itemNameText.gameObject.SetActive(true);
-                            itemNameText.text = "Pickup"+ keyItem.keyID;
-                        HabdBT.gameObject.SetActive(true);
-                  
-                        timer = displayDuration;
-
-                        
-
-                    }
+                 
                 
                     if (hitObject.CompareTag(interactKeyholTag))
                     {
