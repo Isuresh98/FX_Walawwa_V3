@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 using TMPro;
+using Unity.VisualScripting;
 #if UNITY_EDITOR
 using UnityEditorInternal.Profiling.Memory.Experimental; // Only in Editor
 #endif
@@ -103,6 +104,10 @@ public class Interact : MonoBehaviour {
         {
             if (hot.transform.gameObject.tag == interactTag)
             {
+
+
+                
+
                 print("Interactive Object Name: " + hot.transform.name);
                Rigidbody rb= hot.transform.gameObject.GetComponent<Rigidbody>(); // Freezes all movement and rotation
                 rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -168,61 +173,97 @@ public class Interact : MonoBehaviour {
 
     public void OnHandButtonDoorClicked()
     {
-        Debug.Log(" Button Clicked!");
-        isHolding = true;
-        holdTime = 0f;
+       
+            Debug.Log(" Button Clicked!");
+            isHolding = true;
+            holdTime = 0f;
+        
+      
+          
+     
     }
 
     public void OnHandButtonDoorReleased()
     {
-        if (isHolding)
-        {
-            if (holdTime < requiredHoldTime)
+       
+            if (isHolding)
             {
-                Debug.Log("Hold Canceled. Button Released Too Early!");
-            }
+                if (holdTime < requiredHoldTime)
+                {
+                    Debug.Log("Hold Canceled. Button Released Too Early!");
+                }
 
-            isHolding = false; // Stop the hold process
-            holdTime = 0f; // Reset the timer
-        }
+                isHolding = false; // Stop the hold process
+                holdTime = 0f; // Reset the timer
+            }
+        
+       
     }
 
     private void HoldAction()
     {
         Debug.Log(" Hold Successful! Action triggered.");
 
-        // Add action when hold is completed
-        isHolding = false; // Stop the hold process
-        holdTime = 0f; // Reset the timer
 
-
-        RaycastHit hot;
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-
-        if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
+        if (ItemID == 5)
         {
+            Debug.Log(" Helth Up");
+            RaycastHit hot;
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
-            if (hot.transform.gameObject.tag == interactKeyholTag)
+            if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
             {
-                print("Interactive Dor Hol Object Name: " + hot.transform.name);
 
-                Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
-
-                if (keyhol.locket)
+                if (hot.transform.gameObject.tag == interactTag)
                 {
-
-
-                    keyhol.TryUnlockDoor();
-
-                    itemNameText.gameObject.SetActive(true);
-                    itemNameText.text = keyhol.TryUnlockDoor();
-                    timer = displayDuration;
+                    print("Interactive Dor Hol Object Name: " + hot.transform.name);
+                    CheckRaycastedObject(hot.transform.gameObject, -1);
+                   
                 }
 
+
             }
-
-
+            // Add action when hold is completed
+            isHolding = false; // Stop the hold process
+            holdTime = 0f; // Reset the timer
         }
+        else
+        {
+
+            Debug.Log(" Helth Up");
+
+            RaycastHit hot;
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+
+            if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
+            {
+
+                if (hot.transform.gameObject.tag == interactKeyholTag)
+                {
+                    print("Interactive Dor Hol Object Name: " + hot.transform.name);
+
+                    Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
+
+                    if (keyhol.locket)
+                    {
+
+
+                        keyhol.TryUnlockDoor();
+
+                        itemNameText.gameObject.SetActive(true);
+                        itemNameText.text = keyhol.TryUnlockDoor();
+                        timer = displayDuration;
+                    }
+
+                }
+
+
+            }
+            // Add action when hold is completed
+            isHolding = false; // Stop the hold process
+            holdTime = 0f; // Reset the timer
+        }
+    
 
 
      }
@@ -283,21 +324,44 @@ public class Interact : MonoBehaviour {
                 // Display the item name on the UI if it has changed
                 string itemName = hitObject.gameObject.GetComponent<Item>().itemName; // Or use a custom name if needed
 
-                if (itemNameText.text != itemName)
-                {
-                    itemNameText.text = "Pickup " + itemName;
-                }
-                itemNameText.gameObject.SetActive(true);
-                HabdBT.gameObject.SetActive(true);
-                timer = displayDuration;
+                        if (itemName == "Helth")
+                        {
+                            Image buttonImage = DoorInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
+                            int Id = hitObject.gameObject.GetComponent<Item>().itemID;
+                            if (itemNameText.text != itemName)
+                            {
+                                itemNameText.text = "Pickup " + itemName;
+                            }
+
+                            ItemID = Id;
+                            buttonImage.gameObject.SetActive(true); // Ensure the button is visible
+                            buttonImage.sprite = m_itemsDatabase.Items[Id].m_itemIcon; // Set the sprite
+
+
+                            itemNameText.gameObject.SetActive(true);
+                            DoorInteractdBT.gameObject.SetActive(true);
+                            timer = displayDuration;
+                        }
+                        else
+                        {
+                            int Id = hitObject.gameObject.GetComponent<Item>().itemID;
+                            if (itemNameText.text != itemName)
+                            {
+                                itemNameText.text = "Pickup " + itemName;
+                            }
+                            ItemID = Id;
+                            itemNameText.gameObject.SetActive(true);
+                            HabdBT.gameObject.SetActive(true);
+                            timer = displayDuration;
+                        }
+
+
+
+
+
+               
             }
 
-            //else
-            //{
-            //    // If the object has a different tag, hide the text
-            //    itemNameText.gameObject.SetActive(false);
-            //    HabdBT.gameObject.SetActive(false);
-            //}
 
 
 
@@ -375,8 +439,8 @@ public class Interact : MonoBehaviour {
                     //    HabdBT.gameObject.SetActive(false);
                     //}
                 }
-        else
-        {
+             else
+                 {
             // If nothing was hit, hide the text
             itemNameText.gameObject.SetActive(false);
             HabdBT.gameObject.SetActive(false);
