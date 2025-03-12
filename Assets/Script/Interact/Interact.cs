@@ -46,7 +46,7 @@ public class Interact : MonoBehaviour {
     public TextMeshProUGUI itemNameText;
     public Button HabdBT;
     private float displayDuration = 0.5f;
-    private float timer;
+    public float timer;
 
 
     [Header("UI Item Settings")]
@@ -63,7 +63,7 @@ public class Interact : MonoBehaviour {
     private RaycastHit[] hits = new RaycastHit[1];
 
     // Update rate for mobile optimization
-    private float checkInterval = 0.2f;
+    private float checkInterval = 0.05f;
     private float checkTimer;
 
 
@@ -78,6 +78,9 @@ public class Interact : MonoBehaviour {
     public float requiredHoldTime = 2f; // Time in seconds to trigger hold action
     public LayerMask interactDoorLayers;
     public Slider TimerForCollect;
+    public Sprite[] sprites;
+
+
     private void Start()
     {
         m_gameController = FindObjectOfType<GameControll>();
@@ -233,7 +236,7 @@ public class Interact : MonoBehaviour {
         else
         {
 
-            Debug.Log(" Helth Up");
+            Debug.Log("Unlock Up");
 
             RaycastHit hot;
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
@@ -270,7 +273,21 @@ public class Interact : MonoBehaviour {
 
 
      }
-
+    private void TimerRay()
+    {
+        // Hide the text after the timer runs out
+        if (itemNameText.gameObject.activeSelf)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                itemNameText.gameObject.SetActive(false);
+                HabdBT.gameObject.SetActive(false);
+                DoorInteractdBT.gameObject.SetActive(false);
+                TimerForCollect.gameObject.SetActive(false);
+            }
+        }
+    }
     // button reaction in dor
     private void Update()
     {
@@ -299,9 +316,9 @@ public class Interact : MonoBehaviour {
         {
             TakingItem();
         }
-
-        //Timer for checking interval
-        checkTimer += Time.deltaTime;
+        TimerRay();
+         //Timer for checking interval
+         checkTimer += Time.deltaTime;
         if (checkTimer < checkInterval) return;
         checkTimer = 0f;
 
@@ -324,7 +341,7 @@ public class Interact : MonoBehaviour {
 
             // Check if the hit object has the correct tag
             if (hitObject.CompareTag(interactTag)) // Change "PickupItem" to your desired tag
-            {
+                     {
                 // Display the item name on the UI if it has changed
                 string itemName = hitObject.gameObject.GetComponent<Item>().itemName; // Or use a custom name if needed
 
@@ -339,14 +356,14 @@ public class Interact : MonoBehaviour {
                             TimerForCollect.gameObject.SetActive(true);
                             ItemID = Id;
                             buttonImage.gameObject.SetActive(true); // Ensure the button is visible
-                            buttonImage.sprite = m_itemsDatabase.Items[Id].m_itemIcon; // Set the sprite
+                            buttonImage.sprite = sprites[0]; // Set the sprite
 
 
                             itemNameText.gameObject.SetActive(true);
                             DoorInteractdBT.gameObject.SetActive(true);
                             timer = displayDuration;
                         }
-                        else
+                        else if(!(itemName==null))
                         {
                             int Id = hitObject.gameObject.GetComponent<Item>().itemID;
                             if (itemNameText.text != itemName)
@@ -358,13 +375,14 @@ public class Interact : MonoBehaviour {
                             HabdBT.gameObject.SetActive(true);
                             timer = displayDuration;
                         }
-
-
-
-
+                        else
+                        {
+                            itemNameText.gameObject.SetActive(false);
+                            HabdBT.gameObject.SetActive(false);
+                        }
 
                
-            }
+                     }
 
 
 
@@ -378,14 +396,16 @@ public class Interact : MonoBehaviour {
                         {
                             itemNameText.gameObject.SetActive(true);
                             itemNameText.text = "This door is LOCKED.Use the " + doorSystem.requiredKey + " to unlock";
-                
                             timer = displayDuration;
+
 
                         }
                         else
                         {
                             itemNameText.gameObject.SetActive(false);
-                            HabdBT.gameObject.SetActive(true);
+                            HabdBT.gameObject.SetActive(false);
+                            TimerForCollect.gameObject.SetActive(false);
+                       
                         }
                       
                     }
@@ -415,23 +435,32 @@ public class Interact : MonoBehaviour {
                        
                         if (keyvaluwe == 1&& keyhol.locket)// Player has the key
                         {
+                            Image buttonImage = DoorInteractdBT.GetComponent<Image>(); // Get the Image component of the Button
+
                             TimerForCollect.gameObject.SetActive(true);
                             itemNameText.gameObject.SetActive(true);
                             itemNameText.text = "Unlock Use " + keyhol.requiredKey;
                             DoorInteractdBT.gameObject.SetActive(true);
-
+                            buttonImage.sprite = sprites[1]; // Set the sprite
                             timer = displayDuration;
+                            ItemID = 0;
                         }
                        else if(!(keyvaluwe == 1))
                         {
+                            
                             itemNameText.text = "Need " + keyhol.requiredKey;
+                            itemNameText.gameObject.SetActive(true);
                             DoorInteractdBT.gameObject.SetActive(false);
+                            TimerForCollect.gameObject.SetActive(false);
                             timer = displayDuration;
 
                         }
                         else
                         {
+                            itemNameText.gameObject.SetActive(false);
+                            HabdBT.gameObject.SetActive(false);
                             DoorInteractdBT.gameObject.SetActive(false);
+                            TimerForCollect.gameObject.SetActive(false);
                         }
                        
 
@@ -447,27 +476,21 @@ public class Interact : MonoBehaviour {
              else
                  {
             // If nothing was hit, hide the text
-            itemNameText.gameObject.SetActive(false);
-            HabdBT.gameObject.SetActive(false);
-            DoorInteractdBT.gameObject.SetActive(false);
+                   itemNameText.gameObject.SetActive(false);
+                   HabdBT.gameObject.SetActive(false);
+                     DoorInteractdBT.gameObject.SetActive(false);
                     TimerForCollect.gameObject.SetActive(false);
+
+                
                 }
 
-        // Hide the text after the timer runs out
-        if (itemNameText.gameObject.activeSelf)
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                itemNameText.gameObject.SetActive(false);
-                HabdBT.gameObject.SetActive(false);
-                 DoorInteractdBT.gameObject.SetActive(false);
-                        TimerForCollect.gameObject.SetActive(false);
-                    }
-        }
+
+      
 
         }
         }
+
+      
     }
    
     private void InteractBTUse()

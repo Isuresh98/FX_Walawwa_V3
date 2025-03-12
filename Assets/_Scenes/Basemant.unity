@@ -61801,7 +61801,7 @@ MonoBehaviour:
   rayDistance: 3
   interactLayers:
     serializedVersion: 2
-    m_Bits: 49409
+    m_Bits: 49408
   interactTag: Interact
   interactCoinTag: Coin
   m_examineTransform: {fileID: 2660437550493397927}
@@ -61812,6 +61812,7 @@ MonoBehaviour:
   m_itemShowTime: 0.2
   itemNameText: {fileID: 1815526912}
   HabdBT: {fileID: 167748280}
+  timer: 0
   ItemInteractdBT: {fileID: 991090162}
   ItemID: 0
   detectableLayer:
@@ -61827,6 +61828,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   TimerForCollect: {fileID: 1136221864}
+  sprites:
+  - {fileID: 21300000, guid: 672a47997f9f74e9e9f9c6f8a578a0aa, type: 3}
+  - {fileID: 21300000, guid: 2f75044dfa25f41f2abe77556f9f2182, type: 3}
 --- !u!224 &4628403386755003195
 RectTransform:
   m_ObjectHideFlags: 0
