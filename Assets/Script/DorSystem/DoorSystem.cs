@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DoorSystem : MonoBehaviour
 {
-    [SerializeField] private string doorID; // Unique ID for each door
+   public string doorID; // Unique ID for each door
      public string requiredKey; // Key required to unlock
      public bool isLocked = true; // Door lock status
     [SerializeField] private Animator doorAnimator; // Animator for door open/close

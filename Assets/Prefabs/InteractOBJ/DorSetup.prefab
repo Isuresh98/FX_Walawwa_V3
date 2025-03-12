@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd752b0c63e26404ab24e5674057a03f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorID: Master_Dor
+  doorID: Master
   requiredKey: MasterKey
   isLocked: 1
   doorAnimator: {fileID: 5942256109224996475}

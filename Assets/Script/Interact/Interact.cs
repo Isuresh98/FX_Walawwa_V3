@@ -253,7 +253,7 @@ public class Interact : MonoBehaviour {
                     if (keyhol.locket)
                     {
 
-
+                        Debug.Log("Try Unlocket");
                         keyhol.TryUnlockDoor();
 
                         itemNameText.gameObject.SetActive(true);
@@ -402,10 +402,12 @@ public class Interact : MonoBehaviour {
                         }
                         else
                         {
-                            itemNameText.gameObject.SetActive(false);
-                            HabdBT.gameObject.SetActive(false);
+                            itemNameText.gameObject.SetActive(true);
+                            itemNameText.text = "Open " + doorSystem.doorID + " Door";
+                           
+                            HabdBT.gameObject.SetActive(true);
                             TimerForCollect.gameObject.SetActive(false);
-                       
+                            timer = displayDuration;
                         }
                       
                     }
