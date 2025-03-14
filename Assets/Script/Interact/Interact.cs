@@ -374,12 +374,13 @@ public class Interact : MonoBehaviour {
                                     Image buttonImage = DoorInteractdBT.GetComponent<Image>();
                                     buttonImage.gameObject.SetActive(true);
                                     buttonImage.sprite = sprites[0];
-                                   
+                                    ItemID = Id;
                                     TimerForCollect.gameObject.SetActive(true);
                                     HabdBT.gameObject.SetActive(false);
                                 }
                                else
                                 {
+                                    ItemID = Id;
                                     HabdBT.gameObject.SetActive(true);
                                 }
                             }
@@ -388,13 +389,16 @@ public class Interact : MonoBehaviour {
                                 itemName = "Hand bags Item Full";
                             }
                         }
-                        else if (hitObject.CompareTag(interactKeyTag)) // Key Item Pickup
+
+
+                        if (hitObject.CompareTag(interactKeyTag)) // Key Item Pickup
                         {
                             if (!inventoryFull)
                             {
                                 KeyItem keyItem = hitObject.GetComponent<KeyItem>();
                                 itemName = "Pickup " + keyItem.keyID;
                                 HabdBT.gameObject.SetActive(true);
+                                ItemID = Id;
                             }
                             else
                             {
@@ -405,7 +409,7 @@ public class Interact : MonoBehaviour {
                         // Update UI
                         itemNameText.text = itemName;
                         itemNameText.gameObject.SetActive(true);
-                        ItemID = Id;
+                       
                         timer = displayDuration;
                     }
 
