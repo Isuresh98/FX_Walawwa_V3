@@ -225,7 +225,7 @@ public class Interact : MonoBehaviour {
                
                 if (hot.transform.gameObject.tag == interactTag)
                 {
-
+                    print("Hit Object name " + hot.transform.gameObject);
                     Item item = hot.transform.gameObject.GetComponent<Item>();
                   if(item.itemID ==5)
                     {
