@@ -214,74 +214,68 @@ public class Interact : MonoBehaviour {
 
         TimerForCollect.gameObject.SetActive(false);
         HabdBT.gameObject.SetActive(false);
-        if (ItemID == 5)
-        {
-            Debug.Log(" Helth Up");
-            RaycastHit hot;
-            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
-            if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
+        Debug.Log(" Helth Up");
+        RaycastHit hot;
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
+        {
+            Item item = hot.transform.gameObject.GetComponent<Item>();
+
+            if (item != null && ItemID == item.itemID)
             {
-               
-                if (hot.transform.gameObject.tag == interactTag)
+                       print("Interactive Dor Hol Object Name: " + hot.transform.name);
+                      CheckRaycastedObject(hot.transform.gameObject, -1);
+                        
+                
+                // Add action when hold is completed
+                isHolding = false; // Stop the hold process
+                holdTime = 0f; // Reset the timer
+            }
+            else
+            {
+
+                Debug.Log("Unlock Up");
+
+
+                if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
                 {
-                    print("Hit Object name " + hot.transform.gameObject);
-                    Item item = hot.transform.gameObject.GetComponent<Item>();
-                  if(item.itemID ==5)
+
+                    if (hot.transform.gameObject.tag == interactKeyholTag)
                     {
                         print("Interactive Dor Hol Object Name: " + hot.transform.name);
-                        CheckRaycastedObject(hot.transform.gameObject, -1);
-                    }
-                 
-                   
-                }
 
+                        Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
 
-            }
-            // Add action when hold is completed
-            isHolding = false; // Stop the hold process
-            holdTime = 0f; // Reset the timer
-        }
-        else
-        {
+                        if (keyhol.locket)
+                        {
 
-            Debug.Log("Unlock Up");
+                            Debug.Log("Try Unlocket");
+                            keyhol.TryUnlockDoor();
 
-            RaycastHit hot;
-            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                            itemNameText.gameObject.SetActive(true);
+                            itemNameText.text = keyhol.TryUnlockDoor();
+                            timer = displayDuration;
+                        }
 
-            if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
-            {
-
-                if (hot.transform.gameObject.tag == interactKeyholTag)
-                {
-                    print("Interactive Dor Hol Object Name: " + hot.transform.name);
-
-                    Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
-
-                    if (keyhol.locket)
-                    {
-
-                        Debug.Log("Try Unlocket");
-                        keyhol.TryUnlockDoor();
-
-                        itemNameText.gameObject.SetActive(true);
-                        itemNameText.text = keyhol.TryUnlockDoor();
-                        timer = displayDuration;
                     }
 
+
                 }
-
-
+                // Add action when hold is completed
+                isHolding = false; // Stop the hold process
+                holdTime = 0f; // Reset the timer
             }
-            // Add action when hold is completed
-            isHolding = false; // Stop the hold process
-            holdTime = 0f; // Reset the timer
+
+
+
+
         }
-    
 
 
-     }
+
+
+    }
     private void TimerRay()
     {
         // Hide the text after the timer runs out
