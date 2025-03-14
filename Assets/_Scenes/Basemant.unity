@@ -63346,7 +63346,7 @@ MonoBehaviour:
     type: 3}
   m_slots: []
   m_emptySprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
-  maxSlots: 2
+  maxSlots: 5
 --- !u!4 &5716332498532876135
 Transform:
   m_ObjectHideFlags: 0
