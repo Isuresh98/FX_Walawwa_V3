@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
 public class PerformanceMonitor : MonoBehaviour
 {
-    public Text infoText; // Assign a UI Text to display all performance stats
+    public Text infoText;
+    public Text lagReasonInfoText;
 
     private float deltaTime = 0.0f;
     private long totalRAM;
@@ -19,46 +19,98 @@ public class PerformanceMonitor : MonoBehaviour
     void Start()
     {
         totalRAM = GetTotalRAM();
-        isLowEndDevice = totalRAM <= 2048; // Check if device has ≤ 2GB RAM
+        isLowEndDevice = totalRAM <= 2048; // Devices with ≤2GB RAM are considered low-end
     }
 
     void Update()
     {
-        // FPS Calculation
         deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
 
-        // RAM Usage Calculation
         long unityMemory = UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong() / (1024 * 1024); // MB
-
-        // Get CPU Usage
         cpuUsage = GetCPUUsage();
-
-        // Get Battery Level & Temperature
         batteryLevel = GetBatteryLevel();
         batteryTemperature = GetBatteryTemperature();
-
-        // Get Available Storage
         availableStorage = GetAvailableStorage();
 
-        // Detect Lag (FPS < 30)
-        string lagWarning = fps < 30 ? "⚠ Lag detected!" : "";
+        // Lag Detection with Detailed Reasons
+        string lagReason = "No significant lag detected ✅";
+        string solution = "Game is running fine.";
 
-        // Display Information
+        if (fps < 30)
+        {
+            if (cpuUsage > 80)
+            {
+                lagReason = "⚠ High CPU Usage";
+                solution = "Close background apps & optimize game logic. Reduce AI updates, disable unnecessary scripts.";
+            }
+            else if (unityMemory > totalRAM * 0.8f)
+            {
+                lagReason = "⚠ High RAM Usage";
+                solution = "Reduce texture resolution, optimize UI elements, limit particle effects.";
+            }
+            else if (availableStorage < 500)
+            {
+                lagReason = "⚠ Low Storage";
+                solution = "Free up device storage. Cached files might be causing slowdowns.";
+            }
+            else if (batteryTemperature > 45)
+            {
+                lagReason = "⚠ Overheating Device";
+                solution = "Reduce screen brightness, close background apps, and let the device cool down.";
+            }
+            else if (isLowEndDevice)
+            {
+                lagReason = "⚠ Low-End Device Performance";
+                solution = "Enable low-quality mode. Reduce draw calls, disable shadows, use sprite atlases.";
+            }
+            else if (QualitySettings.vSyncCount > 0)
+            {
+                lagReason = "⚠ VSync Enabled";
+                solution = "Disable VSync in quality settings to improve FPS.";
+            }
+            else if (Application.targetFrameRate < 30)
+            {
+                lagReason = "⚠ Low Target Frame Rate";
+                solution = "Increase Application.targetFrameRate to at least 60 for smoother performance.";
+            }
+            else
+            {
+                lagReason = "⚠ Unknown Performance Issue";
+                solution = "Try lowering graphics settings & enabling GPU instancing.";
+            }
+        }
+
+        // Display Information in UI
         if (infoText != null)
         {
             infoText.text =
                 $" **Performance Monitor**\n" +
-                $" FPS: {Mathf.Round(fps)} {lagWarning}\n" +
+                $" FPS: {Mathf.Round(fps)} {(fps < 30 ? "⚠ Lag detected!" : "")}\n" +
                 $" CPU Usage: {cpuUsage}%\n" +
                 $" RAM Usage: {unityMemory} MB / {totalRAM} MB\n" +
                 $" Battery: {batteryLevel}% | Temp: {batteryTemperature}°C\n" +
                 $" Free Storage: {availableStorage} MB\n" +
                 $" Device Type: {(isLowEndDevice ? "Low-End (⚠)" : "OK ")}";
         }
+
+        if (lagReasonInfoText != null)
+        {
+            lagReasonInfoText.text =
+                $" **Lag Analysis**\n" +
+                $" Reason: {lagReason}\n" +
+                $" Solution: {solution}";
+        }
+
+        // Debug Log Output
+        Debug.Log($"[PerformanceMonitor] FPS: {Mathf.Round(fps)} | CPU: {cpuUsage}% | RAM: {unityMemory}MB/{totalRAM}MB | Battery: {batteryLevel}% | Temp: {batteryTemperature}°C | Storage: {availableStorage}MB");
+        if (fps < 30)
+        {
+            Debug.LogWarning($"[PerformanceMonitor] Lag Detected! Reason: {lagReason} | Solution: {solution}");
+        }
     }
 
-    // ** Get Total RAM on Android (Uses Android API) **
+    // ** Get Total RAM on Android **
     long GetTotalRAM()
     {
         if (Application.platform == RuntimePlatform.Android)
@@ -71,7 +123,7 @@ public class PerformanceMonitor : MonoBehaviour
                 using (AndroidJavaObject activityManager = activity.Call<AndroidJavaObject>("getSystemService", "activity"))
                 {
                     activityManager.Call("getMemoryInfo", memoryInfo);
-                    return memoryInfo.Get<long>("totalMem") / (1024 * 1024); // Convert bytes to MB
+                    return memoryInfo.Get<long>("totalMem") / (1024 * 1024);
                 }
             }
             catch (Exception e)
@@ -95,7 +147,7 @@ public class PerformanceMonitor : MonoBehaviour
     // ** Get Battery Level on Mobile Devices **
     float GetBatteryLevel()
     {
-        return SystemInfo.batteryLevel * 100f; // Returns 0-1, so multiply by 100
+        return SystemInfo.batteryLevel * 100f;
     }
 
     // ** Get Battery Temperature on Android **
@@ -129,11 +181,14 @@ public class PerformanceMonitor : MonoBehaviour
             try
             {
                 using (AndroidJavaClass environment = new AndroidJavaClass("android.os.Environment"))
-                using (AndroidJavaObject statFs = new AndroidJavaObject("android.os.StatFs", environment.CallStatic<string>("getExternalStorageDirectory")))
+                using (AndroidJavaObject statFs = new AndroidJavaObject("android.os.StatFs", environment.CallStatic<AndroidJavaObject>("getExternalStorageDirectory").Call<string>("getAbsolutePath")))
                 {
                     long availableBlocks = statFs.Call<long>("getAvailableBlocksLong");
                     long blockSize = statFs.Call<long>("getBlockSizeLong");
-                    return (availableBlocks * blockSize) / (1024 * 1024); // Convert bytes to MB
+                    long availableSpace = (availableBlocks * blockSize) / (1024 * 1024);
+
+                    Debug.Log($"Available Storage: {availableSpace} MB");
+                    return availableSpace;
                 }
             }
             catch (Exception e)
