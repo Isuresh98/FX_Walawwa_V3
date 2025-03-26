@@ -119,8 +119,10 @@ public class GameControll : MonoBehaviour {
 
     private void Start()
     {
-        //remove itempichter spowner
-      //  m_spawner.SpawnPictures(m_needPicturesCount);
+        Application.targetFrameRate = 60;  // Set frame rate to 60 FPS
+        QualitySettings.vSyncCount = 0;   // Disable V-Sync to allow Unity to control FPS
+                                          //remove itempichter spowner
+                                          //  m_spawner.SpawnPictures(m_needPicturesCount);
         m_spawner.SpawnPills();
         Time.timeScale = 1.0f;
         pausePanel.SetActive(false);
