@@ -72,8 +72,12 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
+#if UNITY_EDITOR
+
         Debug.Log("Player Died!");
-      
+
+#endif
+
         if (!Isdie)
         {
             // Start moving the camera to the death point

@@ -103,9 +103,12 @@ public class Interact : MonoBehaviour {
     {
         RaycastHit hot;
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+#if UNITY_EDITOR
 
         // Draw the ray for debugging
         Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.green);
+
+#endif
 
         if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
         {
@@ -113,16 +116,20 @@ public class Interact : MonoBehaviour {
             {
 
 
-                
-
+#if UNITY_EDITOR
                 print("Interactive Object Name: " + hot.transform.name);
-               Rigidbody rb= hot.transform.gameObject.GetComponent<Rigidbody>(); // Freezes all movement and rotation
+#endif
+
+
+                Rigidbody rb= hot.transform.gameObject.GetComponent<Rigidbody>(); // Freezes all movement and rotation
                 rb.constraints = RigidbodyConstraints.FreezeAll;
                 CheckRaycastedObject(hot.transform.gameObject, -1);
             }
             else if (hot.transform.gameObject.tag == interactCoinTag)
             {
+#if UNITY_EDITOR
                 print("Interactive Object Name: " + hot.transform.name);
+#endif
                 SphereCollider sphereCollider = hot.transform.gameObject.GetComponent<SphereCollider>();
                 if (sphereCollider != null)
                 {
@@ -132,8 +139,11 @@ public class Interact : MonoBehaviour {
             }
             else if (hot.transform.gameObject.tag == interactKeyTag)
             {
+#if UNITY_EDITOR
+
                 print("Interactive Dor Object Name: " + hot.transform.name);
 
+#endif
                 Rigidbody rb = hot.transform.gameObject.GetComponent<Rigidbody>(); // Freezes all movement and rotation
                 rb.constraints = RigidbodyConstraints.FreezeAll;
                 KeyItem keyItem = hot.transform.gameObject.GetComponent<KeyItem>();
@@ -143,8 +153,11 @@ public class Interact : MonoBehaviour {
             }
             else if (hot.transform.gameObject.tag == interactKeyholTag)
             {
+#if UNITY_EDITOR
+
                 print("Interactive Dor Hol Object Name: " + hot.transform.name);
 
+#endif
                 Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
 
                 if (keyhol.locket)
@@ -166,7 +179,11 @@ public class Interact : MonoBehaviour {
         {
             if (hot.transform.gameObject.tag == interactDorTag)
             {
+#if UNITY_EDITOR
+
                 print("Interactive Dor Object Name: " + hot.transform.name);
+
+#endif
                 DoorSystem doorSystem = hot.transform.gameObject.GetComponent<DoorSystem>();
                 doorSystem.ToggleDoor();
 
@@ -180,9 +197,12 @@ public class Interact : MonoBehaviour {
 
     public void OnHandButtonDoorClicked()
     {
-       
-            Debug.Log(" Button Clicked!");
-            isHolding = true;
+#if UNITY_EDITOR
+
+        Debug.Log(" Button Clicked!");
+
+#endif
+        isHolding = true;
             holdTime = 0f;
         
       
@@ -196,11 +216,15 @@ public class Interact : MonoBehaviour {
             if (isHolding)
             {
                 if (holdTime < requiredHoldTime)
-                {
-                    Debug.Log("Hold Canceled. Button Released Too Early!");
-                }
+            {
+#if UNITY_EDITOR
 
-                isHolding = false; // Stop the hold process
+                Debug.Log("Hold Canceled. Button Released Too Early!");
+
+#endif
+            }
+
+            isHolding = false; // Stop the hold process
                 holdTime = 0f; // Reset the timer
                 TimerForCollect.value = 0f; // Reset slider when released
              }
@@ -210,12 +234,18 @@ public class Interact : MonoBehaviour {
 
     private void HoldAction()
     {
+#if UNITY_EDITOR
+
         Debug.Log(" Hold Successful! Action triggered.");
 
+#endif
         TimerForCollect.gameObject.SetActive(false);
         HabdBT.gameObject.SetActive(false);
+#if UNITY_EDITOR
 
         Debug.Log(" Helth Up");
+
+#endif
         RaycastHit hot;
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
@@ -224,8 +254,12 @@ public class Interact : MonoBehaviour {
 
             if (item != null && ItemID == item.itemID)
             {
-                       print("Interactive Dor Hol Object Name: " + hot.transform.name);
-                      CheckRaycastedObject(hot.transform.gameObject, -1);
+#if UNITY_EDITOR
+
+                print("Interactive Dor Hol Object Name: " + hot.transform.name);
+
+#endif
+                CheckRaycastedObject(hot.transform.gameObject, -1);
                         
                 
                 // Add action when hold is completed
@@ -234,23 +268,31 @@ public class Interact : MonoBehaviour {
             }
             else
             {
+#if UNITY_EDITOR
 
                 Debug.Log("Unlock Up");
 
 
+#endif
                 if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
                 {
 
                     if (hot.transform.gameObject.tag == interactKeyholTag)
                     {
+#if UNITY_EDITOR
+
                         print("Interactive Dor Hol Object Name: " + hot.transform.name);
 
+#endif
                         Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
 
                         if (keyhol.locket)
                         {
+#if UNITY_EDITOR
 
                             Debug.Log("Try Unlocket");
+
+#endif
                             keyhol.TryUnlockDoor();
 
                             itemNameText.gameObject.SetActive(true);
@@ -327,9 +369,12 @@ public class Interact : MonoBehaviour {
 
         // Create a ray going straight forward from the camera
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+#if UNITY_EDITOR
 
         // Draw the ray in the Scene view for debugging
         Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red);
+
+#endif
 
         // Perform the raycast using RaycastNonAlloc for better performance on mobile
         int hitCount = Physics.RaycastNonAlloc(ray, hits, rayDistance, detectableLayer);
@@ -522,7 +567,11 @@ public class Interact : MonoBehaviour {
         {
             itemNameText.gameObject.SetActive(true);
             itemNameText.text = "Use Item Animation";
+#if UNITY_EDITOR
+
             print("Use Animation");
+
+#endif
         }
     }
 
@@ -537,7 +586,11 @@ public class Interact : MonoBehaviour {
 
         if (buttonImage == null)
         {
+#if UNITY_EDITOR
+
             Debug.LogError("Button does not have an Image component!");
+
+#endif
             return;
         }
 
@@ -558,7 +611,11 @@ public class Interact : MonoBehaviour {
         }
         else
         {
+#if UNITY_EDITOR
+
             Debug.LogWarning("Invalid Item ID!");
+
+#endif
         }
     }
 
@@ -667,10 +724,13 @@ if(m_readState == 2)
 
     private void TakingItem()
     {
+#if UNITY_EDITOR
+
         print("Take Item....");
 
-        
-            if (m_takeItem && m_item != null)
+#endif
+
+        if (m_takeItem && m_item != null)
             {
                 if (m_itemTakeState == 0)
                 {

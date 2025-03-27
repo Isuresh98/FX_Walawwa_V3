@@ -252,7 +252,11 @@ public class PlayerController : MonoBehaviour {
 
     public void CatchPlayer(int state)
     {
+#if UNITY_EDITOR
+
         print("CatchPlayer start states=" + state);
+
+#endif
         if (state == 1)
         {
             gameControll.ResetPlayerStates();

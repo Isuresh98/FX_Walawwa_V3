@@ -12,13 +12,20 @@ public class KeyItem : MonoBehaviour
     public void CollectKey()
     {
         PlayerPrefs.SetInt(keyID, 1); // Save key as collected
+#if UNITY_EDITOR
         Debug.Log("Collected key: " + keyID);
-       // Destroy(gameObject); // Remove the key from the scene
+
+#endif
+        // Destroy(gameObject); // Remove the key from the scene
     }
 
     public void DropKey()
     {
         PlayerPrefs.SetInt(keyID, 0); // Save key as collected
+#if UNITY_EDITOR
+
         Debug.Log("Drop key: " + keyID);
+
+#endif
     }
 }

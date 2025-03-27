@@ -20,6 +20,8 @@ public class PerformanceMonitor : MonoBehaviour
     {
         totalRAM = GetTotalRAM();
         isLowEndDevice = totalRAM <= 2048; // Devices with ≤2GB RAM are considered low-end
+
+    
     }
 
     void Update()
@@ -101,12 +103,16 @@ public class PerformanceMonitor : MonoBehaviour
                 $" Reason: {lagReason}\n" +
                 $" Solution: {solution}";
         }
-
+#if UNITY_EDITOR
         // Debug Log Output
         Debug.Log($"[PerformanceMonitor] FPS: {Mathf.Round(fps)} | CPU: {cpuUsage}% | RAM: {unityMemory}MB/{totalRAM}MB | Battery: {batteryLevel}% | Temp: {batteryTemperature}°C | Storage: {availableStorage}MB");
+#endif
+
         if (fps < 30)
         {
+#if UNITY_EDITOR
             Debug.LogWarning($"[PerformanceMonitor] Lag Detected! Reason: {lagReason} | Solution: {solution}");
+#endif
         }
     }
 
@@ -128,7 +134,11 @@ public class PerformanceMonitor : MonoBehaviour
             }
             catch (Exception e)
             {
+#if UNITY_EDITOR
+
                 Debug.LogError("RAM detection failed: " + e.Message);
+
+#endif
             }
         }
         return SystemInfo.systemMemorySize;
@@ -167,7 +177,11 @@ public class PerformanceMonitor : MonoBehaviour
             }
             catch (Exception e)
             {
+#if UNITY_EDITOR
+
                 Debug.LogError("Battery temperature detection failed: " + e.Message);
+
+#endif
             }
         }
         return -1;
@@ -186,14 +200,20 @@ public class PerformanceMonitor : MonoBehaviour
                     long availableBlocks = statFs.Call<long>("getAvailableBlocksLong");
                     long blockSize = statFs.Call<long>("getBlockSizeLong");
                     long availableSpace = (availableBlocks * blockSize) / (1024 * 1024);
-
+#if UNITY_EDITOR
                     Debug.Log($"Available Storage: {availableSpace} MB");
+#endif
+
                     return availableSpace;
                 }
             }
             catch (Exception e)
             {
+#if UNITY_EDITOR
+
                 Debug.LogError("Storage detection failed: " + e.Message);
+#endif
+
             }
         }
         return -1;

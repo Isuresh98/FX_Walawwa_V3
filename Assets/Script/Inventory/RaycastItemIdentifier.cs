@@ -28,8 +28,12 @@ public class RaycastItemIdentifier : MonoBehaviour
         // Create a ray going straight forward from the camera
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
-        // Draw the ray in the Scene view for debugging
+        // Draw the ray in the Scene view for debugging#if UNITY_EDITOR
+#if UNITY_EDITOR
+
         Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red);
+
+#endif
 
         // Perform the raycast using RaycastNonAlloc for better performance on mobile
         int hitCount = Physics.RaycastNonAlloc(ray, hits, rayDistance, detectableLayer);

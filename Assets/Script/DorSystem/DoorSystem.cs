@@ -68,7 +68,11 @@ public class DoorSystem : MonoBehaviour
         }
         else
         {
+#if UNITY_EDITOR
+
             Debug.Log("Door is locked! Find the key.");
+
+#endif
         }
     }
 
@@ -79,8 +83,12 @@ public class DoorSystem : MonoBehaviour
             doorAnimator.SetTrigger("Open");
         }
         isOpen = true;
+#if UNITY_EDITOR
+
         Debug.Log("Door Opened!");
-       // Invoke(nameof(CloseDoor), closeDelay); // Auto-close after delay
+
+#endif
+        // Invoke(nameof(CloseDoor), closeDelay); // Auto-close after delay
     }
 
     public void CloseDoor()
@@ -90,12 +98,20 @@ public class DoorSystem : MonoBehaviour
             doorAnimator.SetTrigger("Close");
         }
         isOpen = false;
+#if UNITY_EDITOR
+
         Debug.Log("Door Closed!");
+
+#endif
     }
 
     public void ToggleDoor()
     {
+#if UNITY_EDITOR
+
         print("Toggele Work");
+
+#endif
 
         if (isOpen)
         {

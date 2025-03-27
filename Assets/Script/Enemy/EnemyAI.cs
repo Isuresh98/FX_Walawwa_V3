@@ -152,7 +152,11 @@ public class EnemyAI : MonoBehaviour
     {
         if (attackTimer <= 0f)
         {
+#if UNITY_EDITOR
+
             Debug.Log("Attacking Player");
+
+#endif
 
             attackTimer = attackCooldown;
 
@@ -216,18 +220,29 @@ public class EnemyAI : MonoBehaviour
         // Check if the player's position is on a NavMesh surface
         if (!NavMesh.SamplePosition(player.position, out hit, navMeshCheckRadius, NavMesh.AllAreas))
         {
+#if UNITY_EDITOR
+
             Debug.Log("Player is in a non-walkable area!");
+
+#endif
             return true; // Player is NOT on the NavMesh (Non-walkable area)
         }
 
         // Check if the area is walkable
         if (hit.mask == 0) // 0 means not assigned to any NavMesh area
         {
+#if UNITY_EDITOR
+
             Debug.Log("Player is in a non-walkable area (NavMesh hit but no valid mask)!");
+
+#endif
             return true;
         }
+#if UNITY_EDITOR
 
         Debug.Log("Player is in a walkable area!");
+
+#endif
         return false; // Player is on a walkable NavMesh
     }
 }

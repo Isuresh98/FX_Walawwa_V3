@@ -123,6 +123,15 @@ public class GameControll : MonoBehaviour {
         QualitySettings.vSyncCount = 0;   // Disable V-Sync to allow Unity to control FPS
                                           //remove itempichter spowner
                                           //  m_spawner.SpawnPictures(m_needPicturesCount);
+
+
+        //carch delet
+     
+        string path = Application.persistentDataPath;
+        System.IO.Directory.Delete(path, true);
+        //carch delet
+
+
         m_spawner.SpawnPills();
         Time.timeScale = 1.0f;
         pausePanel.SetActive(false);
@@ -184,10 +193,13 @@ public class GameControll : MonoBehaviour {
            
             }else
             {
+#if UNITY_EDITOR
                 Debug.Log("Wrond enemy mode id, cant find mode in Enemy Modes list");
+#endif
             }
-            
-        }else
+
+        }
+        else
         {
             int EM = 0;
 
@@ -200,7 +212,10 @@ public class GameControll : MonoBehaviour {
             }
             else
             {
+
+#if UNITY_EDITOR
                 Debug.Log("Wrond enemy mode id, cant find mode in Enemy Modes list");
+#endif
             }
         }
 
@@ -223,9 +238,13 @@ public class GameControll : MonoBehaviour {
                 }
             }else
             {
+
+#if UNITY_EDITOR
                 Debug.Log("Wrond difficulty mode id, cant find mode in difficulty Modes list");
+#endif
             }
-        }else
+        }
+        else
         {
             int GD = 0;
 

@@ -32,7 +32,9 @@ public class FristTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Print "Set" to the console
-            Debug.Log("Set");
+#if UNITY_EDITOR
+    Debug.Log("Set");
+#endif
             if (!isFrist_Trigger)
             {
                 // Start the coroutine to set isFrist_Trigger after 10 seconds
@@ -58,11 +60,19 @@ public class FristTrigger : MonoBehaviour
             if (anim != null)
             {
                 anim.SetTrigger("LightTrigger");
+#if UNITY_EDITOR
+
                 Debug.Log("LightTrigger toggled on: " + anim.gameObject.name);
+
+#endif
             }
             else
             {
+#if UNITY_EDITOR
+
                 Debug.LogWarning("Animator reference is missing in LightSet");
+
+#endif
             }
         }
     
@@ -80,7 +90,11 @@ public class FristTrigger : MonoBehaviour
             }
             else
             {
+#if UNITY_EDITOR
+
                 Debug.LogWarning("No Rigidbody found on " + obj.name);
+
+#endif
             }
         }
 
@@ -88,6 +102,10 @@ public class FristTrigger : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         isFrist_Trigger = true;
+#if UNITY_EDITOR
+
         Debug.Log("isFrist_Trigger is now true");
+
+#endif
     }
 }

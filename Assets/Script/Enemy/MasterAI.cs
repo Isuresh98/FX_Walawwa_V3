@@ -43,15 +43,21 @@ public class MasterAI : MonoBehaviour
     public float ShootIntervalTime;
     private bool canShoot = true;
     public Transform masterShootAIGFX; // Assign MasterShootAIGFX in the Inspector
+
+    [SerializeField] bool isActiveMaster=false;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        FristTrigger = GameObject.FindGameObjectWithTag("Frist_Trigger").GetComponent<FristTrigger>();
+    
         if (player == null)
         {
+#if UNITY_EDITOR
+
             Debug.LogError("Player not found! Make sure your player GameObject has the 'Player' tag.");
+
+#endif
             return;
         }
  
@@ -71,7 +77,7 @@ public class MasterAI : MonoBehaviour
     void Update()
     {
         if (player == null) return;
-        if (!FristTrigger.isFrist_Trigger) return;
+        if (!isActiveMaster) return;
 
         DetectCoin();
 
@@ -146,14 +152,21 @@ public class MasterAI : MonoBehaviour
     {
         if (detectedCoin != null)
         {
+#if UNITY_EDITOR
+
             Debug.Log("set enemy coin coin place");
+
+#endif
             agent.SetDestination(detectedCoin.position);
             if (Vector3.Distance(transform.position, detectedCoin.position) < 1.5f && !isWaitingCoroutineStarted)
             {
+#if UNITY_EDITOR
 
 
                 Debug.Log("set enemy waiting coin coin place");
-                StartCoroutine(WaitAtCoin());
+
+#endif
+                // StartCoroutine(WaitAtCoin());
             }
         }
     }
@@ -207,13 +220,13 @@ public class MasterAI : MonoBehaviour
         animator.SetBool("standUp", true);
         // Wait until "coin collect" animation finishes
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
-        animator.SetBool("standUp", false);
-        animator.SetBool("standUp_V2", true);
+      //  animator.SetBool("standUp", false);
+       // animator.SetBool("standUp_V2", true);
         // Wait until "stand up" animation finishes
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
 
-        animator.SetBool("standUp_V2", false);
-        animator.SetBool("standUp_V3", true);
+      //  animator.SetBool("standUp_V2", false);
+       // animator.SetBool("standUp_V3", true);
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
 
         isWaitingCoroutineStarted = false;
@@ -272,7 +285,7 @@ public class MasterAI : MonoBehaviour
 
         agent.isStopped = true;
         isAttacking = false;
-        animator.SetBool("isAttacking", false);
+       // animator.SetBool("isAttacking", false);
         animator.SetFloat("MoveSpeed", 0);
         Debug.Log("Player out of range. Moving to last known position before patrolling.");
 

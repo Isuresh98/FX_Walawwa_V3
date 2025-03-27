@@ -42,7 +42,11 @@ public class G_Enemy : MonoBehaviour
         FristTrigger = GameObject.FindGameObjectWithTag("Frist_Trigger").GetComponent<FristTrigger>();
         if (player == null)
         {
+#if UNITY_EDITOR
+
             Debug.LogError("Player not found! Make sure your player GameObject has the 'Player' tag.");
+
+#endif
             return;
         }
 
@@ -118,7 +122,11 @@ public class G_Enemy : MonoBehaviour
 
                         // Stop movement by setting MoveSpeed to 0
                         animator.SetFloat("MoveSpeed", 0);
+#if UNITY_EDITOR
+
                         Debug.Log("Enemy is attacking!");
+
+#endif
                     }
                 }
                 else
@@ -143,14 +151,21 @@ public class G_Enemy : MonoBehaviour
     {
         if (detectedCoin != null)
         {
+#if UNITY_EDITOR
+
             Debug.Log("set enemy coin coin place");
-           
+
+#endif
+
             agent.SetDestination(detectedCoin.position);
             if (Vector3.Distance(transform.position, detectedCoin.position) < 1.5f&&!isWaitingCoroutineStarted)
             {
-                
-                    
+#if UNITY_EDITOR
+
+
                 Debug.Log("set enemy waiting coin coin place");
+
+#endif
                 StartCoroutine(WaitAtCoin());
             }
         }
@@ -275,7 +290,11 @@ public class G_Enemy : MonoBehaviour
         isAttacking = false;
         animator.SetBool("isAttacking", false);
         animator.SetFloat("MoveSpeed", 0);
+#if UNITY_EDITOR
+
         Debug.Log("Player out of range. Moving to last known position before patrolling.");
+
+#endif
 
         StartCoroutine(MoveToLastPlayerPosition(lastPlayerPosition));
     }

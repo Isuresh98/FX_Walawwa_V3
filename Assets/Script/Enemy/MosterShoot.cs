@@ -10,6 +10,7 @@ public class MosterShoot : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
     }
 
     // Update is called once per frame

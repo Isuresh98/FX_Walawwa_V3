@@ -61,7 +61,11 @@ public class Inventory : MonoBehaviour {
                         GameObject droppedItem = Instantiate(itemData.m_itemPrefab, dropPosition, Quaternion.identity);
                         Rigidbody rb = droppedItem.transform.gameObject.GetComponent<Rigidbody>(); // Freezes all movement and rotation
                         rb.constraints = RigidbodyConstraints.None;
+#if UNITY_EDITOR
+
                         Debug.Log($"Dropped: {itemData.name}");
+
+#endif
                     }
                 }
 
@@ -91,8 +95,11 @@ public class Inventory : MonoBehaviour {
                 // Check if the inventory has reached the maximum slot limit
                 if (m_slots.Count >= maxSlots)
                 {
-                
+#if UNITY_EDITOR
+
                     Debug.Log("Cannot add item: Inventory is full! No free slots available.");
+
+#endif
                     return; // Stop adding
                 }
               

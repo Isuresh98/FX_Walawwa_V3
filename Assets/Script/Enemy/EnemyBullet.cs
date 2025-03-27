@@ -17,7 +17,11 @@ public class EnemyBullet : MonoBehaviour
 
         if (other.CompareTag("Player")) // Check if it hits the player
         {
+#if UNITY_EDITOR
+
             Debug.Log("Bullet hit player...");
+
+#endif
             other.gameObject.GetComponent<PlayerHealth>().TakeDamage(110);
         }
 
