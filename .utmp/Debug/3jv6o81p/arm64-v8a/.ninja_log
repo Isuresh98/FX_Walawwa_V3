@@ -1,0 +1,10 @@
+# ninja log v5
+1	1102	1743071205742906060	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	db6bd33aca021a2c
+0	1105	1743071205745633398	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	cf43fbf1da6405f7
+4	1135	1743071205779948666	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	c4bc932ce6e4aa80
+8	1149	1743071205795182360	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	f88d660897e0371f
+5	1172	1743071205817364023	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	a224f7cfd17e07df
+2	1179	1743071205825504954	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	b260745cbddc656c
+1	1180	1743071205826454956	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	d54dbc399bc40cc6
+3	1275	1743071205921023122	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	e0bd15cd7dcc6169
+1275	1483	1743071206121869432	/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Walawwa/gradle-project/unityLibrary/build/intermediates/cxx/Debug/3jv6o81p/obj/arm64-v8a/libgame.so	1af63155ef61d47f
