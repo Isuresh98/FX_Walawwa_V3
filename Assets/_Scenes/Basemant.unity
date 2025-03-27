@@ -22093,6 +22093,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SandSwirlsEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010715882420, guid: 57a17fbd878734c0a97603163e0dc9f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012573350444, guid: 57a17fbd878734c0a97603163e0dc9f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.007
