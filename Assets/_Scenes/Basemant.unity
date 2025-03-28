@@ -58674,7 +58674,7 @@ PrefabInstance:
     - target: {fileID: 6395369851251234189, guid: 4fa19e398a9e5456ea877f1a43ad0120,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7042038039988528168, guid: 4fa19e398a9e5456ea877f1a43ad0120,
         type: 3}
@@ -59991,7 +59991,7 @@ PrefabInstance:
     - target: {fileID: 5354023134981022585, guid: b65e6d6d5b4214d7fb05b4ccd88f7065,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6447284901411048836, guid: b65e6d6d5b4214d7fb05b4ccd88f7065,
         type: 3}
@@ -62262,7 +62262,7 @@ PrefabInstance:
     - target: {fileID: 6481351888592297068, guid: fe4c306afa43f4f27af381ccafd77b3f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -62438,9 +62438,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2403450517775012823}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 10
+  m_MaxValue: 15
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 15
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

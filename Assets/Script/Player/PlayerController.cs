@@ -46,8 +46,8 @@ public class PlayerController : MonoBehaviour {
 
     [Header("CameraSettings")]
     [Tooltip("Mouse Sensetivity value")]
-    [Range(2f, 10f)] // Adds a slider in the Inspector
-    public float mouseSensetivity = 10f; // Default value
+    [Range(2f, 15f)] // Adds a slider in the Inspector
+    public float mouseSensetivity = 15f; // Default value
     [Tooltip("Main camera transform")]
     public Transform cameraTransform;
     private float clampX;
