@@ -1,7 +1,7 @@
 {
   "buildFiles": [
-    "/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Walawwa/gradle-project/unityLibrary/src/main/cpp/CMakeLists.txt",
-    "/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Walawwa/gradle-project/unityLibrary/src/main/cpp/GameActivity/CMakeLists.txt"
+    "/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/CMakeLists.txt",
+    "/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/CMakeLists.txt"
   ],
   "cleanCommandsComponents": [
     [
@@ -22,7 +22,7 @@
       "toolchain": "toolchain",
       "abi": "armeabi-v7a",
       "artifactName": "game",
-      "output": "/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Walawwa/gradle-project/unityLibrary/build/intermediates/cxx/Debug/3jv6o81p/obj/armeabi-v7a/libgame.so",
+      "output": "/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/3jv6o81p/obj/armeabi-v7a/libgame.so",
       "runtimeFiles": []
     }
   },

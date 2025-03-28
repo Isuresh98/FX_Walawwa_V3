@@ -1,10 +1,10 @@
 # ninja log v5
-3	683	1743072048748544997	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	a224f7cfd17e07df
-3	699	1743072048766480657	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	f88d660897e0371f
-2	722	1743072048790304036	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	c4bc932ce6e4aa80
-0	728	1743072048797938467	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	db6bd33aca021a2c
-1	731	1743072048801562016	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	b260745cbddc656c
-1	759	1743072048828608235	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	d54dbc399bc40cc6
-2	807	1743072048876912120	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	e0bd15cd7dcc6169
-0	848	1743072048914917068	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	cf43fbf1da6405f7
-848	947	1743072049012042797	/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Walawwa/gradle-project/unityLibrary/build/intermediates/cxx/Debug/3jv6o81p/obj/arm64-v8a/libgame.so	1af63155ef61d47f
+5	1419	1743136557609944692	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	58b7c64d945a953
+4	1426	1743136557612389606	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	e995e6537d2f112e
+0	1440	1743136557635778230	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	66303fdb84e36726
+7	1455	1743136557649847039	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	b4912a84f9ffe823
+2	1459	1743136557655148165	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	e76205c94d801948
+2	1523	1743136557719498780	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	2738af0f0c91cd07
+4	1588	1743136557783834602	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	3f361e3517e7c830
+3	1632	1743136557830406681	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	4b93e26d55fd9c07
+1632	1748	1743136557942827232	/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/3jv6o81p/obj/arm64-v8a/libgame.so	f235caf1a0331e92

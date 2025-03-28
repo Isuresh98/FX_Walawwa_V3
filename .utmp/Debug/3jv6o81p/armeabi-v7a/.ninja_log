@@ -1,10 +1,10 @@
 # ninja log v5
-3	683	1743072050885572742	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	e237c836b72ff5ab
-0	687	1743072050885115033	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	6c0445f173022343
-2	692	1743072050897561932	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	995f39dbe9126ba7
-1	693	1743072050898101058	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	62076a830478dee4
-3	730	1743072050935463464	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	cf0c7ddcdd189e2b
-0	737	1743072050943234645	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	621c231ea7d2c379
-1	764	1743072050969234070	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	17893070f7bae7be
-0	795	1743072050998781502	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	bf9f819df32f1cef
-795	899	1743072051100391073	/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Walawwa/gradle-project/unityLibrary/build/intermediates/cxx/Debug/3jv6o81p/obj/armeabi-v7a/libgame.so	77113a4689c9e4ad
+3	1388	1743136561556101442	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	e9bd5a0eb4201cad
+4	1391	1743136561552546052	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	42bab59354ac9073
+6	1400	1743136561571567689	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	3dc20f0c99085013
+2	1402	1743136561573026129	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	611b23ba0bed5b3f
+0	1420	1743136561591821056	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	f0174b4c1d8d42ba
+1	1525	1743136561695721803	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	eb72abf70745e060
+2	1579	1743136561750073966	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	c48993a2016f3fe2
+0	1621	1743136561792996153	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	71346d1ce6213f96
+1621	1778	1743136561943600232	/Users/isuresh/Desktop/Unity Project/Company FX/Horrer V2 walawwa/Project V3/FX_Walawwa/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/3jv6o81p/obj/armeabi-v7a/libgame.so	792ac168b4deea34
