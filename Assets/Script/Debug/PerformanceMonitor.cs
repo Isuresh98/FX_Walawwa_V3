@@ -105,7 +105,7 @@ public class PerformanceMonitor : MonoBehaviour
         }
 #if UNITY_EDITOR
         // Debug Log Output
-        Debug.Log($"[PerformanceMonitor] FPS: {Mathf.Round(fps)} | CPU: {cpuUsage}% | RAM: {unityMemory}MB/{totalRAM}MB | Battery: {batteryLevel}% | Temp: {batteryTemperature}°C | Storage: {availableStorage}MB");
+//        Debug.Log($"[PerformanceMonitor] FPS: {Mathf.Round(fps)} | CPU: {cpuUsage}% | RAM: {unityMemory}MB/{totalRAM}MB | Battery: {batteryLevel}% | Temp: {batteryTemperature}°C | Storage: {availableStorage}MB");
 #endif
 
         if (fps < 30)

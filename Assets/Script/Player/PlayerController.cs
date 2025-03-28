@@ -46,7 +46,8 @@ public class PlayerController : MonoBehaviour {
 
     [Header("CameraSettings")]
     [Tooltip("Mouse Sensetivity value")]
-    public float mouseSensetivity;
+    [Range(2f, 10f)] // Adds a slider in the Inspector
+    public float mouseSensetivity = 10f; // Default value
     [Tooltip("Main camera transform")]
     public Transform cameraTransform;
     private float clampX;
@@ -323,6 +324,57 @@ public class PlayerController : MonoBehaviour {
     //new vertion
     [Header("Joystic Parts")]
     [SerializeField] private RectTransform joystickArea;
+    private Vector2 currentRotation;
+    private Vector2 targetRotation;
+    private Vector2 rotationVelocity;
+    private float smoothTime = 0.2f; // Adjust for smoother/faster response
+
+    // new vertion
+
+    private void CameraRotation()
+    {
+        if (Input.touchCount > 0)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Touch touch = Input.GetTouch(i);
+
+                if (!RectTransformUtility.RectangleContainsScreenPoint(joystickArea, touch.position))
+                {
+                    if (touch.phase == TouchPhase.Moved && !gameControll.DragInteract)
+                    {
+                        float touchX = touch.deltaPosition.x * mouseSensetivity * Time.deltaTime;
+                        float touchY = touch.deltaPosition.y * mouseSensetivity * Time.deltaTime;
+
+                        // Set target rotation values
+                        targetRotation.x -= touchY;
+                        targetRotation.y += touchX;
+
+                        // Clamp vertical rotation
+                        targetRotation.x = Mathf.Clamp(targetRotation.x, clampXaxis.x, clampXaxis.y);
+                    }
+                }
+            }
+        }
+
+        // Apply smooth delay effect
+        currentRotation = Vector2.SmoothDamp(currentRotation, targetRotation, ref rotationVelocity, smoothTime);
+
+        // Apply rotation
+        m_TPS_Player.SetFloat("SpineAngle", currentRotation.x * 1.3f, 0.2f, Time.deltaTime);
+        cameraTransform.localRotation = Quaternion.Euler(currentRotation.x, 0, 0);
+        transform.rotation = Quaternion.Euler(0, currentRotation.y, 0);
+    }
+
+
+
+
+
+
+
+
+    //old code
+    /*
 
     private void CameraRotation()
     {
@@ -369,7 +421,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
     }
-
+    */
 
     // old vertion in thoch setup
     /* private void CameraRotation()

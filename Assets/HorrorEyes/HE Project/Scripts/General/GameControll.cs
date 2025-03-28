@@ -122,14 +122,9 @@ public class GameControll : MonoBehaviour {
        // Application.targetFrameRate = 60;  // Set frame rate to 60 FPS
   
                                           //remove itempichter spowner
-        if (SystemInfo.processorCount < 4)
-        {
-            Application.targetFrameRate = 30; // Low-end devices
-        }
-        else
-        {
+    
             Application.targetFrameRate = 60; // Mid to high-end devices
-        }                    //  m_spawner.SpawnPictures(m_needPicturesCount);
+                           //  m_spawner.SpawnPictures(m_needPicturesCount);
 
         QualitySettings.vSyncCount = 0;   // Disable V-Sync to allow Unity to control FPS
         //carch delet
