@@ -370,7 +370,7 @@ public class GameControll : MonoBehaviour {
         m_cutsceneEnded = true;
         m_cutsceneTextArea.text = m_cutsceneText;
         StartCoroutine(WaitCutscene());
-        gameControllPanel.SetActive(true);
+     
     }
 
     public void SetEffect(PicturePaper.effectType effectType)
@@ -949,10 +949,7 @@ public class GameControll : MonoBehaviour {
         fadeScreen.Play(fadeOutAnimName);
         m_cutscenePanel.SetActive(false);
         player.locked = false;
-        for (int i = 0; i < enemy.Count; i++)
-        {
-            enemy[i].gameObject.SetActive(true);
-        }
+        gameControllPanel.SetActive(true);
 
 
     }
