@@ -90,6 +90,10 @@ public class GameControll : MonoBehaviour {
     int m_charCount;
     bool m_cantPrint = false;
 
+    [Header("Book read UI")]
+    public GameObject BooksAnimpannel;
+    public GameObject Bookspannel;
+
 
     private void Awake()
     {
@@ -115,6 +119,8 @@ public class GameControll : MonoBehaviour {
         enemy.Clear();
         PrepareGame();
         gameControllPanel.SetActive(false);
+        Bookspannel.SetActive(false);
+        BooksAnimpannel.SetActive(false);
 
     }
 
@@ -268,6 +274,14 @@ public class GameControll : MonoBehaviour {
         }
     }
 
+    public void OpenBook()
+    {
+        Bookspannel.SetActive(true);
+    }
+    public void booksAnimationOff()
+    {
+        BooksAnimpannel.SetActive(false);
+    }
     private void Update()
     {
         ControllGame();
@@ -950,6 +964,7 @@ public class GameControll : MonoBehaviour {
         m_cutscenePanel.SetActive(false);
         player.locked = false;
         gameControllPanel.SetActive(true);
+        BooksAnimpannel.SetActive(true);
 
 
     }

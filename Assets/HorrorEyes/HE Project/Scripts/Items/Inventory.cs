@@ -109,7 +109,10 @@ public class Inventory : MonoBehaviour {
                 newSlot.m_itemCount = cnt;
                 m_slots.Add(newSlot);
                 PrepareSlot(newSlot);
-
+                if (id == 6)
+                {
+                    m_gameControll.booksAnimationOff();
+                }
                 if (id == 0) /// if item id == 0 (eyePills id)
                 {
                     m_gameControll.AddEyePills(1);

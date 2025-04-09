@@ -563,6 +563,10 @@ public class Interact : MonoBehaviour {
             buttonImage.gameObject.SetActive(false); // Hide the button when ID is 0
             ItemDropBT.gameObject.SetActive(false);
         }
+        else if (InteractID == 6)
+        {
+            m_gameController.OpenBook();
+        }
         else
         {
             itemNameText.gameObject.SetActive(true);
