@@ -97,6 +97,35 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Enemy AI Use")]
     public bool iSIntractableHideObject = false;
+
+    [Header("Camera movement animation ")]
+    public Transform startPosition; // Lower position
+    public Transform endPosition;   // Final camera position
+    public float animationDuration = 2f;
+    private float timer = 0f;
+    private bool animating = true;
+
+    private void CamStartAnimation()
+    {
+        if (animating)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / animationDuration);
+
+            // Position Lerp
+            transform.position = Vector3.Lerp(startPosition.position, endPosition.position, t);
+
+            // Rotation Lerp (Spherical interpolation for smooth rotation)
+            transform.rotation = Quaternion.Slerp(startPosition.rotation, endPosition.rotation, t);
+
+            if (t >= 1f)
+            {
+                animating = false;
+                gameControll.SkipCutscene(); // Call your method when done
+            }
+        }
+    }
+
     private void Awake()
     {
         m_runArrownImage.SetActive(m_running);
@@ -105,12 +134,16 @@ public class PlayerController : MonoBehaviour {
         characterController = GetComponent<CharacterController>();
         clampX = 0f;
         moveSpeed = walkSpeed;
-
+     
+        // Set starting position and rotation
+        transform.position = startPosition.position;
+        transform.rotation = startPosition.rotation;
 
     }
 
     private void Update()
     {
+        CamStartAnimation();
         PlayerStates();
         if (!locked && !lockedByDying)
         {

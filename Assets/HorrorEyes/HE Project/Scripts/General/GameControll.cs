@@ -101,7 +101,7 @@ public class GameControll : MonoBehaviour {
         m_spawner = GetComponent<ItemsSpawner>();    
         inventory = GetComponent<Inventory>();
         m_charCount = m_cutsceneText.Length;
-        m_cutscenePanel.SetActive(true);
+       // m_cutscenePanel.SetActive(true);
         player.locked = true;
         m_TipText.text = "";
         m_TipText.gameObject.SetActive(false);
@@ -114,6 +114,7 @@ public class GameControll : MonoBehaviour {
         }
         enemy.Clear();
         PrepareGame();
+        gameControllPanel.SetActive(false);
 
     }
 
@@ -271,7 +272,7 @@ public class GameControll : MonoBehaviour {
     {
         ControllGame();
         UpdateStats();
-        Cutscene();
+        //Cutscene();
 
         LightUpUISliderUpdate();
 
@@ -369,6 +370,7 @@ public class GameControll : MonoBehaviour {
         m_cutsceneEnded = true;
         m_cutsceneTextArea.text = m_cutsceneText;
         StartCoroutine(WaitCutscene());
+        gameControllPanel.SetActive(true);
     }
 
     public void SetEffect(PicturePaper.effectType effectType)
