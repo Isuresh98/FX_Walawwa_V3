@@ -142,6 +142,10 @@ public class PlayerController : MonoBehaviour {
     private float moveToEndTimer = 0f;
     [SerializeField] private float moveToEndDuration = 0.5f;
 
+    // Declare somewhere at the top
+    private Vector3 startMovingToEndPosition;
+    private Quaternion startMovingToEndRotation;
+
     private void CamStartAnimation()
     {
         if (animating)
@@ -163,6 +167,24 @@ public class PlayerController : MonoBehaviour {
                 SetLookTarget(leftLookAngle, 0f, leftLookDuration);
             }
         }
+        else if (movingToEndStart) // ✅ This block must come before lookAround
+        {
+            moveToEndTimer += Time.deltaTime;
+            float t2 = Mathf.Clamp01(moveToEndTimer / moveToEndDuration);
+
+            Vector3 newPosition = Vector3.Lerp(startMovingToEndPosition, endStartPosition.position, t2);
+            Vector3 moveDirection = newPosition - transform.position;
+            characterController.Move(moveDirection); // This moves smoothly
+
+            transform.rotation = Quaternion.Slerp(startMovingToEndRotation, endStartPosition.rotation, t2);
+
+            if (t2 >= 1f)
+            {
+                movingToEndStart = false;
+                lookTimer = 0f;
+                SetLookTarget(0f, 0f, centerLookDuration); // Look Center after move
+            }
+        }
         else if (lookAround)
         {
             lookTimer += Time.deltaTime;
@@ -179,13 +201,10 @@ public class PlayerController : MonoBehaviour {
                     subLookPhase = SubLookPhase.Up;
                     gameControll.ScreenFade(1); // fade-in at the beginning
                     SetLookTarget(GetCurrentYAngle(), upLookAngle, lookUpDownDuration);
-
-                   
                 }
                 else if (subLookPhase == SubLookPhase.Up)
                 {
                     subLookPhase = SubLookPhase.Down;
-                  
                     SetLookTarget(GetCurrentYAngle(), downLookAngle, lookUpDownDuration);
                 }
                 else if (subLookPhase == SubLookPhase.Down)
@@ -196,32 +215,18 @@ public class PlayerController : MonoBehaviour {
                     {
                         case LookPhase.Left:
                             lookPhase = LookPhase.Right;
-                            gameControll.ScreenFade(1); // fade-in at the beginning
+                            gameControll.ScreenFade(1);
                             SetLookTarget(rightLookAngle, 0f, rightLookDuration);
                             break;
                         case LookPhase.Right:
                             lookPhase = LookPhase.Center;
-
-                            // Start transition to endStartPosition
                             movingToEndStart = true;
                             moveToEndTimer = 0f;
 
+                            // ✅ Add these lines to initialize start point
+                            startMovingToEndPosition = transform.position;
+                            startMovingToEndRotation = transform.rotation;
                             break;
-                    }
-                }
-                else if (movingToEndStart)
-                {
-                    moveToEndTimer += Time.deltaTime;
-                    float t2 = Mathf.Clamp01(moveToEndTimer / moveToEndDuration);
-
-                    transform.position = Vector3.Lerp(transform.position, endStartPosition.position, t);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, endStartPosition.rotation, t);
-
-                    if (t2 >= 1f)
-                    {
-                        movingToEndStart = false;
-                        lookTimer = 0f;
-                        SetLookTarget(0f, 0f, centerLookDuration); // Center look after move
                     }
                 }
                 else if (lookPhase == LookPhase.Center)
@@ -229,9 +234,24 @@ public class PlayerController : MonoBehaviour {
                     lookPhase = LookPhase.None;
                     lookAround = false;
                     gameControll.SkipCutscene();
+                 
+                    Invoke(nameof(Movefiexd), 2.5f); // Delay cutscene skip until fade is done
+
                 }
             }
         }
+    }
+
+    private void Movefiexd()
+    {
+        moveToEndTimer += Time.deltaTime;
+        float t2 = Mathf.Clamp01(moveToEndTimer / moveToEndDuration);
+
+        Vector3 newPosition = Vector3.Lerp(startMovingToEndPosition, endStartPosition.position, t2);
+        Vector3 moveDirection = newPosition - transform.position;
+        characterController.Move(moveDirection); // This moves smoothly
+
+        transform.rotation = Quaternion.Slerp(startMovingToEndRotation, endStartPosition.rotation, t2);
     }
     private void Fadeout()
     {

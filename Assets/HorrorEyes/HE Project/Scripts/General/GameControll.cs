@@ -22,6 +22,8 @@ public class GameControll : MonoBehaviour {
     public string m_loadingSceneName;
     public string m_mainMenuSceneName;
     public List<DifficultyModes> m_difficultyModes = new List<DifficultyModes>();
+    [SerializeField] private Transform finalCutsceneEndPoint; // Set this in Inspector to your desired post-cutscene camera/player location
+
 
     [Header("Enemy Settings")]
     public Text m_eyesPillsCountText;
@@ -960,13 +962,16 @@ public class GameControll : MonoBehaviour {
     private IEnumerator WaitCutscene()
     {
         yield return new WaitForSeconds(1f);
+
+        // ✅ Set final position before unlocking control
+        player.transform.position = finalCutsceneEndPoint.position;
+        player.transform.rotation = finalCutsceneEndPoint.rotation;
+
         fadeScreen.Play(fadeOutAnimName);
         m_cutscenePanel.SetActive(false);
         player.locked = false;
         gameControllPanel.SetActive(true);
         BooksAnimpannel.SetActive(true);
-
-
     }
 
     private IEnumerator WaitFadeAnim(string name)
