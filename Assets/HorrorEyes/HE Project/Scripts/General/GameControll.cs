@@ -122,7 +122,7 @@ public class GameControll : MonoBehaviour {
         PrepareGame();
         gameControllPanel.SetActive(false);
         Bookspannel.SetActive(false);
-        BooksAnimpannel.SetActive(false);
+        BooksAnimpannel.SetActive(true);
 
     }
 

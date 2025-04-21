@@ -291,7 +291,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
-        CamStartAnimation();
+       // CamStartAnimation();
         PlayerStates();
         if (!locked && !lockedByDying)
         {
