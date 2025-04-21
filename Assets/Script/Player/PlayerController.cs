@@ -101,6 +101,8 @@ public class PlayerController : MonoBehaviour {
     [Header("Camera movement animation ")]
     public Transform startPosition; // Lower position
     public Transform endPosition;   // Final camera position
+    public Transform endStartPosition;   // start position
+
     public float animationDuration = 0.5f;
     public float animationDurationAngle = 0.5f;
     private float timer = 0f;
@@ -135,7 +137,10 @@ public class PlayerController : MonoBehaviour {
     // Angle values
     [SerializeField] private float upLookAngle = -10f;
     [SerializeField] private float downLookAngle = 10f;
-  
+
+    private bool movingToEndStart = false;
+    private float moveToEndTimer = 0f;
+    [SerializeField] private float moveToEndDuration = 0.5f;
 
     private void CamStartAnimation()
     {
@@ -196,9 +201,27 @@ public class PlayerController : MonoBehaviour {
                             break;
                         case LookPhase.Right:
                             lookPhase = LookPhase.Center;
-                          
-                            SetLookTarget(0f, 0f, centerLookDuration);
+
+                            // Start transition to endStartPosition
+                            movingToEndStart = true;
+                            moveToEndTimer = 0f;
+
                             break;
+                    }
+                }
+                else if (movingToEndStart)
+                {
+                    moveToEndTimer += Time.deltaTime;
+                    float t2 = Mathf.Clamp01(moveToEndTimer / moveToEndDuration);
+
+                    transform.position = Vector3.Lerp(transform.position, endStartPosition.position, t);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, endStartPosition.rotation, t);
+
+                    if (t2 >= 1f)
+                    {
+                        movingToEndStart = false;
+                        lookTimer = 0f;
+                        SetLookTarget(0f, 0f, centerLookDuration); // Center look after move
                     }
                 }
                 else if (lookPhase == LookPhase.Center)
