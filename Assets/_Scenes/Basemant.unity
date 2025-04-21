@@ -17128,6 +17128,7 @@ GameObject:
   - component: {fileID: 1222109234}
   - component: {fileID: 1222109237}
   - component: {fileID: 1222109236}
+  - component: {fileID: 1222109238}
   m_Layer: 5
   m_Name: BooksAnim
   m_TagString: Untagged
@@ -17193,6 +17194,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222109233}
   m_CullTransparentMesh: 1
+--- !u!95 &1222109238
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222109233}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1229184233
 GameObject:
   m_ObjectHideFlags: 0
@@ -18511,7 +18534,7 @@ PlayableDirector:
   - key: {fileID: 7416899090429688043, guid: 0cbc450755880447f89877ac338d2cbd, type: 2}
     value: {fileID: 9025155134412873912}
   - key: {fileID: -5842519203636529791, guid: 0cbc450755880447f89877ac338d2cbd, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1222109238}
   - key: {fileID: 6530193176576724323, guid: 0cbc450755880447f89877ac338d2cbd, type: 2}
     value: {fileID: 1967250176}
   - key: {fileID: -8528930503396785751, guid: 0cbc450755880447f89877ac338d2cbd, type: 2}
@@ -27669,6 +27692,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2001139096952848455}
+        m_TargetAssemblyTypeName: GameControll, Assembly-CSharp
+        m_MethodName: SkipCutscene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -40556,6 +40591,8 @@ MonoBehaviour:
   upLookAngle: -10
   downLookAngle: 10
   moveToEndDuration: 5
+  timeline: {fileID: 1322188490}
+  BookObject: {fileID: 1603660410}
   joystickArea: {fileID: 1303226071}
 --- !u!224 &7297069286317457867
 RectTransform:

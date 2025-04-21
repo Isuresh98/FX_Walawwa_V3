@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.UI;
-
+using UnityEngine.Playables;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour {
 
@@ -146,6 +147,11 @@ public class PlayerController : MonoBehaviour {
     private Vector3 startMovingToEndPosition;
     private Quaternion startMovingToEndRotation;
 
+    [Header("Cutsence")]
+    public PlayableDirector timeline;
+    public GameObject BookObject;
+
+     
     private void CamStartAnimation()
     {
         if (animating)
@@ -285,10 +291,24 @@ public class PlayerController : MonoBehaviour {
         transform.rotation = startPosition.rotation;
         currentRotation = new Vector2(0f, -88.672f); // 20 degrees up, 90 degrees facing right
         targetRotation = currentRotation;
-
+        timeline.stopped += OnTimelineStopped;
 
     }
+    void OnTimelineStopped(PlayableDirector pd)
+    {
+        if (pd == timeline)
+        {
+            // Your game function here
+#if UNITY_EDITOR
+            Debug.Log("Timeline finished. Starting game function...");
+#endif
+            gameControll.OpenBook();
+            Destroy(BookObject);
+            
+        }
+    }
 
+   
     private void Update()
     {
        // CamStartAnimation();
