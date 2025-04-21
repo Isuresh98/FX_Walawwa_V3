@@ -101,9 +101,41 @@ public class PlayerController : MonoBehaviour {
     [Header("Camera movement animation ")]
     public Transform startPosition; // Lower position
     public Transform endPosition;   // Final camera position
-    public float animationDuration = 2f;
+    public float animationDuration = 0.5f;
+    public float animationDurationAngle = 0.5f;
     private float timer = 0f;
     private bool animating = true;
+    private bool lookAround = false;
+
+    private enum LookPhase { Left, Right, Center, None }
+    private enum SubLookPhase { None, Up, Down }
+
+    private float lookTimer = 0f;
+    private float phaseDuration = 0.5f;
+
+
+    private Quaternion baseRotation;
+    private Quaternion targetRotationA;
+
+    [SerializeField] private float leftLookAngle = -10f;
+    [SerializeField] private float rightLookAngle = 15f;
+
+
+    private LookPhase lookPhase;
+    private SubLookPhase subLookPhase = SubLookPhase.None;
+
+
+
+    // Configurable durations
+    [SerializeField] private float leftLookDuration = 0.8f;
+    [SerializeField] private float rightLookDuration = 1.0f;
+    [SerializeField] private float centerLookDuration = 0.6f;
+    [SerializeField] private float lookUpDownDuration = 0.4f;
+
+    // Angle values
+    [SerializeField] private float upLookAngle = -10f;
+    [SerializeField] private float downLookAngle = 10f;
+  
 
     private void CamStartAnimation()
     {
@@ -112,19 +144,89 @@ public class PlayerController : MonoBehaviour {
             timer += Time.deltaTime;
             float t = Mathf.Clamp01(timer / animationDuration);
 
-            // Position Lerp
             transform.position = Vector3.Lerp(startPosition.position, endPosition.position, t);
-
-            // Rotation Lerp (Spherical interpolation for smooth rotation)
             transform.rotation = Quaternion.Slerp(startPosition.rotation, endPosition.rotation, t);
 
             if (t >= 1f)
             {
                 animating = false;
-                gameControll.SkipCutscene(); // Call your method when done
+                lookAround = true;
+                lookTimer = 0f;
+                baseRotation = transform.rotation;
+                lookPhase = LookPhase.Left;
+                subLookPhase = SubLookPhase.None;
+                SetLookTarget(leftLookAngle, 0f, leftLookDuration);
+            }
+        }
+        else if (lookAround)
+        {
+            lookTimer += Time.deltaTime;
+            float t = Mathf.Clamp01(lookTimer / phaseDuration);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotationA, t);
+
+            if (lookTimer >= phaseDuration)
+            {
+                lookTimer = 0f;
+
+                // Sub look logic (up/down after left or right)
+                if (subLookPhase == SubLookPhase.None && (lookPhase == LookPhase.Left || lookPhase == LookPhase.Right))
+                {
+                    subLookPhase = SubLookPhase.Up;
+                    gameControll.ScreenFade(1); // fade-in at the beginning
+                    SetLookTarget(GetCurrentYAngle(), upLookAngle, lookUpDownDuration);
+
+                   
+                }
+                else if (subLookPhase == SubLookPhase.Up)
+                {
+                    subLookPhase = SubLookPhase.Down;
+                  
+                    SetLookTarget(GetCurrentYAngle(), downLookAngle, lookUpDownDuration);
+                }
+                else if (subLookPhase == SubLookPhase.Down)
+                {
+                    subLookPhase = SubLookPhase.None;
+
+                    switch (lookPhase)
+                    {
+                        case LookPhase.Left:
+                            lookPhase = LookPhase.Right;
+                            gameControll.ScreenFade(1); // fade-in at the beginning
+                            SetLookTarget(rightLookAngle, 0f, rightLookDuration);
+                            break;
+                        case LookPhase.Right:
+                            lookPhase = LookPhase.Center;
+                          
+                            SetLookTarget(0f, 0f, centerLookDuration);
+                            break;
+                    }
+                }
+                else if (lookPhase == LookPhase.Center)
+                {
+                    lookPhase = LookPhase.None;
+                    lookAround = false;
+                    gameControll.SkipCutscene();
+                }
             }
         }
     }
+    private void Fadeout()
+    {
+        gameControll.ScreenFade(0); // fade-in at the beginning
+    }
+    private void SetLookTarget(float yAngleOffset, float xAngleOffset, float duration)
+    {
+        Invoke(nameof(Fadeout), 0.5f); // Delay cutscene skip until fade is done
+        targetRotationA = baseRotation * Quaternion.Euler(xAngleOffset, yAngleOffset, 0f);
+        phaseDuration = duration;
+    }
+    private float GetCurrentYAngle()
+    {
+        // Return the Y angle from the current baseRotation
+        Invoke(nameof(Fadeout), 0.5f); // Delay cutscene skip until fade is done
+        return baseRotation.eulerAngles.y;
+    }
+
 
     private void Awake()
     {

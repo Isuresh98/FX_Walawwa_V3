@@ -12924,13 +12924,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949190745}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.9230089, z: 0, w: 0.38477865}
-  m_LocalPosition: {x: 2.27, y: -0.63, z: 0.98}
+  m_LocalRotation: {x: 0, y: 0.80130607, z: 0, w: 0.5982546}
+  m_LocalPosition: {x: 2.27, y: -0.695, z: 0.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1584310243}
-  m_LocalEulerAnglesHint: {x: 0, y: 134.74, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 106.51, z: 0}
 --- !u!1 &957211580
 GameObject:
   m_ObjectHideFlags: 0
@@ -40033,7 +40033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3317526470346528245}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40443,7 +40443,16 @@ MonoBehaviour:
   iSIntractableHideObject: 0
   startPosition: {fileID: 1395573745}
   endPosition: {fileID: 949190746}
-  animationDuration: 5
+  animationDuration: 2
+  animationDurationAngle: 2
+  leftLookAngle: -80
+  rightLookAngle: 90
+  leftLookDuration: 2
+  rightLookDuration: 3
+  centerLookDuration: 1
+  lookUpDownDuration: 0.6
+  upLookAngle: -10
+  downLookAngle: 10
   joystickArea: {fileID: 1303226071}
 --- !u!224 &7297069286317457867
 RectTransform:
@@ -43542,7 +43551,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6611930525081020503}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.37622422, z: 0, w: 0.92652863}
+  m_LocalRotation: {x: 0, y: 0.016492635, z: 0, w: 0.999864}
   m_LocalPosition: {x: -49.87, y: -1.27, z: 8.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -43552,7 +43561,7 @@ Transform:
   - {fileID: 7358629511474306691}
   - {fileID: 5580004637638391224}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -44.2, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 1.89, z: 0}
 --- !u!224 &9046331101473298187
 RectTransform:
   m_ObjectHideFlags: 0
