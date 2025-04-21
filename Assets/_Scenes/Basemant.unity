@@ -6698,13 +6698,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432546156}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.010332649, y: 0.162456, z: -0.0017012955, w: 0.98666024}
-  m_LocalPosition: {x: 3.536, y: -0.829, z: 1.321}
+  m_LocalRotation: {x: -0.051636867, y: 0.16267227, z: 0.008525283, w: 0.9852912}
+  m_LocalPosition: {x: 3.91, y: -0.875, z: 0.512}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1584310243}
-  m_LocalEulerAnglesHint: {x: 1.2, y: 18.7, z: 0}
+  m_LocalEulerAnglesHint: {x: -6, y: 18.75, z: 0}
 --- !u!1001 &434598701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12955,13 +12955,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949190745}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.11320284, z: 0, w: -0.99357194}
-  m_LocalPosition: {x: 2.841, y: -0.898, z: 0.259}
+  m_LocalRotation: {x: 0, y: -0.05355602, z: 0, w: 0.9985649}
+  m_LocalPosition: {x: 2.97, y: -0.898, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1584310243}
-  m_LocalEulerAnglesHint: {x: 0, y: 373, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -6.14, z: 0}
 --- !u!1 &957211580
 GameObject:
   m_ObjectHideFlags: 0
@@ -19558,13 +19558,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395573744}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.45159826, y: 0.8080401, z: 0.18456975, w: 0.3302487}
+  m_LocalRotation: {x: 0.4873953, y: 0.8720913, z: -0.021280145, w: -0.03807634}
   m_LocalPosition: {x: 2.811, y: -1.762, z: 0.433}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1584310243}
-  m_LocalEulerAnglesHint: {x: 0, y: 135.54, z: 58.4}
+  m_LocalEulerAnglesHint: {x: 0, y: 185, z: 58.4}
 --- !u!1001 &1400632748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31879,6 +31879,7 @@ MonoBehaviour:
     m_enemyMoveSpeed: 2
     m_enemyLostTime: 5
     m_enemyFOV: {x: -90, y: 90}
+  finalCutsceneEndPoint: {fileID: 432546157}
   m_eyesPillsCountText: {fileID: 8716058810113461890}
   enemy: []
   m_eyesPillsAnimationUI: {fileID: 1388400606713542470}
@@ -43585,7 +43586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6611930525081020503}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.75881684, z: 0, w: 0.6513041}
+  m_LocalRotation: {x: 0, y: -0.14556491, z: 0, w: 0.9893487}
   m_LocalPosition: {x: -47.425, y: -1.27, z: 9.483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -43595,7 +43596,7 @@ Transform:
   - {fileID: 7358629511474306691}
   - {fileID: 5580004637638391224}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -98.72, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -16.74, z: 0}
 --- !u!224 &9046331101473298187
 RectTransform:
   m_ObjectHideFlags: 0

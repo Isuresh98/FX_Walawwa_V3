@@ -963,15 +963,12 @@ public class GameControll : MonoBehaviour {
     {
         yield return new WaitForSeconds(1f);
 
-        // ✅ Set final position before unlocking control
-        player.transform.position = finalCutsceneEndPoint.position;
-        player.transform.rotation = finalCutsceneEndPoint.rotation;
-
         fadeScreen.Play(fadeOutAnimName);
         m_cutscenePanel.SetActive(false);
         player.locked = false;
         gameControllPanel.SetActive(true);
         BooksAnimpannel.SetActive(true);
+       
     }
 
     private IEnumerator WaitFadeAnim(string name)

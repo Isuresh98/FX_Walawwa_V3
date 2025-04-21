@@ -283,6 +283,9 @@ public class PlayerController : MonoBehaviour {
         // Set starting position and rotation
         transform.position = startPosition.position;
         transform.rotation = startPosition.rotation;
+        currentRotation = new Vector2(0f, -88.672f); // 20 degrees up, 90 degrees facing right
+        targetRotation = currentRotation;
+
 
     }
 
@@ -538,10 +541,12 @@ public class PlayerController : MonoBehaviour {
         // Apply smooth delay effect
         currentRotation = Vector2.SmoothDamp(currentRotation, targetRotation, ref rotationVelocity, smoothTime);
 
+
         // Apply rotation
         m_TPS_Player.SetFloat("SpineAngle", currentRotation.x * 1.3f, 0.2f, Time.deltaTime);
         cameraTransform.localRotation = Quaternion.Euler(currentRotation.x, 0, 0);
-        transform.rotation = Quaternion.Euler(0, currentRotation.y, 0);
+
+        transform.rotation = Quaternion.Euler(0f, currentRotation.y,0f);
     }
 
 
