@@ -129,18 +129,18 @@ public class MainMenu : MonoBehaviour {
         m_levelNameText.text = m_levels[levelID].name;
         m_levelDescriptionText.text = m_levels[levelID].m_description;
 
-        m_enemyNameText.text = m_enemys[enemyID].name;
-        m_enemyDescriptionText.text = m_enemys[enemyID].m_description;
+//        m_enemyNameText.text = m_enemys[enemyID].name;
+      //  m_enemyDescriptionText.text = m_enemys[enemyID].m_description;
 
-        m_difficultNameText.text = m_difficults[difficultID].name;
-        m_difficultDescriptionText.text = m_difficults[difficultID].m_description;
+   //     m_difficultNameText.text = m_difficults[difficultID].name;
+   //     m_difficultDescriptionText.text = m_difficults[difficultID].m_description;
 
-        m_levels[levelID].m_levelShowGameobject.SetActive(true);
+//        m_levels[levelID].m_levelShowGameobject.SetActive(true);
 
-        for (int i = 0; i < m_enemys[enemyID].m_enemyShowGameobject.Length; i++)
-        {
-            m_enemys[enemyID].m_enemyShowGameobject[i].SetActive(true);
-        }
+        //for (int i = 0; i < m_enemys[enemyID].m_enemyShowGameobject.Length; i++)
+        //{
+        //    m_enemys[enemyID].m_enemyShowGameobject[i].SetActive(true);
+        //}
 
 
         UpdateGameInfo();
@@ -384,9 +384,9 @@ public class MainMenu : MonoBehaviour {
     {
         if (!m_selectedEnemyIsLocked && !m_selectedLevelIsLocked)
         {
-            PlayerPrefs.SetInt("EnemyMode", m_enemys[enemyID].m_enemyModeId);
-            PlayerPrefs.SetString("GameLevel", m_levels[levelID].m_sceneName);
-            PlayerPrefs.SetInt("GameDifficulty", m_difficults[difficultID].m_difficultId);
+           // PlayerPrefs.SetInt("EnemyMode", m_enemys[enemyID].m_enemyModeId);
+          //  PlayerPrefs.SetString("GameLevel", m_levels[levelID].m_sceneName);
+         //   PlayerPrefs.SetInt("GameDifficulty", m_difficults[difficultID].m_difficultId);
             SceneManager.LoadScene(m_loadingSceneName, LoadSceneMode.Single);
         }
     }
