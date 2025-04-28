@@ -21,8 +21,8 @@ public class G_Enemy_1 : MonoBehaviour
     public float patrolWaitTime = 2f; // Time to wait at each waypoint
     private int currentWaypointIndex = 0;
     private bool isPatrolling = false;
-
-
+    [Header("enemymeshObject Settings")]
+  //  public GameObject enemyMesh;
     [Header("Frist Step")]
     FristTrigger_1 FristTrigger;
 
@@ -36,6 +36,8 @@ public class G_Enemy_1 : MonoBehaviour
     private bool isWaitingCoroutineStarted = false;
     void Start()
     {
+        // Change outline color to red
+      //  OutlineHelper.SetOutlineColor(enemyMesh, Color.red);
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
