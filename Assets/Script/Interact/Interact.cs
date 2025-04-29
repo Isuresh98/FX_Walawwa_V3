@@ -340,14 +340,27 @@ public class Interact : MonoBehaviour {
                         }
 
                     }
-                    else if (hot.transform.gameObject.tag == interactScruKeyTag)
+                    if (hot.transform.gameObject.tag == interactScruKeyTag)
                     {
+                       
 #if UNITY_EDITOR
 
                         print("Interactive Dor Hol Object Name: " + hot.transform.name);
                         print("Interactive Dor Hol Scruw Work ");
-
 #endif
+                        Transform hitTransform = hot.transform;
+
+                        ScrowHoll scrowHoll = hitTransform.GetComponent<ScrowHoll>();
+                        if (scrowHoll != null)
+                        {
+                            scrowHoll.ActiveScruwHoll();
+                        }
+                        else
+                        {
+                            Debug.LogError("ScrowHoll component not found on object: " + hot.transform.gameObject.name);
+                        }
+                        itemNameText.gameObject.SetActive(true);
+                        timer = displayDuration;
                         //this use scru hol active setup
 
 
@@ -523,7 +536,7 @@ public class Interact : MonoBehaviour {
                         }
 
                         */
-                        if (ItemID == 1)
+                        if (InteractID == 1)
                         {
                             itemNameText.gameObject.SetActive(true);
                             itemNameText.text = "UNLOCKED";
@@ -728,16 +741,16 @@ public class Interact : MonoBehaviour {
         }
         else if (ID > 0 && ID < m_itemsDatabase.Items.Count)
         {
-           // buttonImage.gameObject.SetActive(true); // Ensure the button is visible
-          //  ItemDropBT.gameObject.SetActive(true);
-          //  buttonImage.sprite = m_itemsDatabase.Items[ID].m_itemIcon; // Set the sprite
+            buttonImage.gameObject.SetActive(false); // Ensure the button is visible
+            ItemDropBT.gameObject.SetActive(true);
+           buttonImage.sprite = m_itemsDatabase.Items[ID].m_itemIcon; // Set the sprite
           
 
-           // InteractID = ID;
+           InteractID = ID;
         }
         else if (ID ==1)
         {
-            buttonImage.gameObject.SetActive(true); // Ensure the button is visible
+            buttonImage.gameObject.SetActive(false); // Ensure the button is visible
             ItemDropBT.gameObject.SetActive(true);
             buttonImage.sprite = m_itemsDatabase.Items[ID].m_itemIcon; // Set the sprite
 

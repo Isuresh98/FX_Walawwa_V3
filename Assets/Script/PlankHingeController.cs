@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlankHingeController : MonoBehaviour
@@ -28,12 +29,12 @@ public class PlankHingeController : MonoBehaviour
 
     public void ActivateLeftHinge()
     {
-        ToggleHinge(HingeSide.Left);
+        StartCoroutine(ToggleHingeDelayed(HingeSide.Left));
     }
 
     public void ActivateRightHinge()
     {
-        ToggleHinge(HingeSide.Right);
+        StartCoroutine(ToggleHingeDelayed(HingeSide.Right));
     }
 
     void ToggleHinge(HingeSide side)
@@ -50,6 +51,11 @@ public class PlankHingeController : MonoBehaviour
             RemoveHinge();
             currentHingeSide = HingeSide.None;
         }
+    }
+    IEnumerator ToggleHingeDelayed(HingeSide side)
+    {
+        yield return new WaitForSeconds(0.5f);
+        ToggleHinge(side);
     }
 
     void AddHinge(HingeSide side)
