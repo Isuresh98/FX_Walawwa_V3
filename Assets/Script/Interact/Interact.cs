@@ -73,6 +73,7 @@ public class Interact : MonoBehaviour {
     public string interactDorTag;
     public string interactKeyTag;
     public string interactKeyholTag;
+    public string interactScruKeyTag;
     [Header("Timer Use Button Settings")]
     public Button DoorInteractdBT;
     private bool isHolding = false;
@@ -172,6 +173,30 @@ public class Interact : MonoBehaviour {
                 }
 
             }
+            else if (hot.transform.gameObject.tag == interactScruKeyTag)
+            {
+#if UNITY_EDITOR
+
+                print("Interactive Dor Scrue Hol Object Name: " + hot.transform.name);
+
+#endif
+                /*
+                Keyhole keyhol = hot.transform.gameObject.GetComponent<Keyhole>();
+
+                if (keyhol.locket)
+                {
+
+
+                    keyhol.TryUnlockDoor();
+
+                    itemNameText.gameObject.SetActive(true);
+                    itemNameText.text = keyhol.TryUnlockDoor();
+                    timer = displayDuration;
+                }
+                */
+
+            }
+            
 
 
         }
@@ -266,6 +291,20 @@ public class Interact : MonoBehaviour {
                 isHolding = false; // Stop the hold process
                 holdTime = 0f; // Reset the timer
             }
+            else if (item != null && ItemID == item.itemID)
+            {
+#if UNITY_EDITOR
+
+                print("Interactive Dor Hol Object Name: " + hot.transform.name);
+
+#endif
+                CheckRaycastedObject(hot.transform.gameObject, -1);
+
+
+                // Add action when hold is completed
+                isHolding = false; // Stop the hold process
+                holdTime = 0f; // Reset the timer
+            }
             else
             {
 #if UNITY_EDITOR
@@ -301,6 +340,20 @@ public class Interact : MonoBehaviour {
                         }
 
                     }
+                    else if (hot.transform.gameObject.tag == interactScruKeyTag)
+                    {
+#if UNITY_EDITOR
+
+                        print("Interactive Dor Hol Object Name: " + hot.transform.name);
+                        print("Interactive Dor Hol Scruw Work ");
+
+#endif
+                        //this use scru hol active setup
+
+
+
+                    }
+
 
 
                 }
@@ -455,9 +508,62 @@ public class Interact : MonoBehaviour {
 
 
 
+                    if (hitObject.CompareTag(interactScruKeyTag))
+                    {
+                        /*
+                        DoorSystem doorSystem = hitObject.gameObject.GetComponent<DoorSystem>();
+
+                        if (doorSystem.isLocked)
+                        {
+                            itemNameText.gameObject.SetActive(true);
+                            itemNameText.text = "This door is LOCKED.Use the  Hammer to unlock";
+                            timer = displayDuration;
 
 
-                    
+                        }
+
+                        */
+                        if (ItemID == 1)
+                        {
+                            itemNameText.gameObject.SetActive(true);
+                            itemNameText.text = "UNLOCKED";
+                            timer = displayDuration;
+                            DoorInteractdBT.gameObject.SetActive(true);
+                            //enable evettrigger
+                            EventTrigger trigger = DoorInteractdBT.GetComponent<EventTrigger>();
+                            if (trigger != null)
+                            {
+                                trigger.enabled = true;
+                            }
+                            Image buttonImage = DoorInteractdBT.GetComponent<Image>();
+                            buttonImage.gameObject.SetActive(true);
+                            buttonImage.sprite = sprites[3];
+                            TimerForCollect.gameObject.SetActive(true);
+                            HabdBT.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            itemNameText.gameObject.SetActive(true);
+                            itemNameText.text = "This door is LOCKED.Use the  Hammer to unlock";
+                            timer = displayDuration;
+                            DoorInteractdBT.gameObject.SetActive(true);
+                            // Disable EventTrigger
+                            EventTrigger trigger = DoorInteractdBT.GetComponent<EventTrigger>();
+                            if (trigger != null)
+                            {
+                                trigger.enabled = false;
+                            }
+                            Image buttonImage = DoorInteractdBT.GetComponent<Image>();
+                            buttonImage.gameObject.SetActive(true);
+                            buttonImage.sprite = sprites[2];
+                           
+                        }
+                       
+
+
+                    }
+
+
 
 
                     if (hitObject.CompareTag(interactDorTag))
@@ -541,8 +647,13 @@ public class Interact : MonoBehaviour {
                    HabdBT.gameObject.SetActive(false);
                      DoorInteractdBT.gameObject.SetActive(false);
                     TimerForCollect.gameObject.SetActive(false);
-
-                
+                    ItemInteractdBT.gameObject.SetActive(false);
+                    //enable evettrigger
+                    EventTrigger trigger = DoorInteractdBT.GetComponent<EventTrigger>();
+                    if (trigger != null)
+                    {
+                        trigger.enabled = true;
+                    }
                 }
 
 
@@ -567,6 +678,12 @@ public class Interact : MonoBehaviour {
         {
             m_gameController.OpenBook();
         }
+        else if (InteractID == 1)
+        {
+            //use hammer for animate
+            itemNameText.text = "Use Item Animation";
+          
+        }
         else
         {
             itemNameText.gameObject.SetActive(true);
@@ -582,6 +699,11 @@ public class Interact : MonoBehaviour {
     private void DropItem()
     {
         GetInventory.DropItem(InteractID);
+        DoorInteractdBT.gameObject.SetActive(true);
+        Image buttonImage = DoorInteractdBT.GetComponent<Image>();
+        buttonImage.gameObject.SetActive(true);
+        buttonImage.sprite = sprites[2];
+        InteractID = 0;
     }
 
     public void InteractItemBehavior(int ID)
@@ -606,10 +728,19 @@ public class Interact : MonoBehaviour {
         }
         else if (ID > 0 && ID < m_itemsDatabase.Items.Count)
         {
+           // buttonImage.gameObject.SetActive(true); // Ensure the button is visible
+          //  ItemDropBT.gameObject.SetActive(true);
+          //  buttonImage.sprite = m_itemsDatabase.Items[ID].m_itemIcon; // Set the sprite
+          
+
+           // InteractID = ID;
+        }
+        else if (ID ==1)
+        {
             buttonImage.gameObject.SetActive(true); // Ensure the button is visible
             ItemDropBT.gameObject.SetActive(true);
             buttonImage.sprite = m_itemsDatabase.Items[ID].m_itemIcon; // Set the sprite
-          
+
 
             InteractID = ID;
         }

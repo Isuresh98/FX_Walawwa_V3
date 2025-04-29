@@ -12,6 +12,7 @@ TagManager:
   - Door
   - Key
   - Keyhol
+  - ScruKey
   layers:
   - Default
   - TransparentFX
