@@ -2697,13 +2697,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199924746}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.54816115, y: 0.446671, z: 0.45220098, w: 0.54361635}
-  m_LocalPosition: {x: -47.048, y: 49.811, z: 31.71}
+  m_LocalRotation: {x: -0.5372335, y: 0.45949405, z: 0.46513072, w: 0.5328217}
+  m_LocalPosition: {x: -47.048, y: 49.811, z: 31.79}
   m_LocalScale: {x: 1.02, y: 0.54, z: 0.69}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1743431857}
-  m_LocalEulerAnglesHint: {x: -90.58, y: 90.05, z: -11.12}
+  m_LocalEulerAnglesHint: {x: -90.58, y: 92.78, z: -11.12}
 --- !u!64 &199924748
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8143,7 +8143,7 @@ Transform:
   m_GameObject: {fileID: 815486797}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7065446, y: 0.028192498, z: 0.028192498, w: 0.7065446}
-  m_LocalPosition: {x: 1.186, y: -0.095, z: -0.65}
+  m_LocalPosition: {x: 1.186, y: -0.095, z: -1.13}
   m_LocalScale: {x: 1.02, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13948,6 +13948,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: _1_Thick_Big (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1419ffa554ed54497b8b6f4d055a7549,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15768,6 +15773,37 @@ Transform:
   - {fileID: 199924747}
   m_Father: {fileID: 551197962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1746521712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1746521713}
+  m_Layer: 8
+  m_Name: Forse deraction pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1746521713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746521712}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.424}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1636962517262659781}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1759210212
 GameObject:
   m_ObjectHideFlags: 0
@@ -16932,7 +16968,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cc35b584992e34a2caa77dacb2559ea9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -74.636
+      value: -74.47
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc35b584992e34a2caa77dacb2559ea9,
         type: 3}
@@ -21800,7 +21836,8 @@ Transform:
   m_LocalPosition: {x: 0.04, y: 0.34, z: -0.6}
   m_LocalScale: {x: 1, y: 1, z: 1.15}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1746521713}
   m_Father: {fileID: 6744668632534366910}
   m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
 --- !u!33 &1650873679302029733
@@ -28767,8 +28804,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cbc3689873ab4cd5a38e3398783bcad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickForce: 150
-  PlankCount: 0
+  kickPoint: {fileID: 1746521713}
+  kickForce: 100
+  PlankCount: 3
   PlankMaxCount: 3
   isUnlock: 0
   isUnlockend: 0
@@ -31494,7 +31532,7 @@ Transform:
   m_GameObject: {fileID: 7764972916566444205}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7024015, z: 0, w: 0.71178097}
-  m_LocalPosition: {x: -74.18, y: -0.194, z: 10.288}
+  m_LocalPosition: {x: -74.63, y: -0.194, z: 10.288}
   m_LocalScale: {x: 0.87, y: 0.82, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -32327,7 +32365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &7196882307153247159
 MonoBehaviour:
   m_ObjectHideFlags: 0

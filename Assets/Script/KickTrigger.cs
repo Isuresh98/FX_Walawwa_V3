@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class KickTrigger : MonoBehaviour
 {
+    public Transform kickPoint; // Assign this in the inspector to be the upper center of the door
     public float kickForce = 500f;
     private Rigidbody rb;
     public int PlankCount;
@@ -37,23 +38,23 @@ public class KickTrigger : MonoBehaviour
     {
         if (PlankCount >= PlankMaxCount)
         {
-            if (rb != null)
+            if (rb != null && kickPoint != null)
             {
-                rb.isKinematic = false; // Enable physics
+                rb.isKinematic = false;
+
                 Vector3 kickDirection = -transform.up;
-                rb.AddForce(kickDirection * kickForce);
+                rb.AddForceAtPosition(kickDirection * kickForce, kickPoint.position);
+
                 isUnlockend = true;
             }
         }
         else
         {
 #if UNITY_EDITOR
-
-            Debug.Log($"Not Unlock Plank");
-
+            Debug.Log("Not Unlock Plank");
 #endif
         }
-
-
     }
+
+
 }
