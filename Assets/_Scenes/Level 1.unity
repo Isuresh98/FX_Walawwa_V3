@@ -2469,8 +2469,8 @@ Transform:
   m_GameObject: {fileID: 188012986}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.092, y: 0.737, z: 0.344}
-  m_LocalScale: {x: 87.9, y: 237.6, z: 33.4}
+  m_LocalPosition: {x: 0.155, y: 1.047, z: 0.343}
+  m_LocalScale: {x: 87.9, y: 190.5, z: 33.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1063316992}
@@ -2493,6 +2493,7 @@ MonoBehaviour:
   anchorYOffset: 0.004943351
   limitMin: 7.24
   limitMax: 97.7
+  kickTrigger: {fileID: 5266210291662769810}
 --- !u!54 &188012989
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9283,8 +9284,8 @@ Transform:
   m_GameObject: {fileID: 1016941515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.092, y: 1.332, z: 0.344}
-  m_LocalScale: {x: 87.9, y: 237.6, z: 33.4}
+  m_LocalPosition: {x: 0.155, y: 1.662, z: 0.343}
+  m_LocalScale: {x: 87.9, y: 190.5, z: 33.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 78270901}
@@ -9307,6 +9308,7 @@ MonoBehaviour:
   anchorYOffset: 0.004943351
   limitMin: 7.24
   limitMax: 97.7
+  kickTrigger: {fileID: 5266210291662769810}
 --- !u!54 &1016941518
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11048,7 +11050,7 @@ Transform:
   m_GameObject: {fileID: 1183907950}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -68.17, y: 48.33, z: 44.54}
+  m_LocalPosition: {x: -68.39, y: 47.97, z: 44.54}
   m_LocalScale: {x: 4.39, y: 3.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11159,8 +11161,8 @@ Transform:
   m_GameObject: {fileID: 1205764541}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.092, y: 1.896, z: 0.344}
-  m_LocalScale: {x: 87.9, y: 237.6, z: 33.4}
+  m_LocalPosition: {x: 0.155, y: 2.386, z: 0.343}
+  m_LocalScale: {x: 87.9, y: 190.5, z: 33.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2134201035}
@@ -11285,6 +11287,7 @@ MonoBehaviour:
   anchorYOffset: 0.004943351
   limitMin: 7.24
   limitMax: 97.7
+  kickTrigger: {fileID: 5266210291662769810}
 --- !u!1 &1211276745
 GameObject:
   m_ObjectHideFlags: 0
@@ -12782,7 +12785,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1340793236
 Transform:
   m_ObjectHideFlags: 0
@@ -21222,8 +21225,8 @@ Transform:
   m_GameObject: {fileID: 5266210291662769809}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.089826055, z: -0.402}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0, y: -0.089826055, z: -0.552}
+  m_LocalScale: {x: 1, y: 1, z: 1.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6744668632534366910}
@@ -21429,28 +21432,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8652266, y: 0.058090407, z: 2.5276294}
   m_Center: {x: 0, y: 0.0000000018626456, z: 1.2638147}
---- !u!64 &1793370176221581738
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8765924032462284311}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6072863122417037846, guid: 344c22d9d460de048acc720929dcb5a5, type: 3}
 --- !u!4 &1797249267657064350
 Transform:
   m_ObjectHideFlags: 0
@@ -27296,6 +27277,7 @@ MonoBehaviour:
   interactKeyTag: Key
   interactKeyholTag: Keyhol
   interactScruKeyTag: ScruKey
+  interactHammerKeyTag: HammerKey
   DoorInteractdBT: {fileID: 48942377}
   holdTime: 0
   requiredHoldTime: 2
@@ -27308,6 +27290,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2f75044dfa25f41f2abe77556f9f2182, type: 3}
   - {fileID: 21300000, guid: c85511a46463a491babaf3c3e66cb81e, type: 3}
   - {fileID: 21300000, guid: ac2f973f516a04acb9f1495184c9cdfb, type: 3}
+  - {fileID: 21300000, guid: f48c67741b30940be93979b12eadd2f4, type: 3}
 --- !u!224 &4628403386755003195
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28191,13 +28174,58 @@ GameObject:
   - component: {fileID: 3863325637438693203}
   - component: {fileID: 2397370083513241213}
   - component: {fileID: 1793370176221581737}
-  m_Layer: 0
+  - component: {fileID: 5266210291662769811}
+  - component: {fileID: 5266210291662769810}
+  m_Layer: 8
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: HammerKey
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5266210291662769810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266210291662769809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbc3689873ab4cd5a38e3398783bcad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kickForce: 500
+  PlankCount: 0
+  PlankMaxCount: 3
+  isUnlock: 0
+--- !u!54 &5266210291662769811
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266210291662769809}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &5291771159737060409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30286,7 +30314,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0.07, y: -2.894053e-24, z: -0.14}
-  m_LocalScale: {x: 3.22525, y: 3.22525, z: 3.22525}
+  m_LocalScale: {x: 3.22525, y: 4.01, z: 3.22525}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6744668632534366910}
@@ -30894,7 +30922,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7024015, z: 0, w: 0.71178097}
   m_LocalPosition: {x: -74.18, y: -0.194, z: 10.288}
-  m_LocalScale: {x: 0.64, y: 0.82, z: 1}
+  m_LocalScale: {x: 0.87, y: 0.82, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6463625506746384583}
@@ -31726,7 +31754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &7196882307153247159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35217,7 +35245,6 @@ GameObject:
   - component: {fileID: 6463625506746384583}
   - component: {fileID: 4778056759884299573}
   - component: {fileID: 2655565089737128790}
-  - component: {fileID: 1793370176221581738}
   m_Layer: 0
   m_Name: Vorota_main
   m_TagString: Untagged

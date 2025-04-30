@@ -14,7 +14,7 @@ public class PlankHingeController : MonoBehaviour
     private HingeSide currentHingeSide = HingeSide.None;
 
     private HingeJoint hingeJoint;
-
+    public KickTrigger kickTrigger;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
@@ -91,6 +91,7 @@ public class PlankHingeController : MonoBehaviour
     {
         if (hingeJoint != null)
         {
+            kickTrigger.addPlank(1);
             Destroy(hingeJoint);
             hingeJoint = null;
         }
