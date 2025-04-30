@@ -40,7 +40,7 @@ public class KickTrigger : MonoBehaviour
             if (rb != null)
             {
                 rb.isKinematic = false; // Enable physics
-                Vector3 kickDirection = transform.forward;
+                Vector3 kickDirection = -transform.up;
                 rb.AddForce(kickDirection * kickForce);
                 isUnlockend = true;
             }

@@ -11241,7 +11241,7 @@ Transform:
   m_GameObject: {fileID: 1183907950}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -68.39, y: 47.97, z: 44.54}
+  m_LocalPosition: {x: -68.27, y: 48.68, z: 44.54}
   m_LocalScale: {x: 4.39, y: 3.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16688,7 +16688,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cc35b584992e34a2caa77dacb2559ea9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 303.9
+      value: 412.42084
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc35b584992e34a2caa77dacb2559ea9,
         type: 3}
@@ -16713,7 +16713,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cc35b584992e34a2caa77dacb2559ea9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.352
+      value: 41.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc35b584992e34a2caa77dacb2559ea9,
         type: 3}
@@ -16951,7 +16951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1973808641
 Transform:
   m_ObjectHideFlags: 0
@@ -21431,13 +21431,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5266210291662769809}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: -0.089826055, z: -0.552}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0, y: 0.08982605, z: -0.6}
   m_LocalScale: {x: 1, y: 1, z: 1.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6744668632534366910}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
 --- !u!33 &1650873679302029733
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -27411,7 +27411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetLight: {fileID: 0}
   startIntensity: 5
-  endIntensity: 1
+  endIntensity: 2
   duration: 10
   timer: 0
   isDecreasing: 0
@@ -28384,7 +28384,7 @@ GameObject:
   - component: {fileID: 5266210291662769811}
   - component: {fileID: 5266210291662769810}
   m_Layer: 8
-  m_Name: Grid
+  m_Name: Iron Griil
   m_TagString: HammerKey
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28402,7 +28402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cbc3689873ab4cd5a38e3398783bcad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kickForce: 500
+  kickForce: 150
   PlankCount: 0
   PlankMaxCount: 3
   isUnlock: 0
@@ -30716,9 +30716,9 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 15
-  m_SpotAngle: 88
+  m_Intensity: 2
+  m_Range: 5
+  m_SpotAngle: 133.7
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
