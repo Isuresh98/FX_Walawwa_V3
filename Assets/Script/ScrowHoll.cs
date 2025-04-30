@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ScrowHoll : MonoBehaviour
@@ -5,17 +6,19 @@ public class ScrowHoll : MonoBehaviour
     public PlankHingeController plankHingeController;
     public bool isLeft;
 
-    private Rigidbody rb;
+    public Rigidbody nutrb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+
+     
     }
 
     public void ActiveScruwHoll()
     {
 
-        Destroy(this.gameObject, 0.1f);
+        // Start the coroutine to delay the nut activation
+        StartCoroutine(DelayedNutsActive());
 
         if (isLeft)
         {
@@ -27,7 +30,25 @@ public class ScrowHoll : MonoBehaviour
         }
 
        
+    }
 
-        
+    private IEnumerator DelayedNutsActive()
+    {
+        Collider collider = GetComponent<Collider>();
+        collider.isTrigger = true;
+        yield return new WaitForSeconds(0.1f);
+        nustActive();
+    }
+
+    public void nustActive()
+    {
+#if UNITY_EDITOR
+        Debug.Log("Nuts Active");
+#endif
+        nutrb.isKinematic = false;
+        Collider rbcollider = nutrb.gameObject.GetComponent<Collider>();
+        rbcollider.isTrigger = false;
+        Destroy(this.gameObject, 2f);
+       
     }
 }
