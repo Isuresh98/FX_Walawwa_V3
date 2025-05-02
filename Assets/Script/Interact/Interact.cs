@@ -48,7 +48,7 @@ public class Interact : MonoBehaviour {
     public Button HabdBT;
     private float displayDuration = 0.5f;
     public float timer;
-
+    public Image targetIconhighlighter;
 
     [Header("UI Item Settings")]
     public Button ItemInteractdBT;
@@ -83,8 +83,8 @@ public class Interact : MonoBehaviour {
     public LayerMask interactDoorLayers;
     public Slider TimerForCollect;
     public Sprite[] sprites;
-
-
+    [Header("Popup Hint Settings")]
+   [SerializeField] ToolHintPopup toolHintPopup;
     private void Start()
     {
         m_gameController = FindObjectOfType<GameControll>();
@@ -97,7 +97,7 @@ public class Interact : MonoBehaviour {
         HabdBT.onClick.AddListener(OnHandButtonClicked); // Add this line
         ItemInteractdBT.onClick.AddListener(InteractBTUse); // Add this line
         ItemDropBT.onClick.AddListener(DropItem); // Add this line
-
+        targetIconhighlighter.gameObject.SetActive(false);
 
 
     }
@@ -464,7 +464,7 @@ public class Interact : MonoBehaviour {
         {
             RaycastHit hit = hits[0];
             GameObject hitObject = hit.collider.gameObject;
-
+                   
 
                     // Check if the hit object has an interactable tag
                     if (hitObject.CompareTag(interactTag) || hitObject.CompareTag(interactKeyTag))
@@ -473,15 +473,43 @@ public class Interact : MonoBehaviour {
                         string itemName = "";
                         int Id = -1;
 
+                        //corsor icon hiliter
+                        targetIconhighlighter.gameObject.SetActive(true);
+
                         if (hitObject.CompareTag(interactTag)) // Normal Item Pickup
                         {
+                            // need this add UI Hiliter
+
                             Item item = hitObject.GetComponent<Item>();
                             int hitItemID = item.itemID;
                             itemName = item.itemName;
                             Id = hitItemID;
 
-                            bool itemExists = m_gameController.inventory.m_slots.Any(slot => slot.m_itemID == hitItemID);
+                           
 
+
+
+                            //popup hitnt tool massage
+                            if(itemName== "Hammer")
+                            {
+                                toolHintPopup.ShowHintOnce("Hammer");
+                            }else if (itemName == "Screwdriver")
+                            {
+                                toolHintPopup.ShowHintOnce("Screwdriver");
+                            }
+                            else if (itemName == "Coin")
+                            {
+                                toolHintPopup.ShowHintOnce("Coin");
+                            }
+                            else if (itemName == "HeadTorch")
+                            {
+                                toolHintPopup.ShowHintOnce("HeadTorch");
+                            }
+
+
+
+                            bool itemExists = m_gameController.inventory.m_slots.Any(slot => slot.m_itemID == hitItemID);
+                            // this cheak item bag full or not
                             if (itemExists || !inventoryFull)
                             {
                                 // Update UI for pickup items
@@ -533,6 +561,9 @@ public class Interact : MonoBehaviour {
                     
                     if (hitObject.CompareTag(interactHammerKeyTag))
                     {
+                        //corsor icon hiliter
+                        targetIconhighlighter.gameObject.SetActive(true);
+
                         if (InteractID == 1)
                         {//hammer
 
@@ -611,7 +642,8 @@ public class Interact : MonoBehaviour {
 
                     if (hitObject.CompareTag(interactScruKeyTag))
                     {
-                       
+                        //corsor icon hiliter
+                        targetIconhighlighter.gameObject.SetActive(true);
                         if (InteractID == 2)
                         {
                             itemNameText.gameObject.SetActive(true);
@@ -656,7 +688,8 @@ public class Interact : MonoBehaviour {
 
                     if (hitObject.CompareTag(interactDorTag))
                     {
-                       
+                        //corsor icon hiliter
+                        targetIconhighlighter.gameObject.SetActive(true);
                         DoorSystem doorSystem = hitObject.gameObject.GetComponent<DoorSystem>();
 
                         if (doorSystem.isLocked)
@@ -683,7 +716,8 @@ public class Interact : MonoBehaviour {
                 
                     if (hitObject.CompareTag(interactKeyholTag))
                     {
-
+                        //corsor icon hiliter
+                        targetIconhighlighter.gameObject.SetActive(true);
 
                         Keyhole keyhol = hitObject.GetComponent<Keyhole>();
                         int keyvaluwe = PlayerPrefs.GetInt(keyhol.requiredKey);
@@ -736,6 +770,8 @@ public class Interact : MonoBehaviour {
                      DoorInteractdBT.gameObject.SetActive(false);
                     TimerForCollect.gameObject.SetActive(false);
                     ItemInteractdBT.gameObject.SetActive(false);
+                    targetIconhighlighter.gameObject.SetActive(false);
+
                     //enable evettrigger
                     EventTrigger trigger = DoorInteractdBT.GetComponent<EventTrigger>();
                     if (trigger != null)

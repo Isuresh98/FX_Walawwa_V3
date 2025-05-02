@@ -183,5 +183,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 0
   itemCount: 1
-  itemName: headTorch
+  itemName: HeadTorch
   pickupSound: {fileID: 8300000, guid: 92e2a291ec6d81742931284558a16cf5, type: 3}

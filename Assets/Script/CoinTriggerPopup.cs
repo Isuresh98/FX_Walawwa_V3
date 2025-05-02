@@ -7,6 +7,8 @@ public class CoinTriggerPopup : MonoBehaviour
     public GameObject popupPanel;
     public TMP_Text popupText;
 
+    private bool hasShownPopup = false;
+
     private void Start()
     {
         // Auto-find if not set manually
@@ -19,13 +21,11 @@ public class CoinTriggerPopup : MonoBehaviour
         popupPanel.SetActive(false); // Hide at start
     }
 
-
-
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasShownPopup)
         {
+            hasShownPopup = true;
             ShowPopup();
         }
     }

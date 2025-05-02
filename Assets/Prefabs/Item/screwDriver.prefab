@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 2
   itemCount: 1
-  itemName: screwDriver
+  itemName: Screwdriver
   pickupSound: {fileID: 8300000, guid: 92e2a291ec6d81742931284558a16cf5, type: 3}
 --- !u!54 &5389464496166653413
 Rigidbody:
