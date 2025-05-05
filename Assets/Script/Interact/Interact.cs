@@ -489,22 +489,6 @@ public class Interact : MonoBehaviour {
 
 
 
-                            //popup hitnt tool massage
-                            if(itemName== "Hammer")
-                            {
-                                toolHintPopup.ShowHintOnce("Hammer");
-                            }else if (itemName == "Screwdriver")
-                            {
-                                toolHintPopup.ShowHintOnce("Screwdriver");
-                            }
-                            else if (itemName == "Coin")
-                            {
-                                toolHintPopup.ShowHintOnce("Coin");
-                            }
-                            else if (itemName == "HeadTorch")
-                            {
-                                toolHintPopup.ShowHintOnce("HeadTorch");
-                            }
 
 
 
@@ -527,6 +511,17 @@ public class Interact : MonoBehaviour {
                                 {
                                     ItemID = Id;
                                     HabdBT.gameObject.SetActive(true);
+
+                                    //popup hitnt tool massage
+                                    if (itemName == "Coin")
+                                    {
+                                        toolHintPopup.ShowHintOnce("Coin");
+                                    }
+                                    else if (itemName == "HeadTorch")
+                                    {
+                                        toolHintPopup.ShowHintOnce("HeadTorch");
+                                    }
+
                                 }
                             }
                             else
@@ -563,10 +558,13 @@ public class Interact : MonoBehaviour {
                     {
                         //corsor icon hiliter
                         targetIconhighlighter.gameObject.SetActive(true);
-
+                        toolHintPopup.ShowHintOnce("Hammer");
                         if (InteractID == 1)
                         {//hammer
-
+                         //popup hitnt tool massage
+                          
+                             
+                            
                             KickTrigger kickTrigger = hitObject.gameObject.GetComponent<KickTrigger>();
 
                             if (kickTrigger.isUnlock)
@@ -644,6 +642,7 @@ public class Interact : MonoBehaviour {
                     {
                         //corsor icon hiliter
                         targetIconhighlighter.gameObject.SetActive(true);
+                        toolHintPopup.ShowHintOnce("Screwdriver");
                         if (InteractID == 2)
                         {
                             itemNameText.gameObject.SetActive(true);
