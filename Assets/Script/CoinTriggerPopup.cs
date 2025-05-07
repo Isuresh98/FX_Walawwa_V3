@@ -33,7 +33,7 @@ public class CoinTriggerPopup : MonoBehaviour
     void ShowPopup()
     {
         popupPanel.SetActive(true);
-        popupText.text = "Collect this coin to destroy the ghost enemy for 5 minutes!";
+        popupText.text = "ñks;a;= 5la i|yd N+; i;=rd úkdY lsÍug fuu ldish tl;= lrkakæ ";
         Invoke("HidePopup", 3f);
     }
 

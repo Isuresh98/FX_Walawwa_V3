@@ -934,7 +934,10 @@ MonoBehaviour:
   m_itemShowTime: 0.2
   itemNameText: {fileID: 0}
   HabdBT: {fileID: 0}
+  timer: 0
+  targetIconhighlighter: {fileID: 0}
   ItemInteractdBT: {fileID: 0}
+  ItemDropBT: {fileID: 0}
   ItemID: 0
   detectableLayer:
     serializedVersion: 2
@@ -942,12 +945,17 @@ MonoBehaviour:
   interactDorTag: Door
   interactKeyTag: Key
   interactKeyholTag: Keyhol
+  interactScruKeyTag: 
+  interactHammerKeyTag: 
   DoorInteractdBT: {fileID: 0}
   holdTime: 0
   requiredHoldTime: 2
   interactDoorLayers:
     serializedVersion: 2
     m_Bits: 128
+  TimerForCollect: {fileID: 0}
+  sprites: []
+  toolHintPopup: {fileID: 0}
 --- !u!1 &4235083535405163707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1264,7 @@ MonoBehaviour:
   m_staminaConsumptionSpeed: 10
   m_staminaRecoverySpeed: 7
   m_running: 0
-  mouseSensetivity: 50
+  mouseSensetivity: 15
   cameraTransform: {fileID: 8486721357248061632}
   cameraAnimation: {fileID: 7482728196989668990}
   cameraHitAnimName: PlayerHitAnimation
@@ -1285,6 +1293,22 @@ MonoBehaviour:
   AS: {fileID: 0}
   m_TPS_Player: {fileID: 9005095258769897355}
   iSIntractableHideObject: 0
+  startPosition: {fileID: 0}
+  endPosition: {fileID: 0}
+  endStartPosition: {fileID: 0}
+  animationDuration: 0.5
+  animationDurationAngle: 0.5
+  leftLookAngle: -10
+  rightLookAngle: 15
+  leftLookDuration: 0.8
+  rightLookDuration: 1
+  centerLookDuration: 0.6
+  lookUpDownDuration: 0.4
+  upLookAngle: -10
+  downLookAngle: 10
+  moveToEndDuration: 0.5
+  timeline: {fileID: 0}
+  BookObject: {fileID: 0}
   joystickArea: {fileID: 0}
 --- !u!82 &3515041510523488851
 AudioSource:

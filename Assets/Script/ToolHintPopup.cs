@@ -63,13 +63,13 @@ public class ToolHintPopup : MonoBehaviour
         switch (toolName)
         {
             case "Hammer":
-                return "You collected a Hammer! Use it to break objects.";
+                return "Tng ñáhla tl;= lr .; hq;=hsæ jia;+ka leãug th Ndú;d lrkak'";
             case "Screwdriver":
-                return "You collected a Screwdriver! Use it to unlock screws.";
+                return "Tng bial=remamq kshkla tl;= lr .; hq;=hsæ bial=remamq w.=¿ weÍug th Ndú;d lrkak'";
             case "Coin":
-                return "You collected a Coin! Destroy the ghost enemy for 5 minutes!";
+                return "Tng ldishla tl;= lsÍug wjYHhsæ ñks;a;= 5 la i|yd N+; i;=rd úkdY lrkakæ";
             case "HeadTorch":
-                return "You collected a Head Torch! Use it to see in dark areas.";
+                return "Tng fyâ fgdaÉ tlla tl;= lr .ekSug wjYHhsæ w÷re m%foaYj, ne,Sug th Ndú;d lrkak'";
             default:
                 return "";
         }

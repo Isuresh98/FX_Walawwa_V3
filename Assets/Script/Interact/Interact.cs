@@ -558,17 +558,38 @@ public class Interact : MonoBehaviour {
                     {
                         //corsor icon hiliter
                         targetIconhighlighter.gameObject.SetActive(true);
-                        toolHintPopup.ShowHintOnce("Hammer");
+                        KickTrigger kickTrigger = hitObject.gameObject.GetComponent<KickTrigger>();
+                        if (kickTrigger.isUnlock)
+                        {
+                            toolHintPopup.ShowHintOnce("Hammer");
+
+                            itemNameText.gameObject.SetActive(true);
+                            itemNameText.text = "This door is LOCKED.Use the  Hammer to unlock";
+                            timer = displayDuration;
+                            DoorInteractdBT.gameObject.SetActive(true);
+                            // Disable EventTrigger
+                            EventTrigger trigger = DoorInteractdBT.GetComponent<EventTrigger>();
+                            if (trigger != null)
+                            {
+                                trigger.enabled = false;
+                            }
+                            Image buttonImage = DoorInteractdBT.GetComponent<Image>();
+                            buttonImage.gameObject.SetActive(true);
+                            buttonImage.sprite = sprites[2];
+                        }
+
                         if (InteractID == 1)
                         {//hammer
                          //popup hitnt tool massage
                           
                              
                             
-                            KickTrigger kickTrigger = hitObject.gameObject.GetComponent<KickTrigger>();
+                           
 
                             if (kickTrigger.isUnlock)
                             {
+                               
+
                                 if (!kickTrigger.isUnlockend)
                                 {
                                     itemNameText.gameObject.SetActive(true);
@@ -598,6 +619,7 @@ public class Interact : MonoBehaviour {
                             }
                             else
                             {
+                                /*
                                 itemNameText.gameObject.SetActive(true);
                                 itemNameText.text = "You need Unlock plank";
                                 timer = displayDuration;
@@ -611,12 +633,15 @@ public class Interact : MonoBehaviour {
                                 Image buttonImage = DoorInteractdBT.GetComponent<Image>();
                                 buttonImage.gameObject.SetActive(true);
                                 buttonImage.sprite = sprites[2];
+                                */
                             }
 
                            
                         }
                         else
                         {
+                            
+                            /*
                             itemNameText.gameObject.SetActive(true);
                             itemNameText.text = "This door is LOCKED.Use the  Hammer to unlock";
                             timer = displayDuration;
@@ -630,7 +655,7 @@ public class Interact : MonoBehaviour {
                             Image buttonImage = DoorInteractdBT.GetComponent<Image>();
                             buttonImage.gameObject.SetActive(true);
                             buttonImage.sprite = sprites[2];
-
+                            */
                         }
 
 
