@@ -42,6 +42,33 @@ public class CerventAI_1 : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         FristTrigger = GameObject.FindGameObjectWithTag("Severnt_Frist_Trigger").GetComponent<ServentenmeyFristTrigger>();
+
+
+        // Find the object with tag "Gposs"
+        GameObject gposs = GameObject.FindGameObjectWithTag("S1_SpwanPos");
+
+        if (gposs != null)
+        {
+            int childCount = gposs.transform.childCount;
+            waypoints = new Transform[childCount];
+
+            for (int i = 0; i < childCount; i++)
+            {
+                waypoints[i] = gposs.transform.GetChild(i);
+            }
+        }
+        else
+        {
+#if UNITY_EDITOR
+            Debug.LogError("No GameObject found with tag 'Gposs'. Please set it in the scene.");
+#endif
+        }
+
+
+
+
+
+
         if (player == null)
         {
 #if UNITY_EDITOR

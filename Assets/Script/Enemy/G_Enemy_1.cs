@@ -42,6 +42,29 @@ public class G_Enemy_1 : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         FristTrigger = GameObject.FindGameObjectWithTag("Frist_Trigger").GetComponent<FristTrigger_1>();
+      
+
+        // Find the object with tag "Gposs"
+        GameObject gposs = GameObject.FindGameObjectWithTag("G1_SpwanPos");
+
+        if (gposs != null)
+        {
+            int childCount = gposs.transform.childCount;
+            waypoints = new Transform[childCount];
+
+            for (int i = 0; i < childCount; i++)
+            {
+                waypoints[i] = gposs.transform.GetChild(i);
+            }
+        }
+        else
+        {
+#if UNITY_EDITOR
+            Debug.LogError("No GameObject found with tag 'Gposs'. Please set it in the scene.");
+#endif
+        }
+
+
         if (player == null)
         {
 
@@ -264,7 +287,7 @@ public class G_Enemy_1 : MonoBehaviour
     private bool IsPlayerOnNavMesh(Vector3 position)
     {
         NavMeshHit hit;
-        bool isOnNavMesh = NavMesh.SamplePosition(position, out hit, 2.0f, NavMesh.AllAreas);
+        bool isOnNavMesh = NavMesh.SamplePosition(position, out hit,2f, NavMesh.AllAreas);
 
         // Debug.DrawRay(hit.position, Vector3.up * 2, Color.green, 2.0f); // Show NavMesh hit position
         //Debug.DrawRay(position, Vector3.up * 2, Color.red, 2.0f); // Show Player position
@@ -275,7 +298,7 @@ public class G_Enemy_1 : MonoBehaviour
             return false;
         }
 
-        float distanceThreshold = 1.0f; // Allow some tolerance
+        float distanceThreshold = 1f; // Allow some tolerance
         if (Vector3.Distance(position, hit.position) > distanceThreshold)
         {
             //  Debug.LogWarning($"Player is slightly off NavMesh by {Vector3.Distance(position, hit.position)} units. Adjusting...");
