@@ -50,10 +50,10 @@ public class ToolHintPopup : MonoBehaviour
         }
 
         CancelInvoke(nameof(HideHint));
-        Invoke(nameof(HideHint), hintDuration);
+       // Invoke(nameof(HideHint), hintDuration);
     }
 
-    private void HideHint()
+    public void HideHint()
     {
         popupPanel.SetActive(false);
     }

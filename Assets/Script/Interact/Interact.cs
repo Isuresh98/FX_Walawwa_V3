@@ -515,11 +515,11 @@ public class Interact : MonoBehaviour {
                                     //popup hitnt tool massage
                                     if (itemName == "Coin")
                                     {
-                                        toolHintPopup.ShowHintOnce("Coin");
+                                        //toolHintPopup.ShowHintOnce("Coin");
                                     }
                                     else if (itemName == "HeadTorch")
                                     {
-                                        toolHintPopup.ShowHintOnce("HeadTorch");
+                                       // toolHintPopup.ShowHintOnce("HeadTorch");
                                     }
 
                                 }

@@ -11,6 +11,6 @@ public class PlayerDamage : MonoBehaviour
 
   public void Takedamage()
     {
-        playerHealth.TakeDamage(120);
+        playerHealth.TakeDamage(50);
     }
 }

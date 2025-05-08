@@ -34,10 +34,10 @@ public class CoinTriggerPopup : MonoBehaviour
     {
         popupPanel.SetActive(true);
         popupText.text = "ñks;a;= 5la i|yd N+; i;=rd úkdY lsÍug fuu ldish tl;= lrkakæ ";
-        Invoke("HidePopup", 3f);
+       // Invoke("HidePopup", 3f);
     }
 
-    void HidePopup()
+  public  void HidePopup()
     {
         popupPanel.SetActive(false);
     }

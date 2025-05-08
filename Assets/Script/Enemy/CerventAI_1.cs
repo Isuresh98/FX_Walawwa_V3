@@ -60,17 +60,12 @@ public class CerventAI_1 : MonoBehaviour
         if (player == null) return;
         if (!FristTrigger.isFrist_Trigger) return;
 
-        DetectCoin();
+      
 
 
-        if (IsCoinDetected && !isWaiting)
-        {
-            MissingInteractionPlayer();
-        }
-        else if (!IsCoinDetected && !isWaiting)
-        {
+
             IntracPlayer();
-        }
+        
 
 
     }
@@ -152,93 +147,7 @@ public class CerventAI_1 : MonoBehaviour
             SetPlayerOutOfRange();
         }
     }
-    private void MissingInteractionPlayer()
-    {
-        if (detectedCoin != null)
-        {
-#if UNITY_EDITOR
-
-            Debug.Log("set enemy coin coin place");
-
-#endif
-            agent.SetDestination(detectedCoin.position);
-            if (Vector3.Distance(transform.position, detectedCoin.position) < 1.5f && !isWaitingCoroutineStarted)
-            {
-#if UNITY_EDITOR
-
-
-                Debug.Log("set enemy waiting coin coin place");
-
-#endif
-                StartCoroutine(WaitAtCoin());
-            }
-        }
-    }
-
-
-    void DetectCoin()
-    {
-        if (isWaiting) return;
-
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, CoindetectionRange, coinLayer);
-        if (hitColliders.Length > 0)
-        {
-            detectedCoin = hitColliders[0].transform;
-            IsCoinDetected = true;
-        }
-        else
-        {
-            detectedCoin = null;
-            IsCoinDetected = false;
-        }
-    }
-
-    IEnumerator WaitAtCoin()
-    {
-        isWaitingCoroutineStarted = true;
-        isWaiting = true;
-        agent.isStopped = true;
-
-        // Change coin's layer to ignore it
-        if (detectedCoin != null)
-        {
-            detectedCoin.gameObject.layer = LayerMask.NameToLayer("IgnoredCoin"); // Ensure this layer exists in Unity
-        }
-        //enemy behavior
-        agent.isStopped = true;
-        agent.velocity = Vector3.zero; // Stop completely
-        animator.SetFloat("MoveSpeed", 0);
-        // Play "stand down" animation
-        animator.SetBool("standDown", true);
-        yield return new WaitForSeconds(0.1f);
-        // Wait until "stand down" animation finishes
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
-
-        // Play "coin collect" animation
-        animator.SetBool("standDown", false);
-        animator.SetBool("collectCoin", true);
-
-        yield return new WaitForSeconds(waitTime);
-
-        animator.SetBool("collectCoin", false);
-        animator.SetBool("standUp", true);
-        // Wait until "coin collect" animation finishes
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
-        animator.SetBool("standUp", false);
-        animator.SetBool("standUp_V2", true);
-        // Wait until "stand up" animation finishes
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
-
-        animator.SetBool("standUp_V2", false);
-        animator.SetBool("standUp_V3", true);
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
-
-        isWaitingCoroutineStarted = false;
-        detectedCoin = null;
-        IsCoinDetected = false;
-        agent.isStopped = false;
-        isWaiting = false;
-    }
+   
 
 
     private void UpdateMovement()
@@ -258,7 +167,7 @@ public class CerventAI_1 : MonoBehaviour
         else if (isWalking)
         {
             agent.isStopped = false;
-            agent.speed = 1.5f; // Adjust speed for walking
+            agent.speed = 1f; // Adjust speed for walking
             animator.SetFloat("MoveSpeed", 0.5f);
         }
         else
@@ -272,10 +181,10 @@ public class CerventAI_1 : MonoBehaviour
     private bool IsPlayerOnNavMesh(Vector3 position)
     {
         NavMeshHit hit;
-        bool isOnNavMesh = NavMesh.SamplePosition(position, out hit, 2.0f, NavMesh.AllAreas);
+        bool isOnNavMesh = NavMesh.SamplePosition(position, out hit, 1.2f, NavMesh.AllAreas);
 
-        // Debug.DrawRay(hit.position, Vector3.up * 2, Color.green, 2.0f); // Show NavMesh hit position
-        //Debug.DrawRay(position, Vector3.up * 2, Color.red, 2.0f); // Show Player position
+       // Debug.DrawRay(position, Vector3.up * 2f, Color.red, 1f); // Player position
+      //  Debug.DrawRay(hit.position, Vector3.up * 2f, Color.green, 1f); // Nearest NavMesh point
 
         if (!isOnNavMesh)
         {
@@ -283,7 +192,7 @@ public class CerventAI_1 : MonoBehaviour
             return false;
         }
 
-        float distanceThreshold = 1.0f; // Allow some tolerance
+        float distanceThreshold = .5f; // Allow some tolerance
         if (Vector3.Distance(position, hit.position) > distanceThreshold)
         {
             //  Debug.LogWarning($"Player is slightly off NavMesh by {Vector3.Distance(position, hit.position)} units. Adjusting...");
@@ -291,6 +200,9 @@ public class CerventAI_1 : MonoBehaviour
         }
 
         return true;
+
+
+
     }
 
     private void SetPlayerOutOfRange()
@@ -299,7 +211,10 @@ public class CerventAI_1 : MonoBehaviour
 
         agent.isStopped = true;
         isAttacking = false;
+        isRun = false;
         animator.SetBool("isAttacking", false);
+        animator.SetBool("isRun", false);
+        agent.speed = 1f; // Adjust speed for walking
         animator.SetFloat("MoveSpeed", 0);
 #if UNITY_EDITOR
 
